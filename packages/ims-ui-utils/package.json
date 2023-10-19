@@ -1,0 +1,32 @@
+{
+  "name": "@imsjs/ims-ui-utils",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Van Chin",
+  "exports": {
+    ".": {
+      "require": "./dist/ims-ui-utils.umd.js",
+      "module": "./dist/ims-ui-utils.mjs"
+    }
+  },
+  "main": "./dist/ims-ui-utils.umd.js",
+  "module": "./dist/ims-ui-utils.mjs",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@imsjs/ims-ui-constants": "workspace:*",
+    "@imsjs/ims-ui-enums": "workspace:*",
+    "@imsjs/ims-ui-hooks": "workspace:*",
+    "@imsjs/ims-ui-types": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

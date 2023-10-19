@@ -1,0 +1,7 @@
+packages:
+  # 项目文档
+  - docs
+  # 演练场 用于开发调试
+  - playground
+  # 各个子包 目录 utils components ims-ui
+  - packages/*

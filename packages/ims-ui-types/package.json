@@ -1,0 +1,23 @@
+{
+  "name": "@imsjs/ims-ui-types",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "module": "index.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "Van Chin",
+  "license": "MIT",
+  "dependencies": {
+    "@imsjs/ims-ui-enums": "workspace:*"
+  }
+}

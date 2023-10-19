@@ -1,0 +1,79 @@
+import { warn } from "./log";
+
+/**
+ * @description: Development mode
+ */
+export const devMode = "development";
+
+/**
+ * @description: Production mode
+ */
+export const prodMode = "production";
+
+/**
+ *
+ * @returns:
+ * @example:
+ */
+export function getEnvMode(): string {
+  return import.meta.env.MODE;
+}
+
+/**
+ * @description: Is it a development mode
+ * @returns:
+ * @example:
+ */
+export function isDevMode(): boolean {
+  return import.meta.env.DEV;
+}
+
+/**
+ * @description: Is it a production mode
+ * @returns:
+ * @example:
+ */
+export function isProdMode(): boolean {
+  return import.meta.env.PROD;
+}
+
+/**
+ * Get the configuration file variable name
+ * @param env
+ */
+export const getConfigFileName = (env: Record<string, any>) => {
+  return `__PRODUCTION__${env.VITE_GLOB_APP_SHORT_NAME || "__APP"}__CONF__`
+    .toUpperCase()
+    .replace(/\s/g, "");
+};
+
+/**
+ * @description: Get environment variables
+ * @returns
+ */
+export function getEnvs() {
+  const ENV_NAME = getConfigFileName(import.meta.env);
+
+  // console.info("import.meta.env =>", import.meta.env);
+
+  let ENVS = (import.meta.env.DEV
+    ? // Get the global configuration (the configuration will be extracted independently when packaging)
+      (import.meta.env as unknown as GlobEnvConfig)
+    : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
+
+  if (ENVS === undefined) {
+    ENVS = __ENV__ as unknown as GlobEnvConfig;
+  }
+
+  // console.info("ENVS =>", ENVS);
+
+  const { VITE_GLOB_APP_SHORT_NAME } = ENVS;
+
+  if (!/^[a-zA-Z\_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
+    warn(
+      `VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.`
+    );
+  }
+
+  return ENVS;
+}
