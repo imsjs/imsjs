@@ -1,8 +1,6 @@
 <template>
-  <div  :class="`${prefixCls}-wrapper`" ref="vtableWrapperRef" >
-    
-    <!-- <ImsJsonViewer :data="dataSource"></ImsJsonViewer> -->
-    <div ref="vtableRef" v-element-size="onVtableRefResize"  :class="prefixCls"></div>
+  <div  :class="`${prefixCls}-wrapper h-full`" ref="vtableWrapperRef" >
+    <div ref="vtableRef" class="h-full"   :class="prefixCls"></div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -11,10 +9,9 @@ import { ListTable,TYPES,themes } from "@visactor/vtable";
 
 import { useElementSize } from '@vueuse/core';
 
-import { vElementSize } from '@vueuse/components';
 
 import { ImsVtableProps } from "@imsjs/ims-ui-types";
-import ImsJsonViewer from "@imsjs/ims-ui-components/json-viewer";
+
 
 const COMPONENT_NAME = "ImsVtable";
 defineOptions({
@@ -31,15 +28,8 @@ const vtableInstance = ref();
 
 const vtableWrapperRef = ref(null);
 
-const { width, height } = useElementSize(vtableWrapperRef);
 
-const onVtableRefResize = ({ width, height }: { width: number; height: number }) => {
-  // console.info('onVtableRefResize => width',width);
-  // console.info('onVtableRefResize => height',height);
-}
-
-
-const { api, params,options } = defineProps<ImsVtableProps>();
+const { options } = defineProps<ImsVtableProps>();
 
 
 
@@ -65,10 +55,12 @@ onMounted(()=>{
 
 .@{prefix-cls}-wrapper {
   --at-apply: w-full h-full box-border;
+
 }
 
 .@{prefix-cls} {
   --at-apply: w-full  h-full box-border;
+
 }
 
 </style>

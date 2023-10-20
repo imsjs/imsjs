@@ -1,0 +1,22 @@
+{
+  "name": "@imsjs/ims-ui-playground",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Van Chin",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@imsjs/ims-ui": "workspace:*",
+    "@imsjs/ims-ui-components": "workspace:*",
+    "@imsjs/ims-ui-constants": "workspace:*",
+    "@imsjs/ims-ui-hooks": "workspace:*",
+    "@imsjs/ims-ui-types": "workspace:*",
+    "@imsjs/ims-ui-utils": "workspace:*",
+    "@imsjs/ims-ui-apis": "workspace:*",
+    "leafer-ui": "1.0.0-rc.5"
+  }
+}

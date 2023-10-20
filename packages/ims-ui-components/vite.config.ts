@@ -51,7 +51,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           "vue-json-pretty",
           "axios",
           "lodash-es",
-          "lodash",
+          "overlayscrollbars",
           "@wangeditor/editor",
           "@wangeditor/editor-for-vue",
           "@visactor/vtable",
@@ -60,12 +60,13 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           globals: {
             vue: "vue",
             axios: "axios",
-            lodash: "lodash",
+
             "lodash-es": "lodashEs",
             "vue-json-pretty": "VueJsonPretty",
             "ant-design-vue": "antDesignVue",
             "ant-design-vue/es": "antDesignVueEs",
             sortablejs: "Sortable",
+            overlayscrollbars: "overlayscrollbars",
             "@visactor/vtable": "vtable",
             "@wangeditor/editor-for-vue": "editorForVue",
           },
@@ -90,12 +91,12 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       dedupe: ["vue"],
       alias: [
         {
-          find: /^ims-ui$/,
+          find: /^@imsjs\/ims-ui$/,
           replacement: resolve(__dirname, "..", "ims-ui", "index.ts"),
         },
         {
-          find: /^@ims-ui\/(.*)$/,
-          replacement: resolve(__dirname, "..", "$1", "index.ts"),
+          find: /^@imsjs\/ims-ui-(.*)$/,
+          replacement: resolve(__dirname, "..", "ims-ui-$1", "index.ts"),
         },
       ],
     },

@@ -59,6 +59,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           "axios",
           "lodash-es",
           "lodash",
+          "/lodash.*/",
           "@wangeditor/editor",
           "@wangeditor/editor-for-vue",
           "@visactor/vtable",
@@ -96,8 +97,8 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           replacement: resolve(__dirname, "..", "ims-ui", "index.ts"),
         },
         {
-          find: /^@ims-ui\/(.*)$/,
-          replacement: resolve(__dirname, "..", "$1", "index.ts"),
+          find: /^@imsjs\/ims-ui-(.*)$/,
+          replacement: resolve(__dirname, "..", "ims-ui-$1", "index.ts"),
         },
       ],
     },

@@ -6,7 +6,7 @@ export function configVisualizer(): PluginOption[] {
 
   plugins.push(
     visualizer({
-      open: false,
+      open: true,
     })
   );
   return plugins;

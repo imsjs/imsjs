@@ -39,15 +39,15 @@
     "paths": {
       "@imsjs/ims-ui": ["packages/ims-ui"],
 
-      "@imsjs/ims-ui-components": ["packages/ims-ui-components"],
-      "@imsjs/ims-ui-constants": ["packages/ims-ui-constants"],
-      "@imsjs/ims-ui-enums": ["packages/ims-ui-enums"],
-      "@imsjs/ims-ui-hooks": ["packages/ims-ui-hooks"],
-      "@imsjs/ims-ui-themes": ["packages/ims-ui-themes"],
-      "@imsjs/ims-ui-types": ["packages/ims-ui-types"],
-      "@imsjs/ims-ui-utils": ["packages/ims-ui-utils"]
+      // "@imsjs/ims-ui-components": ["packages/ims-ui-components"],
+      // "@imsjs/ims-ui-constants": ["packages/ims-ui-constants"],
+      // "@imsjs/ims-ui-enums": ["packages/ims-ui-enums"],
+      // "@imsjs/ims-ui-hooks": ["packages/ims-ui-hooks"],
+      // "@imsjs/ims-ui-themes": ["packages/ims-ui-themes"],
+      // "@imsjs/ims-ui-types": ["packages/ims-ui-types"],
+      // "@imsjs/ims-ui-utils": ["packages/ims-ui-utils"]
 
-      // "@imsjs/*": ["packages/*"]
+      "@imsjs/ims-ui-*": ["packages/ims-ui-*"]
     }
   }
 }

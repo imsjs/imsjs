@@ -18,6 +18,6 @@
   "author": "Van Chin",
   "license": "MIT",
   "dependencies": {
-    "@imsjs/ims-ui-enums": "workspace:*"
+    "@imsjs/ims-ui-enums": "workspace:^"
   }
 }

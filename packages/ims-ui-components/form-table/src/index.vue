@@ -80,7 +80,7 @@ import { isFunction, isObject } from "@vue/shared";
 import { watch } from "vue";
 import { ImsFormTableProps, ImsFormTableColumn } from "@imsjs/ims-ui-types";
 import { Icon } from "@iconify/vue";
-import { cloneDeep } from "lodash-es";
+import {cloneDeep} from "lodash-es";
 import { nanoid } from "nanoid";
 
 import type { ComponentInternalInstance } from "vue";

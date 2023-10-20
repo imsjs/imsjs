@@ -10,7 +10,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@imsjs/ims-ui-hooks": "workspace:*"
+    "@imsjs/ims-ui-hooks": "workspace:^"
   },
   "publishConfig": {
     "access": "public"

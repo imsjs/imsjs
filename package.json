@@ -19,9 +19,16 @@
     "release": "tsx build/scripts/release.ts",
     "type:app": "vue-tsc -p tsconfig.app.json --noEmit --composite false",
     "type:mv": "tsx build/scripts/dts-mv.ts",
-    "dev": "pnpm --filter playground run dev",
+    "dev": "pnpm --filter ./playground run dev",
     "dev:docs": "pnpm --filter docs run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@imsjs/ims-ui-components": "workspace:^",
+    "@imsjs/ims-ui-constants": "workspace:^",
+    "@imsjs/ims-ui-hooks": "workspace:^",
+    "@imsjs/ims-ui-types": "workspace:^",
+    "@imsjs/ims-ui-utils": "workspace:^"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
@@ -30,13 +37,12 @@
     "@types/node": "^20.8.7",
     "@types/qs": "^6.9.9",
     "@unocss/transformer-directives": "^0.56.5",
+    "@visactor/vtable": "^0.12.2",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/shared": "^3.3.4",
     "@vueuse/components": "^10.5.0",
     "@vueuse/core": "^10.5.0",
-    "@wangeditor/editor": "^5.1.23",
-    "@wangeditor/editor-for-vue": "^1.0.2",
     "alova": "^2.13.1",
     "ant-design-vue": "^4.0.6",
     "axios": "^1.5.1",
@@ -49,6 +55,7 @@
     "pinia": "^2.1.7",
     "qs": "^6.11.2",
     "rollup-plugin-visualizer": "^5.9.2",
+    "tsx": "^3.14.0",
     "typescript": "^5.2.2",
     "unocss": "^0.56.5",
     "unplugin-auto-import": "^0.16.6",
@@ -57,7 +64,9 @@
     "vite-plugin-enhance-log": "^0.5.2",
     "vite-plugin-mkcert": "^1.16.0",
     "vue": "^3.3.4",
-    "vue-hooks-plus": "^1.8.5"
+    "vue-hooks-plus": "^1.8.5",
+    "vue-json-pretty": "^2.2.4",
+    "vue-router": "^4.2.5"
   },
   "engines": {
     "node": ">=18"

@@ -43,12 +43,12 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: /^ims-ui$/,
+        find: /^@imsjs\/ims-ui$/,
         replacement: resolve(__dirname, "..", "ims-ui", "index.ts"),
       },
       {
-        find: /^@ims-ui\/(.*)$/,
-        replacement: resolve(__dirname, "..", "$1", "index.ts"),
+        find: /^@imsjs\/ims-ui-(.*)$/,
+        replacement: resolve(__dirname, "..", "ims-ui-$1", "index.ts"),
       },
     ],
   },
