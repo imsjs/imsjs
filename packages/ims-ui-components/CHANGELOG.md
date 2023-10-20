@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.2
+
+### Patch Changes
+
+- 2bc9407: fixed vtable wrapper height
+- Updated dependencies [2bc9407]
+  - @imsjs/ims-ui-constants@2.1.2
+  - @imsjs/ims-ui-enums@2.1.2
+  - @imsjs/ims-ui-hooks@2.1.2
+  - @imsjs/ims-ui-types@2.1.2
+  - @imsjs/ims-ui-utils@2.1.2
+
 ## 2.1.1
 
 ### Patch Changes
