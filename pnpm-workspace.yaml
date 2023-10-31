@@ -3,5 +3,6 @@ packages:
   - docs
   # 演练场 用于开发调试
   - playground
+  - designer
   # 各个子包 目录 utils components ims-ui
   - packages/*
