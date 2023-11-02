@@ -1,10 +1,27 @@
 <template>
   <div class="box-border">
-    <ims-table :lists="dataSource" :columns="columns"></ims-table>
+    <a-select
+          mode="multiple"
+          style="width: 100%"
+          placeholder="Please select"
+          :options="tmpOptions"
+        ></a-select>
+  
   </div>
 </template>
 
 <script lang="ts" setup>
+
+const tmpOptions = [
+  {
+    value: "选项一",
+    label: "选项一",
+  },
+  {
+    value: "选项二",
+    label: "选项二",
+  },
+];
 const dataSource = [
   {
     key: "1",

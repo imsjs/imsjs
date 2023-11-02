@@ -77,16 +77,32 @@
                 :class="`${prefixCls}-content-left-contents-component-wrapper-components`"
               >
                 <Simplebar>
-                  <div
-                    :class="`${prefixCls}-content-left-contents-component-wrapper-components-item`"
-                    :key="component.key"
-                    v-for="component in componentLists"
+                  <draggable
+                    :list="componentLists"
+                    :enabled="enabled"
+                    item-key="name"
+                    :group="{ name: 'components', pull: 'clone', put: false }"
+                    :clone="cloneComponent"
+                    :sort="false"
+                    ghost-class="ghost"
+                    :move="checkMove"
+                    @start="dragging = true"
+                    @end="dragging = false"
+                    class="grid grid-cols-[auto_auto] px-10px gap-2"
                   >
-                    <div  :class="`${prefixCls}-content-left-contents-component-wrapper-components-item-component`">
-                      <icon class="icon" :icon="component.icon"></icon>
-                      <span class="title">{{ component.title }}</span>
-                    </div>
-                  </div>
+                    <template #item="{ element }">
+                      <div
+                        @click="addComponent(element)"
+                        :class="[
+                          `${prefixCls}-content-left-contents-component-wrapper-components-item`,
+                          { 'not-draggable': !enabled },
+                        ]"
+                      >
+                        <icon class="icon" :icon="element.icon"></icon>
+                        <span class="title">{{ element.title }}</span>
+                      </div>
+                    </template>
+                  </draggable>
                 </Simplebar>
               </div>
             </div>
@@ -105,27 +121,80 @@
           </div>
         </div>
       </div>
+
       <div :class="`${prefixCls}-content-center`">
         <div :class="`${prefixCls}-content-center-canvas`">
-          <draggable
-            :list="list"
-            :enabled="enabled"
-            item-key="name"
-            class="list-group"
-            ghost-class="ghost"
-            :move="checkMove"
-            @start="dragging = true"
-            @end="dragging = false"
-          >
-            <template #item="{ element }">
-              <div
-                class="list-group-item"
-                :class="{ 'not-draggable': !enabled }"
-              >
-                {{ element.name }}
-              </div>
-            </template>
-          </draggable>
+          <!-- <ims-json-viewer :data="list"></ims-json-viewer> -->
+          <ims-json-viewer
+            :data="activeComponent"
+            v-if="activeComponent.id != '0'"
+          ></ims-json-viewer>
+          <a-form>
+            <draggable
+              :list="list"
+              :enabled="enabled"
+              item-key="id"
+              :component-data="{
+                type: 'transition-group',
+              }"
+              group="components"
+              class="list-group"
+              ghost-class="ghost"
+              animation="300"
+              :move="checkMove"
+            >
+              <template #item="{ element, index }">
+                <div
+                  @click="onActiveComponent(element)"
+                  :class="[
+                    `${prefixCls}-content-center-canvas-component`,
+                    { active: element.id === activeComponent.id },
+                  ]"
+                >
+                  <div
+                    :class="`${prefixCls}-content-center-canvas-component-tool`"
+                  >
+                    <div class="flex items-center justify-end">
+                      <div class="action">
+                        <icon
+                          icon="uiw:component"
+                          class="text-#fff"
+                          :inline="true"
+                        ></icon>
+                        <span class="text-#fff ml-1">{{ element.title }}</span>
+                      </div>
+                      <div
+                        class="action"
+                        @click.stop="copyComponent(element, index)"
+                      >
+                        <icon icon="ant-design:copy-outlined"></icon>
+                      </div>
+                      <div class="action">
+                        <icon icon="tabler:arrows-move"></icon>
+                      </div>
+                      <div
+                        class="action"
+                        @click.stop="deleteComponent(element, index)"
+                      >
+                        <icon icon="wpf:delete"></icon>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <a-form-item
+                      v-bind="element.props || { label: element.title }"
+                    >
+                      <component
+                        :is="element.component.componentName || 'AInput'"
+                        v-bind="element.component.props"
+                      ></component>
+                    </a-form-item>
+                  </div>
+                </div>
+              </template>
+            </draggable>
+          </a-form>
         </div>
       </div>
       <div :class="`${prefixCls}-content-right`">
@@ -142,7 +211,23 @@
             <a-tab-pane key="3" tab="事件"></a-tab-pane>
           </a-tabs>
 
-          <div v-show="activeKey === '1'" class="px-2">属性</div>
+          <div v-show="activeKey === '1'" class="px-0">
+            <a-collapse v-model:activeKey="activeComponentCollapseKey">
+              <a-collapse-panel key="1" header="组件属性">
+                <p>12312</p>
+              </a-collapse-panel>
+              <a-collapse-panel key="2" header="字段属性">
+                <p>123</p>
+              </a-collapse-panel>
+              <a-collapse-panel
+                key="3"
+                header="容器属性"
+                collapsible="disabled"
+              >
+                <p>{{ text }}</p>
+              </a-collapse-panel>
+            </a-collapse>
+          </div>
           <div v-show="activeKey === '2'" class="px-2">样式</div>
           <div v-show="activeKey === '3'" class="px-2">事件</div>
         </div>
@@ -155,14 +240,12 @@ import { useStyle } from "@imsjs/ims-ui";
 
 import draggable from "vuedraggable";
 
+import { cloneDeep } from "lodash-es";
+import { nanoid } from "nanoid";
 import Simplebar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
 
-import { h } from "vue";
-
 const { prefixCls } = useStyle("designer");
-
-console.info("prefixCls =>", prefixCls);
 
 const activeKey = ref("1");
 
@@ -170,20 +253,32 @@ const activeTabKey = ref("component");
 
 const activeFilterKey = ref("all");
 
+const activeComponent = ref({ id: "0" });
+
 const hided = ref(false);
 
 const componentKeywords = ref("");
 
 const enabled = ref(true);
 
-const list = ref([
-  { name: "John", id: 0 },
-  { name: "Joao", id: 1 },
-  { name: "Jean", id: 2 },
-]);
+const activeComponentCollapseKey = ref(['1']);
+
+const list = ref([]);
 
 const checkMove = (e) => {
   window.console.log("Future index: " + e.draggedContext.futureIndex);
+};
+
+const cloneComponent = (item) => {
+  console.info("cloneComponent =>", item);
+  item.id = nanoid();
+  return item;
+};
+
+const addComponent = (item) => {
+  let addedComponent = cloneDeep(item);
+  addedComponent.id = nanoid();
+  list.value.push(addedComponent);
 };
 
 const dragging = ref(false);
@@ -224,111 +319,326 @@ const filterItems = [
   },
 ];
 
+const tmpOptions = [
+  {
+    value: "选项一",
+    label: "选项一",
+  },
+  {
+    value: "选项二",
+    label: "选项二",
+  },
+];
+
 const componentLists = ref([
   {
     title: "输入框",
     icon: "iconoir:input-field",
-    key: "component",
+    key: "AInput",
+    props: {
+      tooltip: "测试",
+      label: "输入框",
+      extra: "测试",
+    },
+    component: {
+      componentName: "AInput",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "文本域",
     icon: "bi:textarea-resize",
-    key: "component",
+    key: "ATextarea",
+    component: {
+      componentName: "ATextarea",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "数字输入框",
     icon: "fluent-emoji-high-contrast:input-numbers",
-    key: "component",
+    key: "AInputNumber",
+    component: {
+      componentName: "AInputNumber",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "密码输入框",
     icon: "ph:password-light",
-    key: "component",
+    key: "AInputPassword",
+    component: {
+      componentName: "AInputPassword",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "选择框",
     icon: "tabler:select",
-    key: "component",
+    key: "ASelect",
+    component: {
+      componentName: "ASelect",
+      props: {
+        placeholder: "请选择",
+        options: [
+          {
+            value: "选项一",
+            label: "选项一",
+          },
+          {
+            value: "选项二",
+            label: "选项二",
+          },
+        ],
+      },
+    },
   },
   {
     title: "级联选择器",
     icon: "uiw:component",
-    key: "component",
+    key: "ACascader",
+    component: {
+      componentName: "ACascader",
+      props: {
+        options: [
+          {
+            value: "zhejiang",
+            label: "Zhejiang",
+            children: [
+              {
+                value: "hangzhou",
+                label: "Hangzhou",
+                children: [
+                  {
+                    value: "xihu",
+                    label: "West Lake",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            value: "jiangsu",
+            label: "Jiangsu",
+            children: [
+              {
+                value: "nanjing",
+                label: "Nanjing",
+                children: [
+                  {
+                    value: "zhonghuamen",
+                    label: "Zhong Hua Men",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    },
   },
   {
     title: "多选框",
     icon: "ci:select-multiple",
-    key: "component",
+    key: "ASelect",
+    component: {
+      componentName: "ASelect",
+      props: {
+        mode: "multiple",
+        placeholder: "请选择",
+        options: [
+          {
+            value: "选项一",
+            label: "选项一",
+          },
+          {
+            value: "选项二",
+            label: "选项二",
+          },
+        ],
+      },
+    },
   },
   {
     title: "单选框",
     icon: "ant-design:check-square-outlined",
-    key: "component",
+    key: "ARadioGroup",
+    component: {
+      componentName: "ARadioGroup",
+      props: {
+        placeholder: "请输入",
+        options: [
+          {
+            value: "选项一",
+            label: "选项一",
+          },
+          {
+            value: "选项二",
+            label: "选项二",
+          },
+        ],
+      },
+    },
   },
   {
     title: "日期选择器",
     icon: "ant-design:calendar-twotone",
-    key: "component",
+
+    key: "ADatePicker",
+    component: {
+      componentName: "ADatePicker",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "时间选择器",
     icon: "ant-design:field-time-outlined",
-    key: "component",
+    key: "ATimePicker",
+    component: {
+      componentName: "ATimePicker",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "滑块",
     icon: "vaadin:slider",
-    key: "component",
+    key: "ASwitch",
+    component: {
+      componentName: "ASwitch",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "开关",
     icon: "line-md:switch-off",
-    key: "component",
+    key: "ASwitch",
+    component: {
+      componentName: "ASwitch",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "颜色选择器",
     icon: "mdi:color",
-    key: "component",
+    key: "AInputNumber",
+    component: {
+      componentName: "AInputNumber",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "上传",
     icon: "ant-design:cloud-upload-outlined",
-    key: "component",
+    key: "ImsUpload",
+    component: {
+      componentName: "ImsUpload",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "按钮",
     icon: "mdi:button",
-    key: "component",
+    key: "ImsButton",
+    component: {
+      componentName: "ImsButton",
+      props: {
+        placeholder: "请输入",
+        text: "按钮",
+      },
+    },
   },
   {
     title: "卡片布局",
     icon: "ant-design:credit-card-outlined",
-    key: "component",
+    key: "AInputNumber",
+    component: {
+      componentName: "AInputNumber",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
   {
     title: "栅格布局",
     icon: "radix-icons:layout",
-    key: "component",
+    key: "AInputNumber",
+    component: {
+      componentName: "AInputNumber",
+      props: {
+        placeholder: "请输入",
+      },
+    },
   },
-
-  
 ]);
 
 const onTabClick = (item) => {
-  console.info("item =>", item);
+  // console.info("item =>", item);
 
   activeTabKey.value = item.key;
 };
 
 const onTabDblClick = (item) => {
-  console.info("onTabDblClick.item =>", item);
+  // console.info("onTabDblClick.item =>", item);
 
   hided.value = !hided.value;
 };
 
 const onFilterItemClick = (item) => {
-  console.info("onFilterItemClick =>", item);
+  // console.info("onFilterItemClick =>", item);
   activeFilterKey.value = item.key;
+};
+
+const onActiveComponent = (item) => {
+  // console.info('onActiveComponent =>',item);
+  activeComponent.value = item;
+};
+
+// copyComponent deleteComponent
+const copyComponent = (item, index) => {
+  let copyedItem = cloneDeep(item);
+
+  copyedItem.id = nanoid();
+
+  list.value.splice(index + 1, 0, copyedItem);
+  console.info("copyComponent =>", item, index);
+  activeComponent.value = list.value[index + 1];
+};
+
+const deleteComponent = (item, index) => {
+  list.value.splice(index, 1);
+  if (list.value.length === 0) {
+    activeComponent.value = { id: "0" };
+  } else {
+    if (list.value.length >= index) {
+      if (index === 0) {
+        activeComponent.value = list.value[0];
+      } else {
+        activeComponent.value = list.value[index - 1];
+      }
+    } else {
+      activeComponent.value = list.value[0];
+    }
+  }
 };
 </script>
 
@@ -440,47 +750,41 @@ const onFilterItemClick = (item) => {
                 font-size: 12px;
 
                 &:hover {
-                  color: #3e8bf2;
+                  color: rgb(23, 114, 233);
                   background-color: #3e8bf20f;
                 }
               }
             }
 
             &-components {
-              --at-apply: box-border flex-1 h-full box-border;
-
+              --at-apply: box-border flex-1 h-full py-2;
 
               &-item {
-                --at-apply: box-border float-left w-1/2 px-2 py-1 ;
-                  // border: 1px solid red;
-                &-component {
-                  border: 1px solid #eaeaea;
-                  --at-apply: px-2 py-2 cursor-pointer rd flex items-center justify-start;
-                  &:hover {
-                    border-color: #3e8bf2;
-                    background-color: #3e8bf20f;
-                    .icon {
-                      color: #3e8bf2;
-                    }
+                border: 1px solid #eaeaea;
+                --at-apply: p-2 cursor-pointer rd flex items-center
+                  justify-start;
+                .icon {
+                  font-size: 14px;
+                  --at-apply: mr-1;
+                }
 
-                    .title {
-                      color: #3e8bf2;
-                    }
-                  }
+                .title {
+                  font-size: 12px;
+                  color: rgb(51, 51, 51);
+                  user-select: none;
+                }
 
+                &:hover {
+                  border-color: #3e8bf2;
+                  background-color: #3e8bf20f;
                   .icon {
-                    font-size: 14px;
-                    --at-apply: mr-1;
+                    color: #3e8bf2;
                   }
 
                   .title {
-                    font-size: 12px;
-                    color: rgb(51, 51, 51);
-                    user-select: none;
+                    color: #3e8bf2;
                   }
                 }
-
-                
               }
             }
           }
@@ -505,9 +809,67 @@ const onFilterItemClick = (item) => {
       overflow: hidden;
 
       &-canvas {
-        --at-apply: w-full h-full p-2;
+        --at-apply: w-full h-full px-4 py-8 rd;
         // border: 1px solid red;
         background-color: #fff;
+
+        &-component {
+          --at-apply: py-0;
+          &:focus {
+            border: 1px solid red;
+          }
+
+          &:hover {
+            outline: 1px dashed #1890ff;
+            background-color: rgba(62, 139, 242, 0.06);
+          }
+
+          &.active {
+            outline: 2px solid #1890ff;
+            position: relative;
+
+            .ims-designer-content-center-canvas-component-tool {
+              display: block;
+              background-color: #fff;
+              position: absolute;
+              top: -23px;
+              --at-apply: w-full flex justify-end;
+            }
+
+            & {
+              background-color: rgba(62, 139, 242, 0.06);
+            }
+          }
+
+          &-tool {
+            // border: 1px solid red;
+
+            background-color: #fff;
+
+            // top: -24px;
+            --at-apply: w-full;
+
+            display: none;
+
+            .action {
+              border-radius: 2px;
+              font-size: 12px !important;
+              display: flex;
+              align-items: center;
+              padding: 0 3px;
+              height: 20px;
+              background-color: #1890ff;
+              margin-left: 2px;
+              color: #fff;
+
+              cursor: pointer;
+
+              &:hover {
+                background-color: #40a9ff;
+              }
+            }
+          }
+        }
       }
     }
 

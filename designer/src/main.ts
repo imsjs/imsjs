@@ -11,7 +11,7 @@ import { Icon } from "@iconify/vue";
 import Antd from "ant-design-vue";
 
 // ims-ui 样式使用了 unocss 所有这里可以不引入
-import "virtual:uno.css";
+// import "virtual:uno.css";
 
 import ImsUI from "@imsjs/ims-ui";
 
