@@ -205,14 +205,14 @@
           </a-breadcrumb>
         </div>
         <div>
-          <a-tabs v-model:activeKey="activeKey" centered>
+          <a-tabs v-model:activeKey="activeKey" centered :tabBarStyle="tabBarStyle" class="props-tabs">
             <a-tab-pane key="1" tab="属性"></a-tab-pane>
             <a-tab-pane key="2" tab="样式"></a-tab-pane>
             <a-tab-pane key="3" tab="事件"></a-tab-pane>
           </a-tabs>
 
           <div v-show="activeKey === '1'" class="px-0">
-            <a-collapse v-model:activeKey="activeComponentCollapseKey">
+            <a-collapse v-model:activeKey="activeComponentCollapseKey" class="props-collapse">
               <a-collapse-panel key="1" header="组件属性">
                 <p>12312</p>
               </a-collapse-panel>
@@ -222,14 +222,14 @@
               <a-collapse-panel
                 key="3"
                 header="容器属性"
-                collapsible="disabled"
+                
               >
-                <p>{{ text }}</p>
+                <p>vvv</p>
               </a-collapse-panel>
             </a-collapse>
           </div>
-          <div v-show="activeKey === '2'" class="px-2">样式</div>
-          <div v-show="activeKey === '3'" class="px-2">事件</div>
+          <div v-show="activeKey === '2'" class="px-0">样式</div>
+          <div v-show="activeKey === '3'" class="px-0">事件</div>
         </div>
       </div>
     </div>
@@ -264,6 +264,10 @@ const enabled = ref(true);
 const activeComponentCollapseKey = ref(['1']);
 
 const list = ref([]);
+
+const tabBarStyle = {
+  margin:'0'
+}
 
 const checkMove = (e) => {
   window.console.log("Future index: " + e.draggedContext.futureIndex);
@@ -842,15 +846,9 @@ const deleteComponent = (item, index) => {
           }
 
           &-tool {
-            // border: 1px solid red;
-
             background-color: #fff;
-
-            // top: -24px;
             --at-apply: w-full;
-
             display: none;
-
             .action {
               border-radius: 2px;
               font-size: 12px !important;
@@ -881,6 +879,16 @@ const deleteComponent = (item, index) => {
 
         --at-apply: h-48px flex items-center px-2;
       }
+
+
+      .props-collapse {
+        border-radius: 0;
+        .ant-collapse-item:last-child {
+          border-radius: 0;
+        }
+      }
+
+      
     }
   }
 }
