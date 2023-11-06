@@ -22,6 +22,7 @@ import {
   ImsOverlayScrollbar,
   ImsEditor,
   ImsVtable,
+  ImsCustomizationOptions,
 } from "@imsjs/ims-ui-components";
 
 export default [
@@ -46,4 +47,5 @@ export default [
   ImsOverlayScrollbar,
   ImsEditor,
   ImsVtable,
+  ImsCustomizationOptions,
 ] as Plugin[];

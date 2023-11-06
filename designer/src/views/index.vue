@@ -129,6 +129,8 @@
             :data="activeComponent"
             v-if="activeComponent.id != '0'"
           ></ims-json-viewer>
+
+          <!-- :move="checkMove" -->
           <a-form>
             <draggable
               :list="list"
@@ -141,7 +143,6 @@
               class="list-group"
               ghost-class="ghost"
               animation="300"
-              :move="checkMove"
             >
               <template #item="{ element, index }">
                 <div
@@ -152,31 +153,38 @@
                   ]"
                 >
                   <div
-                    :class="`${prefixCls}-content-center-canvas-component-tool`"
+                    :class="`${prefixCls}-content-center-canvas-component-tool z-99`"
                   >
-                    <div class="flex items-center justify-end">
-                      <div class="action">
-                        <icon
-                          icon="uiw:component"
-                          class="text-#fff"
-                          :inline="true"
-                        ></icon>
-                        <span class="text-#fff ml-1">{{ element.title }}</span>
+                    <div class="flex items-center justify-between w-full">
+                      <div class="text-#0000004f text-12px">
+                        {{ element.id }}
                       </div>
-                      <div
-                        class="action"
-                        @click.stop="copyComponent(element, index)"
-                      >
-                        <icon icon="ant-design:copy-outlined"></icon>
-                      </div>
-                      <div class="action">
-                        <icon icon="tabler:arrows-move"></icon>
-                      </div>
-                      <div
-                        class="action"
-                        @click.stop="deleteComponent(element, index)"
-                      >
-                        <icon icon="wpf:delete"></icon>
+                      <div class="flex items-center">
+                        <div class="action">
+                          <icon
+                            icon="uiw:component"
+                            class="text-#fff"
+                            :inline="true"
+                          ></icon>
+                          <span class="text-#fff ml-1">{{
+                            element.title
+                          }}</span>
+                        </div>
+                        <div
+                          class="action"
+                          @click.stop="copyComponent(element, index)"
+                        >
+                          <icon icon="ant-design:copy-outlined"></icon>
+                        </div>
+                        <div class="action">
+                          <icon icon="tabler:arrows-move"></icon>
+                        </div>
+                        <div
+                          class="action"
+                          @click.stop="deleteComponent(element, index)"
+                        >
+                          <icon icon="wpf:delete"></icon>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -199,37 +207,126 @@
       </div>
       <div :class="`${prefixCls}-content-right`">
         <div :class="`${prefixCls}-content-right-breadcrumb`">
-          <a-breadcrumb>
+          <a-breadcrumb separator=">">
             <a-breadcrumb-item>页面</a-breadcrumb-item>
-            <a-breadcrumb-item>级联选择器</a-breadcrumb-item>
+            <a-breadcrumb-item>
+              <span>{{ activeComponent.title }}</span>
+              <span class="mx-1 text-12px text-#0000004f">{{
+                activeComponent.type || "xxx"
+              }}</span>
+              <span class="text-12px text-#0000004f italic">{{
+                activeComponent.id || ""
+              }}</span>
+            </a-breadcrumb-item>
           </a-breadcrumb>
         </div>
         <div>
-          <a-tabs v-model:activeKey="activeKey" centered :tabBarStyle="tabBarStyle" class="props-tabs">
+          <a-tabs
+            v-model:activeKey="activeKey"
+            centered
+            :tabBarStyle="tabBarStyle"
+            class="props-tabs"
+          >
             <a-tab-pane key="1" tab="属性"></a-tab-pane>
             <a-tab-pane key="2" tab="样式"></a-tab-pane>
             <a-tab-pane key="3" tab="事件"></a-tab-pane>
           </a-tabs>
 
           <div v-show="activeKey === '1'" class="px-0">
-            <a-collapse v-model:activeKey="activeComponentCollapseKey" class="props-collapse">
-              <a-collapse-panel key="1" header="组件属性">
-                <p>12312</p>
-              </a-collapse-panel>
-              <a-collapse-panel key="2" header="字段属性">
-                <p>123</p>
+            <a-collapse
+              v-model:activeKey="activeComponentCollapseKey"
+              class="props-collapse"
+              v-if="activeComponent.id != '0'"
+            >
+              <a-collapse-panel
+                key="1"
+                header="表单属性"
+                class="props-collapse-panel"
+              >
+                <div class="flex justify-between items-center py-2">
+                  <div class="w-100px text-13px">标题</div>
+                  <div>
+                    <!--  -->
+                    <a-input
+                      size="middle"
+                      v-model:value="activeComponent.props.label"
+                    ></a-input>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <div class="w-100px text-13px">提示信息</div>
+                  <div>
+                    <!-- v-model:value="activeComponent?.props.extra" -->
+                    <a-input
+                      size="middle"
+                      v-model:value="activeComponent.props.tooltip"
+                    ></a-input>
+                  </div>
+                </div>
+
+                <div class="flex justify-between items-center py-2">
+                  <div class="w-100px text-13px">描述</div>
+                  <div>
+                    <!-- v-model:value="activeComponent?.props.extra" -->
+                    <a-input
+                      size="middle"
+                      v-model:value="activeComponent.props.extra"
+                    ></a-input>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <div class="w-100px text-13px">必填</div>
+                  <div class="">
+                    <!-- v-model:value="activeComponent?.props.extra" -->
+                    <a-switch
+                      v-model:checked="activeComponent.props.required"
+                    ></a-switch>
+                  </div>
+                </div>
               </a-collapse-panel>
               <a-collapse-panel
-                key="3"
-                header="容器属性"
-                
+                key="2"
+                header="组件属性"
+                class="props-collapse-panel"
               >
-                <p>vvv</p>
+                <div
+                  class="py-1"
+                  v-for="item in activeComponent.componentProps"
+                >
+                  <div
+                    class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                  >
+                    <div>
+                      {{ item.label
+                      }}<span class="ml-1 text-12px text-#0000004f italic"
+                        >{{ item.field }}</span>
+                      
+                    </div>
+                    <div>
+                      <a-button size="small">{}</a-button>
+                    </div>
+                  </div>
+                  <div class="">
+                    <component
+                      :is="item.component || 'AInput'"
+                      v-model:[item.vModelField]="
+                        activeComponent.component.props[item.field]
+                      "
+                      v-bind="item.props"
+                    ></component>
+                  </div>
+                </div>
+              </a-collapse-panel>
+              <a-collapse-panel key="3" header="字段属性">
+                <div>sss</div>
+              </a-collapse-panel>
+              <a-collapse-panel key="3" header="容器属性">
+                <div>sss</div>
               </a-collapse-panel>
             </a-collapse>
           </div>
-          <div v-show="activeKey === '2'" class="px-0">样式</div>
-          <div v-show="activeKey === '3'" class="px-0">事件</div>
+          <div v-show="activeKey === '4'" class="px-0">样式</div>
+          <div v-show="activeKey === '5'" class="px-0">事件</div>
         </div>
       </div>
     </div>
@@ -261,21 +358,50 @@ const componentKeywords = ref("");
 
 const enabled = ref(true);
 
-const activeComponentCollapseKey = ref(['1']);
+const activeComponentCollapseKey = ref(["1"]);
 
 const list = ref([]);
 
 const tabBarStyle = {
-  margin:'0'
-}
+  margin: "0",
+};
+
+const sizeOptions = [
+  {
+    value: "",
+    label: "默认",
+  },
+  {
+    value: "large",
+    label: "大",
+  },
+  {
+    value: "middle",
+    label: "中",
+  },
+  {
+    value: "small",
+    label: "小",
+  },
+];
 
 const checkMove = (e) => {
-  window.console.log("Future index: " + e.draggedContext.futureIndex);
+  // window.console.log("Future index: " + e.draggedContext.futureIndex,list.value[e.draggedContext.futureIndex]);
+  // activeComponent.value = list.value[e.draggedContext.futureIndex - 1];
 };
 
 const cloneComponent = (item) => {
   console.info("cloneComponent =>", item);
-  item.id = nanoid();
+
+  let itemId = nanoid();
+  item.id = itemId;
+
+  let findedIndex = list.value.findIndex((item) => {
+    return item.id === itemId;
+  });
+
+  console.info("findedIndex =>", findedIndex);
+
   return item;
 };
 
@@ -283,6 +409,8 @@ const addComponent = (item) => {
   let addedComponent = cloneDeep(item);
   addedComponent.id = nanoid();
   list.value.push(addedComponent);
+
+  activeComponent.value = list.value[list.value.length - 1];
 };
 
 const dragging = ref(false);
@@ -339,15 +467,21 @@ const componentLists = ref([
     title: "输入框",
     icon: "iconoir:input-field",
     key: "AInput",
+    type: "input",
     props: {
-      tooltip: "测试",
       label: "输入框",
-      extra: "测试",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
     },
     component: {
       componentName: "AInput",
       props: {
         placeholder: "请输入",
+        bordered: true,
+        showCount: false,
+        size: "",
       },
     },
   },
@@ -355,10 +489,19 @@ const componentLists = ref([
     title: "文本域",
     icon: "bi:textarea-resize",
     key: "ATextarea",
+    type: "textarea",
+    props: {
+      label: "文本域",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ATextarea",
       props: {
         placeholder: "请输入",
+        bordered: true,
       },
     },
   },
@@ -366,6 +509,14 @@ const componentLists = ref([
     title: "数字输入框",
     icon: "fluent-emoji-high-contrast:input-numbers",
     key: "AInputNumber",
+    type: "input-number",
+    props: {
+      label: "数字输入框",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "AInputNumber",
       props: {
@@ -377,6 +528,14 @@ const componentLists = ref([
     title: "密码输入框",
     icon: "ph:password-light",
     key: "AInputPassword",
+    type: "input-password",
+    props: {
+      label: "密码输入框",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "AInputPassword",
       props: {
@@ -388,18 +547,34 @@ const componentLists = ref([
     title: "选择框",
     icon: "tabler:select",
     key: "ASelect",
+    type: "select",
+    props: {
+      label: "选择框",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ASelect",
       props: {
+        bordered: true,
         placeholder: "请选择",
         options: [
           {
+            id:'option-0BMV2r47Uz07S3kFA-flow',
             value: "选项一",
             label: "选项一",
           },
           {
+            id:'option-1BMV2r47Uz07S3kFA-flow',
             value: "选项二",
             label: "选项二",
+          },
+          {
+            id:'option-2BMV2r47Uz07S3kFA-flow',
+            value: "选项三",
+            label: "选项三",
           },
         ],
       },
@@ -409,6 +584,14 @@ const componentLists = ref([
     title: "级联选择器",
     icon: "uiw:component",
     key: "ACascader",
+    type: "cascader",
+    props: {
+      label: "级联选择器",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ACascader",
       props: {
@@ -449,44 +632,74 @@ const componentLists = ref([
       },
     },
   },
-  {
-    title: "多选框",
-    icon: "ci:select-multiple",
-    key: "ASelect",
-    component: {
-      componentName: "ASelect",
-      props: {
-        mode: "multiple",
-        placeholder: "请选择",
-        options: [
-          {
-            value: "选项一",
-            label: "选项一",
-          },
-          {
-            value: "选项二",
-            label: "选项二",
-          },
-        ],
-      },
-    },
-  },
+  
   {
     title: "单选框",
     icon: "ant-design:check-square-outlined",
     key: "ARadioGroup",
+    type: "radio-group",
+    props: {
+      label: "单选框",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ARadioGroup",
       props: {
         placeholder: "请输入",
         options: [
           {
+            id:'option-0BMV2r47Uz07S3kFA-flow',
             value: "选项一",
             label: "选项一",
           },
           {
+            id:'option-1BMV2r47Uz07S3kFA-flow',
             value: "选项二",
             label: "选项二",
+          },
+          {
+            id:'option-2BMV2r47Uz07S3kFA-flow',
+            value: "选项三",
+            label: "选项三",
+          },
+        ],
+      },
+    },
+  },
+  {
+    title: "多选框",
+    icon: "ant-design:check-square-outlined",
+    key: "ACheckboxGroup",
+    type: "checkbox-group",
+    props: {
+      label: "多选框",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
+    component: {
+      componentName: "ACheckboxGroup",
+      props: {
+        placeholder: "请输入",
+        options: [
+          {
+            id:'option-0BMV2r47Uz07S3kFA-flow',
+            value: "选项一",
+            label: "选项一",
+          },
+          {
+            id:'option-1BMV2r47Uz07S3kFA-flow',
+            value: "选项二",
+            label: "选项二",
+          },
+          {
+            id:'option-2BMV2r47Uz07S3kFA-flow',
+            value: "选项三",
+            label: "选项三",
           },
         ],
       },
@@ -495,8 +708,15 @@ const componentLists = ref([
   {
     title: "日期选择器",
     icon: "ant-design:calendar-twotone",
-
     key: "ADatePicker",
+    type: "date-picker",
+    props: {
+      label: "日期选择器",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ADatePicker",
       props: {
@@ -508,6 +728,14 @@ const componentLists = ref([
     title: "时间选择器",
     icon: "ant-design:field-time-outlined",
     key: "ATimePicker",
+    type: "time-picker",
+    props: {
+      label: "时间选择器",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ATimePicker",
       props: {
@@ -518,9 +746,17 @@ const componentLists = ref([
   {
     title: "滑块",
     icon: "vaadin:slider",
-    key: "ASwitch",
+    key: "ASlider",
+    type: "slider",
+    props: {
+      label: "滑块",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
-      componentName: "ASwitch",
+      componentName: "ASlider",
       props: {
         placeholder: "请输入",
       },
@@ -530,6 +766,14 @@ const componentLists = ref([
     title: "开关",
     icon: "line-md:switch-off",
     key: "ASwitch",
+    type: "switch",
+    props: {
+      label: "开关",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ASwitch",
       props: {
@@ -541,6 +785,14 @@ const componentLists = ref([
     title: "颜色选择器",
     icon: "mdi:color",
     key: "AInputNumber",
+    type: "color-picker",
+    props: {
+      label: "颜色选择器",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "AInputNumber",
       props: {
@@ -552,6 +804,14 @@ const componentLists = ref([
     title: "上传",
     icon: "ant-design:cloud-upload-outlined",
     key: "ImsUpload",
+    type: "ims-upload",
+    props: {
+      label: "上传",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ImsUpload",
       props: {
@@ -563,6 +823,14 @@ const componentLists = ref([
     title: "按钮",
     icon: "mdi:button",
     key: "ImsButton",
+    type: "ims-button",
+    props: {
+      label: "按钮",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "ImsButton",
       props: {
@@ -575,6 +843,14 @@ const componentLists = ref([
     title: "卡片布局",
     icon: "ant-design:credit-card-outlined",
     key: "AInputNumber",
+    type: "card",
+    props: {
+      label: "卡片布局",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "AInputNumber",
       props: {
@@ -586,6 +862,14 @@ const componentLists = ref([
     title: "栅格布局",
     icon: "radix-icons:layout",
     key: "AInputNumber",
+    type: "grid",
+    props: {
+      label: "栅格布局",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+    },
     component: {
       componentName: "AInputNumber",
       props: {
@@ -594,6 +878,1104 @@ const componentLists = ref([
     },
   },
 ]);
+
+const componentsProps = {
+  input: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  textarea: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "input-number": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "input-password": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  select: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+        defaultValue: "请选择",
+      },
+    },
+
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "禁用",
+      field: "disabled",
+      props: {},
+    },
+    {
+      component: "ImsCustomizationOptions",
+      vModelField: "value",
+      label: "数据源",
+      field: "options",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  cascader: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  
+  "radio-group": [
+    {
+      component: "ImsCustomizationOptions",
+      vModelField: "value",
+      label: "数据源",
+      field: "options",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "checkbox-group": [
+    {
+      component: "ImsCustomizationOptions",
+      vModelField: "value",
+      label: "数据源",
+      field: "options",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "date-picker": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "time-picker": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  slider: [
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大值",
+      field: "max",
+      props: {
+        placeholder: "请输入最大长度",
+        defaultValue: 100,
+      },
+    },
+
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最小值",
+      field: "min",
+      props: {
+        placeholder: "请输入最大长度",
+        defaultValue: 0,
+      },
+    },
+
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "步长",
+      field: "step",
+      props: {
+        defaultValue: 1,
+      },
+    },
+
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "双滑块模式",
+      field: "range",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  switch: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "color-picker": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "ims-upload": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  "ims-button": [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  card: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+  grid: [
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "占位提示",
+      field: "placeholder",
+      props: {
+        placeholder: "请输入占位提示",
+      },
+    },
+    {
+      component: "AInputNumber",
+      vModelField: "value",
+      label: "最大长度",
+      field: "maxlength",
+      props: {
+        placeholder: "请输入最大长度",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "前缀",
+      field: "prefix",
+      props: {
+        placeholder: "prefix",
+      },
+    },
+
+    {
+      component: "AInput",
+      vModelField: "value",
+      label: "后缀",
+      field: "suffix",
+      props: {
+        placeholder: "suffix",
+      },
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "允许清除内容",
+      field: "allowClear",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否有边框",
+      field: "bordered",
+      props: {},
+    },
+    {
+      component: "ASwitch",
+      vModelField: "checked",
+      label: "是否展示字数",
+      field: "showCount",
+      props: {},
+    },
+    {
+      component: "ARadioGroup",
+      vModelField: "value",
+      label: "尺寸",
+      field: "size",
+      props: {
+        options: sizeOptions,
+        optionType: "button",
+      },
+    },
+    //
+  ],
+};
 
 const onTabClick = (item) => {
   // console.info("item =>", item);
@@ -644,6 +2026,15 @@ const deleteComponent = (item, index) => {
     }
   }
 };
+
+watch(activeComponent, (newActiveComponent) => {
+  let componentType = newActiveComponent.type;
+  // let componentProps = newActiveComponent.component.props;
+
+  newActiveComponent.componentProps = componentsProps[componentType];
+  // console.info("componentProps", componentProps);
+  //
+});
 </script>
 
 <style lang="less" scoped>
@@ -818,7 +2209,7 @@ const deleteComponent = (item, index) => {
         background-color: #fff;
 
         &-component {
-          --at-apply: py-0;
+          --at-apply: p-1;
           &:focus {
             border: 1px solid red;
           }
@@ -847,7 +2238,7 @@ const deleteComponent = (item, index) => {
 
           &-tool {
             background-color: #fff;
-            --at-apply: w-full;
+            --at-apply: w-full px-1;
             display: none;
             .action {
               border-radius: 2px;
@@ -859,9 +2250,7 @@ const deleteComponent = (item, index) => {
               background-color: #1890ff;
               margin-left: 2px;
               color: #fff;
-
               cursor: pointer;
-
               &:hover {
                 background-color: #40a9ff;
               }
@@ -872,7 +2261,7 @@ const deleteComponent = (item, index) => {
     }
 
     &-right {
-      --at-apply: w-300px;
+      --at-apply: w-350px;
 
       &-breadcrumb {
         border-bottom: 1px solid #eaeaea;
@@ -880,15 +2269,17 @@ const deleteComponent = (item, index) => {
         --at-apply: h-48px flex items-center px-2;
       }
 
-
       .props-collapse {
         border-radius: 0;
+
+        :deep(.ant-collapse-content-box) {
+          padding: 8px;
+        }
+
         .ant-collapse-item:last-child {
           border-radius: 0;
         }
       }
-
-      
     }
   }
 }

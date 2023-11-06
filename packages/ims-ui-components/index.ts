@@ -39,3 +39,5 @@ export * from "./overlay-scrollbar";
 export * from "./editor";
 
 export * from "./vtable";
+
+export * from "./customization-options";

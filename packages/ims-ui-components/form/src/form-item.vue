@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<ImsFormItemProps>(), {});
 const emit = defineEmits([]);
 const emitEventHandler = (field: string, event: string, params: any) => {
   const eo = `${field}-${event}`;
-  console.info('eo =>',eo);
+  // console.info('eo =>',eo);
   // console.info('currentInstance =>',currentInstance);
   currentInstance.emitsOptions[eo] = null;
 
@@ -61,7 +61,6 @@ if (props.item.component?.events) {
       props.item.component.events[key].map((pkey: string, index: number) => {
         params[pkey] = args[index];
       });
-
       emitEventHandler(props.item.field, key, params);
     };
   }
@@ -69,10 +68,3 @@ if (props.item.component?.events) {
   props.item.component.emitsEvents = emitsEvents;
 }
 </script>
-
-<!-- <style lang="less" scoped>
-@prefix-cls: ~'@{namespace}-form';
-
-.@{prefix-cls} {
-}
-</style> -->
