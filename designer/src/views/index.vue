@@ -123,86 +123,109 @@
       </div>
 
       <div :class="`${prefixCls}-content-center`">
-        <div :class="`${prefixCls}-content-center-canvas`">
-          <!-- <ims-json-viewer :data="list"></ims-json-viewer> -->
-          <ims-json-viewer
-            :data="activeComponent"
-            v-if="activeComponent.id != '0'"
-          ></ims-json-viewer>
+        <div :class="`${prefixCls}-content-center-tool-bar`">
+          <div></div>
+          <div>
+            <a-space>
+              <!-- <a-button>ddd</a-button>
+              <a-button>ddd</a-button> -->
+              <a-button @click="emptyForm">清空</a-button>
+            </a-space>
+          </div>
+        </div>
 
-          <!-- :move="checkMove" -->
-          <a-form>
-            <draggable
-              :list="list"
-              :enabled="enabled"
-              item-key="id"
-              :component-data="{
-                type: 'transition-group',
-              }"
-              group="components"
-              class="list-group"
-              ghost-class="ghost"
-              animation="300"
-            >
-              <template #item="{ element, index }">
-                <div
-                  @click="onActiveComponent(element)"
-                  :class="[
-                    `${prefixCls}-content-center-canvas-component`,
-                    { active: element.id === activeComponent.id },
-                  ]"
+        <div
+          :class="`${prefixCls}-content-center-canvas-wrapper`"
+          data-simplebar
+          data-simplebar-auto-hide="false"
+        >
+          <Simplebar>
+            <div :class="`${prefixCls}-content-center-canvas-wrapper-canvas`">
+              <ims-json-viewer :data="list"></ims-json-viewer>
+              <!-- <ims-json-viewer :data="demoForm"></ims-json-viewer>
+            <ims-json-viewer
+              :data="activeComponent"
+              v-if="activeComponent.id != '0'"
+            ></ims-json-viewer> -->
+
+              <!-- :move="checkMove" -->
+              <a-form>
+                <draggable
+                  :list="list"
+                  :enabled="enabled"
+                  item-key="id"
+                  :component-data="{
+                    type: 'transition-group',
+                  }"
+                  group="components"
+                  class="list-group"
+                  ghost-class="ghost"
+                  animation="300"
                 >
-                  <div
-                    :class="`${prefixCls}-content-center-canvas-component-tool z-99`"
-                  >
-                    <div class="flex items-center justify-between w-full">
-                      <div class="text-#0000004f text-12px">
-                        {{ element.id }}
+                  <template #item="{ element, index }">
+                    <div
+                      @click="onActiveComponent(element)"
+                      :class="[
+                        `${prefixCls}-content-center-canvas-wrapper-canvas-component`,
+                        { active: element.id === activeComponent.id },
+                      ]"
+                    >
+                      <div
+                        :class="`${prefixCls}-content-center-canvas-wrapper-canvas-component-tool z-99`"
+                      >
+                        <div class="flex items-center justify-between w-full">
+                          <div class="text-#0000004f text-12px">
+                            {{ element.id }}
+                          </div>
+                          <div class="flex items-center">
+                            <div class="action">
+                              <icon
+                                icon="uiw:component"
+                                class="text-#fff"
+                                :inline="true"
+                              ></icon>
+                              <span class="text-#fff ml-1">{{
+                                element.title
+                              }}</span>
+                            </div>
+                            <div
+                              class="action"
+                              @click.stop="copyComponent(element, index)"
+                            >
+                              <icon icon="ant-design:copy-outlined"></icon>
+                            </div>
+                            <div class="action">
+                              <icon icon="tabler:arrows-move"></icon>
+                            </div>
+                            <div
+                              class="action"
+                              @click.stop="deleteComponent(element, index)"
+                            >
+                              <icon icon="wpf:delete"></icon>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="flex items-center">
-                        <div class="action">
-                          <icon
-                            icon="uiw:component"
-                            class="text-#fff"
-                            :inline="true"
-                          ></icon>
-                          <span class="text-#fff ml-1">{{
-                            element.title
-                          }}</span>
-                        </div>
-                        <div
-                          class="action"
-                          @click.stop="copyComponent(element, index)"
+
+                      <div>
+                        <a-form-item
+                          v-bind="element.item || { label: element.title }"
                         >
-                          <icon icon="ant-design:copy-outlined"></icon>
-                        </div>
-                        <div class="action">
-                          <icon icon="tabler:arrows-move"></icon>
-                        </div>
-                        <div
-                          class="action"
-                          @click.stop="deleteComponent(element, index)"
-                        >
-                          <icon icon="wpf:delete"></icon>
-                        </div>
+                          <component
+                            :is="element.component.componentName || 'AInput'"
+                            v-bind="element.component.props"
+                            v-model:[element.vModelField]="
+                              demoForm.model[element.item.name]
+                            "
+                          ></component>
+                        </a-form-item>
                       </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <a-form-item
-                      v-bind="element.item || { label: element.title }"
-                    >
-                      <component
-                        :is="element.component.componentName || 'AInput'"
-                        v-bind="element.component.props"
-                      ></component>
-                    </a-form-item>
-                  </div>
-                </div>
-              </template>
-            </draggable>
-          </a-form>
+                  </template>
+                </draggable>
+              </a-form>
+            </div>
+          </Simplebar>
         </div>
       </div>
       <div :class="`${prefixCls}-content-right`">
@@ -210,113 +233,122 @@
           <a-breadcrumb separator=">">
             <a-breadcrumb-item>表单</a-breadcrumb-item>
             <a-breadcrumb-item v-if="activeComponent.id != '0'">
-              <div class="flex items-center ">
+              <div class="flex items-center">
                 <!-- <span ><icon class="mr-1" :icon="activeComponent.icon" :inline="true"></icon></span> -->
-              <span>{{ activeComponent.title }}</span>
-              <span class="mx-1 text-12px text-#0000004f">{{
-                activeComponent.type || ""
-              }}</span>
-              <!-- <span class="text-12px text-#0000004f italic">{{
+                <span>{{ activeComponent.title }}</span>
+                <span class="mx-1 text-12px text-#0000004f">{{
+                  activeComponent.type || ""
+                }}</span>
+                <!-- <span class="text-12px text-#0000004f italic">{{
                 activeComponent.id || ""
               }}</span> -->
               </div>
             </a-breadcrumb-item>
           </a-breadcrumb>
         </div>
-        <div>
+        <div :class="`${prefixCls}-content-right-props`">
           <a-tabs
             v-model:activeKey="activeKey"
             centered
             :tabBarStyle="tabBarStyle"
-            class="props-tabs"
+            :class="`${prefixCls}-content-right-props-tabs`"
           >
             <a-tab-pane key="1" tab="属性"></a-tab-pane>
             <a-tab-pane key="2" tab="样式"></a-tab-pane>
             <a-tab-pane key="3" tab="事件"></a-tab-pane>
           </a-tabs>
 
-          <div v-show="activeKey === '1'" class="px-0">
-            <a-collapse
-              v-model:activeKey="activeComponentCollapseKey"
-              class="props-collapse"
-              v-if="activeComponent.id != '0'"
-            >
-              <a-collapse-panel
-                key="1"
-                header="表单属性"
-                class="props-collapse-panel"
+          <div
+            :class="`${prefixCls}-content-right-props-contents`"
+            data-simplebar
+            data-simplebar-auto-hide="false"
+          >
+          <Simplebar>
+            <div v-show="activeKey === '1'" class="px-0">
+              <a-collapse
+                v-model:activeKey="activeComponentCollapseKey"
+                class="props-collapse"
+                v-if="activeComponent.id != '0'"
               >
-                <div
-                  class="py-1"
-                  v-for="item in activeComponent.formItemProps"
+                <a-collapse-panel
+                  key="1"
+                  header="表单属性"
+                  class="props-collapse-panel"
                 >
                   <div
-                    class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                    class="py-1"
+                    v-for="item in activeComponent.formItemProps"
                   >
-                    <div>
-                      {{ item.label
-                      }}<span class="ml-1 text-12px text-#0000004f italic"
-                        >{{ item.field }}</span>
-                      
+                    <div
+                      class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                    >
+                      <div>
+                        {{ item.label
+                        }}<span class="ml-1 text-12px text-#0000004f italic">{{
+                          item.field
+                        }}</span>
+                      </div>
+                      <div>
+                        <a-button size="small">{}</a-button>
+                      </div>
                     </div>
-                    <div>
-                      <a-button size="small">{}</a-button>
+                    <div class="">
+                      <component
+                        :is="item.component || 'AInput'"
+                        v-model:[item.vModelField]="
+                          activeComponent.item[item.field]
+                        "
+                        v-bind="item.props"
+                      ></component>
                     </div>
                   </div>
-                  <div class="">
-                    <component
-                      :is="item.component || 'AInput'"
-                      v-model:[item.vModelField]="
-                        activeComponent.item[item.field]
-                      "
-                      v-bind="item.props"
-                    ></component>
-                  </div>
-                </div>
-              </a-collapse-panel>
-              <a-collapse-panel
-                key="2"
-                header="组件属性"
-                class="props-collapse-panel"
-              >
-                <div
-                  class="py-1"
-                  v-for="item in activeComponent.componentProps"
+                </a-collapse-panel>
+                <a-collapse-panel
+                  key="2"
+                  header="组件属性"
+                  class="props-collapse-panel"
                 >
                   <div
-                    class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                    class="py-1"
+                    v-for="item in activeComponent.componentProps"
                   >
-                    <div>
-                      {{ item.label
-                      }}<span class="ml-1 text-12px text-#0000004f italic"
-                        >{{ item.field }}</span>
-                      
+                    <div
+                      class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                    >
+                      <div>
+                        {{ item.label
+                        }}<span class="ml-1 text-12px text-#0000004f italic">{{
+                          item.field
+                        }}</span>
+                      </div>
+                      <div>
+                        <a-button size="small">{}</a-button>
+                      </div>
                     </div>
-                    <div>
-                      <a-button size="small">{}</a-button>
+                    <div class="">
+                      <component
+                        :is="item.component || 'AInput'"
+                        v-model:[item.vModelField]="
+                          activeComponent.component.props[item.field]
+                        "
+                        v-bind="item.props"
+                      ></component>
                     </div>
                   </div>
-                  <div class="">
-                    <component
-                      :is="item.component || 'AInput'"
-                      v-model:[item.vModelField]="
-                        activeComponent.component.props[item.field]
-                      "
-                      v-bind="item.props"
-                    ></component>
-                  </div>
-                </div>
-              </a-collapse-panel>
-              <a-collapse-panel key="3" header="字段属性">
-                <div>sss</div>
-              </a-collapse-panel>
-              <a-collapse-panel key="3" header="容器属性">
-                <div>sss</div>
-              </a-collapse-panel>
-            </a-collapse>
+                </a-collapse-panel>
+                <a-collapse-panel key="3" header="字段属性">
+                  <div>sss</div>
+                </a-collapse-panel>
+                <a-collapse-panel key="3" header="容器属性">
+                  <div>sss</div>
+                </a-collapse-panel>
+              </a-collapse>
+            </div>
+            <div v-show="activeKey === '2'" class="px-0">样式</div>
+            <div v-show="activeKey === '3'" class="px-0">事件</div>
+
+            </Simplebar>
           </div>
-          <div v-show="activeKey === '4'" class="px-0">样式</div>
-          <div v-show="activeKey === '5'" class="px-0">事件</div>
         </div>
       </div>
     </div>
@@ -336,7 +368,14 @@ import componentPropsJson from "@/assets/jsons/component-props.json";
 
 import formItemPropsJson from "@/assets/jsons/form-item-props.json";
 
+import { Form } from "ant-design-vue";
 
+const useForm = Form.useForm;
+
+const demoForm = ref({
+  model: {},
+  rules: {},
+});
 
 // console.info('componentListsJson =>',componentListsJson);
 
@@ -363,25 +402,6 @@ const list = ref([]);
 const tabBarStyle = {
   margin: "0",
 };
-
-const sizeOptions = [
-  {
-    value: "",
-    label: "默认",
-  },
-  {
-    value: "large",
-    label: "大",
-  },
-  {
-    value: "middle",
-    label: "中",
-  },
-  {
-    value: "small",
-    label: "小",
-  },
-];
 
 const checkMove = (e) => {
   // window.console.log("Future index: " + e.draggedContext.futureIndex,list.value[e.draggedContext.futureIndex]);
@@ -449,17 +469,19 @@ const filterItems = [
   },
 ];
 
-
-
 const componentLists = ref(componentListsJson);
 
 const componentsProps = componentPropsJson;
-
 
 const onTabClick = (item) => {
   // console.info("item =>", item);
 
   activeTabKey.value = item.key;
+};
+
+const emptyForm = () => {
+  console.info("emptyForm");
+  list.value = [];
 };
 
 const onTabDblClick = (item) => {
@@ -506,16 +528,16 @@ const deleteComponent = (item, index) => {
   }
 };
 
-watch(activeComponent, (newActiveComponent:any) => {
+const { resetFields, validate, validateInfos } = useForm(
+  demoForm.value.model,
+  demoForm.value.rules
+);
+
+watch(activeComponent, (newActiveComponent: any) => {
   let componentType = newActiveComponent.type;
-  // let componentProps = newActiveComponent.component.props;
 
   newActiveComponent.componentProps = componentsProps[componentType];
   newActiveComponent.formItemProps = formItemPropsJson;
-
-  // newActiveComponent.formItemProps = componentsProps[componentType];
-  // console.info("componentProps", componentProps);
-  //
 });
 </script>
 
@@ -595,6 +617,7 @@ watch(activeComponent, (newActiveComponent:any) => {
 
       &-contents {
         --at-apply: flex-1 w-300px h-full;
+
         &-component {
           --at-apply: flex flex-col h-full;
           &-searcher {
@@ -603,14 +626,12 @@ watch(activeComponent, (newActiveComponent:any) => {
           }
 
           &-wrapper {
-            --at-apply: flex-1 flex h-full;
-            box-sizing: border-box;
+            --at-apply: flex-1 flex h-full box-border;
 
             overflow: hidden;
 
             &-filter {
-              --at-apply: px-2 py-2 h-full;
-              box-sizing: border-box;
+              --at-apply: px-2 py-2 h-full box-border;
 
               background-color: #f8f8f8;
 
@@ -635,6 +656,8 @@ watch(activeComponent, (newActiveComponent:any) => {
 
             &-components {
               --at-apply: box-border flex-1 h-full py-2;
+
+              // border: 1px solid red;
 
               &-item {
                 border: 1px solid #eaeaea;
@@ -678,67 +701,95 @@ watch(activeComponent, (newActiveComponent:any) => {
     }
 
     &-center {
-      --at-apply: flex-1 p-6;
+      --at-apply: flex-1 h-full flex flex-col;
       border: 1px solid #eaeaea;
-      background-image: linear-gradient(#f8f8f8 14px, transparent 0),
-        linear-gradient(90deg, transparent 14px, #373739 0);
-      background-size: 15px 15px;
-      overflow: hidden;
 
-      &-canvas {
-        --at-apply: w-full h-full px-4 py-8 rd;
-        // border: 1px solid red;
-        background-color: #fff;
+      // border: 2px solid red;
 
-        &-component {
-          --at-apply: p-1;
-          &:focus {
-            border: 1px solid red;
-          }
+      // height: calc(100%-48px);
 
-          &:hover {
-            outline: 1px dashed #1890ff;
-            background-color: rgba(62, 139, 242, 0.06);
-          }
+      // overflow: hidden;
 
-          &.active {
-            outline: 2px solid #1890ff;
-            position: relative;
+      &-tool-bar {
+        border-bottom: 1px solid #eaeaea;
+        --at-apply: w-full h-48px box-border flex items-center justify-between
+          px-6;
+      }
 
-            .ims-designer-content-center-canvas-component-tool {
-              display: block;
-              background-color: #fff;
-              position: absolute;
-              top: -23px;
-              --at-apply: w-full flex justify-end;
-            }
+      &-canvas-wrapper {
+        // background-image: linear-gradient(#f8f8f8 14px, transparent 0),
+        //   linear-gradient(90deg, transparent 14px, #373739 0);
+        //   background-size: 15px 15px;
 
-            & {
+        --at-apply: flex-1 px-0 box-border;
+
+        height: calc(100% - 48px);
+        // min-height: 100% !important;
+        // height: 100% !important;
+
+        // border: 1px solid #f8f8f8;
+
+        &:hover {
+          outline: 1px dashed #1890ff;
+        }
+
+        &-canvas {
+          --at-apply: flex-1 w-full px-4 py-8 rd box-border;
+
+          // overflow: hidden;
+          // border: 1px solid red;
+          min-height: calc(100% - 48px);
+          background-color: #fff;
+
+          &-component {
+            --at-apply: p-1;
+
+            &:hover {
+              outline: 1px dashed #1890ff;
               background-color: rgba(62, 139, 242, 0.06);
             }
-          }
 
-          &-tool {
-            background-color: #fff;
-            --at-apply: w-full px-1;
-            display: none;
-            .action {
-              border-radius: 2px;
-              font-size: 12px !important;
-              display: flex;
-              align-items: center;
-              padding: 0 3px;
-              height: 20px;
-              background-color: #1890ff;
-              margin-left: 2px;
-              color: #fff;
-              cursor: pointer;
-              &:hover {
-                background-color: #40a9ff;
+            &.active {
+              outline: 2px solid #1890ff;
+              position: relative;
+
+              .ims-designer-content-center-canvas-wrapper-canvas-component-tool {
+                display: block;
+                background-color: #fff;
+                position: absolute;
+                top: -23px;
+                --at-apply: w-full flex justify-end;
+              }
+
+              & {
+                background-color: rgba(62, 139, 242, 0.06);
+              }
+            }
+
+            &-tool {
+              background-color: #fff;
+              --at-apply: w-full px-1;
+              display: none;
+              .action {
+                border-radius: 2px;
+                font-size: 12px !important;
+                display: flex;
+                align-items: center;
+                padding: 0 3px;
+                height: 20px;
+                background-color: #1890ff;
+                margin-left: 2px;
+                color: #fff;
+                cursor: pointer;
+                &:hover {
+                  background-color: #40a9ff;
+                }
               }
             }
           }
         }
+
+        //
       }
     }
 
@@ -752,6 +803,9 @@ watch(activeComponent, (newActiveComponent:any) => {
       }
 
       .props-collapse {
+        border-top: none;
+        border-left: none;
+        border-right: none;
         border-radius: 0;
 
         :deep(.ant-collapse-content-box) {
@@ -760,6 +814,24 @@ watch(activeComponent, (newActiveComponent:any) => {
 
         .ant-collapse-item:last-child {
           border-radius: 0;
+          // border: 1px solid red;
+        }
+
+        .ant-collapse-item:first-child {
+          border-radius: 0;
+          border-top: none;
+        }
+      }
+
+      &-props {
+        height: calc(100% - 48px);
+        --at-apply: box-border flex flex-col;
+
+        &-tabs {
+        }
+
+        &-contents {
+          --at-apply: flex-1 overflow-hidden;
         }
       }
     }

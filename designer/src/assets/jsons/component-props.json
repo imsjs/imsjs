@@ -95,33 +95,7 @@
         "placeholder": "请输入占位提示"
       }
     },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
+
     {
       "component": "ASwitch",
       "vModelField": "checked",
@@ -135,6 +109,15 @@
       "label": "是否有边框",
       "field": "bordered",
       "props": {}
+    },
+    {
+      "component": "AInputNumber",
+      "vModelField": "value",
+      "label": "最大长度",
+      "field": "maxlength",
+      "props": {
+        "placeholder": "请输入最大长度"
+      }
     },
     {
       "component": "ASwitch",
