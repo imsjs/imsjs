@@ -141,7 +141,9 @@
         >
           <Simplebar>
             <div :class="`${prefixCls}-content-center-canvas-wrapper-canvas`">
-              <ims-json-viewer :data="list"></ims-json-viewer>
+              <div class="mb-2">
+                <ims-json-viewer :data="list"></ims-json-viewer>
+              </div>
               <!-- <ims-json-viewer :data="demoForm"></ims-json-viewer>
             <ims-json-viewer
               :data="activeComponent"
@@ -263,90 +265,91 @@
             data-simplebar
             data-simplebar-auto-hide="false"
           >
-          <Simplebar>
-            <div v-show="activeKey === '1'" class="px-0">
-              <a-collapse
-                v-model:activeKey="activeComponentCollapseKey"
-                class="props-collapse"
-                v-if="activeComponent.id != '0'"
-              >
-                <a-collapse-panel
-                  key="1"
-                  header="表单属性"
-                  class="props-collapse-panel"
+            <Simplebar>
+              <div v-show="activeKey === '1'" class="px-0">
+                <a-collapse
+                  v-model:activeKey="activeComponentCollapseKey"
+                  class="props-collapse"
+                  v-if="activeComponent.id != '0'"
                 >
-                  <div
-                    class="py-1"
-                    v-for="item in activeComponent.formItemProps"
+                  <a-collapse-panel
+                    key="1"
+                    header="表单属性"
+                    class="props-collapse-panel"
                   >
                     <div
-                      class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                      class="py-1"
+                      v-for="item in activeComponent.formItemProps"
                     >
-                      <div>
-                        {{ item.label
-                        }}<span class="ml-1 text-12px text-#0000004f italic">{{
-                          item.field
-                        }}</span>
+                      <div
+                        class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                      >
+                        <div>
+                          {{ item.label
+                          }}<span
+                            class="ml-1 text-12px text-#0000004f italic"
+                            >{{ item.field }}</span
+                          >
+                        </div>
+                        <div>
+                          <a-button size="small">{}</a-button>
+                        </div>
                       </div>
-                      <div>
-                        <a-button size="small">{}</a-button>
+                      <div class="">
+                        <component
+                          :is="item.component || 'AInput'"
+                          v-model:[item.vModelField]="
+                            activeComponent.item[item.field]
+                          "
+                          v-bind="item.props"
+                        ></component>
                       </div>
                     </div>
-                    <div class="">
-                      <component
-                        :is="item.component || 'AInput'"
-                        v-model:[item.vModelField]="
-                          activeComponent.item[item.field]
-                        "
-                        v-bind="item.props"
-                      ></component>
-                    </div>
-                  </div>
-                </a-collapse-panel>
-                <a-collapse-panel
-                  key="2"
-                  header="组件属性"
-                  class="props-collapse-panel"
-                >
-                  <div
-                    class="py-1"
-                    v-for="item in activeComponent.componentProps"
+                  </a-collapse-panel>
+                  <a-collapse-panel
+                    key="2"
+                    header="组件属性"
+                    class="props-collapse-panel"
                   >
                     <div
-                      class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                      class="py-1"
+                      v-for="item in activeComponent.componentProps"
                     >
-                      <div>
-                        {{ item.label
-                        }}<span class="ml-1 text-12px text-#0000004f italic">{{
-                          item.field
-                        }}</span>
+                      <div
+                        class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                      >
+                        <div>
+                          <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
+                            <span class="py-1 border-b-dashed border-b-1">{{ item.label }}</span>
+                          </a-tooltip>
+                          <span v-else class="py-1">{{ item.label }}</span>
+                          <span  class="ml-1 text-12px text-#0000004f italic">{{ item.field }}</span>
+                        </div>
+                        <div>
+                          <a-button size="small">{}</a-button>
+                        </div>
                       </div>
-                      <div>
-                        <a-button size="small">{}</a-button>
+                      <div class="">
+                        <component
+                          :is="item.component || 'AInput'"
+                          v-model:[item.vModelField]="
+                            activeComponent.component.props[item.field]
+                          "
+                          v-bind="item.props"
+                        ></component>
                       </div>
                     </div>
-                    <div class="">
-                      <component
-                        :is="item.component || 'AInput'"
-                        v-model:[item.vModelField]="
-                          activeComponent.component.props[item.field]
-                        "
-                        v-bind="item.props"
-                      ></component>
-                    </div>
-                  </div>
-                </a-collapse-panel>
-                <a-collapse-panel key="3" header="字段属性">
-                  <div>sss</div>
-                </a-collapse-panel>
-                <a-collapse-panel key="3" header="容器属性">
-                  <div>sss</div>
-                </a-collapse-panel>
-              </a-collapse>
-            </div>
-            <div v-show="activeKey === '2'" class="px-0">样式</div>
-            <div v-show="activeKey === '3'" class="px-0">事件</div>
-
+                  </a-collapse-panel>
+                  <a-collapse-panel key="3" header="字段属性">
+                    <div>sss</div>
+                  </a-collapse-panel>
+                  <a-collapse-panel key="3" header="容器属性">
+                    <div>sss</div>
+                  </a-collapse-panel>
+                </a-collapse>
+              </div>
+              <div v-show="activeKey === '2'" class="px-0">样式</div>
+              <div v-show="activeKey === '3'" class="px-0">事件</div>
             </Simplebar>
           </div>
         </div>
@@ -730,7 +733,8 @@ watch(activeComponent, (newActiveComponent: any) => {
         // border: 1px solid #f8f8f8;
 
         &:hover {
-          outline: 1px dashed #1890ff;
+          // outline: 1px dashed #1890ff;
+          outline: 1px solid #1890ff;
         }
 
         &-canvas {
@@ -746,7 +750,7 @@ watch(activeComponent, (newActiveComponent: any) => {
 
             &:hover {
               outline: 1px dashed #1890ff;
-              background-color: rgba(62, 139, 242, 0.06);
+              // background-color: rgba(62, 139, 242, 0.06);
             }
 
             &.active {
@@ -762,7 +766,7 @@ watch(activeComponent, (newActiveComponent: any) => {
               }
 
               & {
-                background-color: rgba(62, 139, 242, 0.06);
+                // background-color: rgba(62, 139, 242, 0.06);
               }
             }
 

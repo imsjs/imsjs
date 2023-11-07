@@ -62,6 +62,9 @@
       "vModelField": "value",
       "label": "尺寸",
       "field": "size",
+      "tooltip": {
+        "title": "控件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
       "props": {
         "options": [
           {
