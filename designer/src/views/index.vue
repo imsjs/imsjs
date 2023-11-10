@@ -12,7 +12,7 @@
           <ims-button icon="iconoir:undo" :disabled="true" />
           <ims-button icon="iconoir:redo" :disabled="true" />
           <a-button>预览</a-button>
-          <a-button>保存</a-button>
+          <a-button @click="saveJson">保存</a-button>
           <a-button>数据回显</a-button>
           <a-button>重置操作</a-button>
         </a-space>
@@ -142,18 +142,15 @@
           <Simplebar>
             <div :class="`${prefixCls}-content-center-canvas-wrapper-canvas`">
               <div class="mb-2">
-                <ims-json-viewer :data="list"></ims-json-viewer>
-              </div>
-              <!-- <ims-json-viewer :data="demoForm"></ims-json-viewer>
-            <ims-json-viewer
-              :data="activeComponent"
-              v-if="activeComponent.id != '0'"
-            ></ims-json-viewer> -->
+                {{ activeComponentIndex }}
+                <ims-json-viewer :data="useFormRs" />
 
-              <!-- :move="checkMove" -->
+                <ims-json-viewer :data="list" title="list" />
+              </div>
+
               <a-form>
                 <draggable
-                  :list="list"
+                  :list="list.items"
                   :enabled="enabled"
                   item-key="id"
                   :component-data="{
@@ -166,7 +163,7 @@
                 >
                   <template #item="{ element, index }">
                     <div
-                      @click="onActiveComponent(element)"
+                      @click="onActiveComponent(element, index)"
                       :class="[
                         `${prefixCls}-content-center-canvas-wrapper-canvas-component`,
                         { active: element.id === activeComponent.id },
@@ -211,13 +208,19 @@
 
                       <div>
                         <a-form-item
-                          v-bind="element.item || { label: element.title }"
+                          v-bind="
+                            Object.assign(
+                              { label: element.title },
+                              element.item,
+                              useFormRs.validateInfos[element.item.name]
+                            )
+                          "
                         >
                           <component
                             :is="element.component.componentName || 'AInput'"
                             v-bind="element.component.props"
                             v-model:[element.vModelField]="
-                              demoForm.model[element.item.name]
+                              list.model[element.item.name]
                             "
                           ></component>
                         </a-form-item>
@@ -279,17 +282,32 @@
                   >
                     <div
                       class="py-1"
-                      v-for="item in activeComponent.formItemProps"
+                      :key="`form-item-${index}`"
+                      v-for="(item, index) in activeComponent.formItemProps"
                     >
                       <div
                         class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
                       >
-                        <div>
-                          {{ item.label
-                          }}<span
-                            class="ml-1 text-12px text-#0000004f italic"
-                            >{{ item.field }}</span
-                          >
+                        <div class="flex items-center">
+                          <icon
+                            icon="mdi:required"
+                            v-if="item.required === true"
+                            style="
+                              margin-right: 2px;
+                              font-size: 8px;
+                              color: #ff4d4f;
+                            "
+                            :inline="true"
+                          />
+                          <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
+                            <span class="py-1 border-b-dashed border-b-1">{{
+                              item.label
+                            }}</span>
+                          </a-tooltip>
+                          <span v-else class="py-1">{{ item.label }}</span>
+                          <span class="ml-1 text-12px text-#0000004f italic">{{
+                            item.field
+                          }}</span>
                         </div>
                         <div>
                           <a-button size="small">{}</a-button>
@@ -302,6 +320,7 @@
                             activeComponent.item[item.field]
                           "
                           v-bind="item.props"
+                          @change="(e) => onFormItemNameChange(item, index, e)"
                         ></component>
                       </div>
                     </div>
@@ -320,10 +339,14 @@
                       >
                         <div>
                           <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
-                            <span class="py-1 border-b-dashed border-b-1">{{ item.label }}</span>
+                            <span class="py-1 border-b-dashed border-b-1">{{
+                              item.label
+                            }}</span>
                           </a-tooltip>
                           <span v-else class="py-1">{{ item.label }}</span>
-                          <span  class="ml-1 text-12px text-#0000004f italic">{{ item.field }}</span>
+                          <span class="ml-1 text-12px text-#0000004f italic">{{
+                            item.field
+                          }}</span>
                         </div>
                         <div>
                           <a-button size="small">{}</a-button>
@@ -362,7 +385,7 @@ import { useStyle } from "@imsjs/ims-ui";
 
 import draggable from "vuedraggable";
 
-import { cloneDeep } from "lodash-es";
+import { cloneDeep, pick } from "lodash-es";
 import { nanoid } from "nanoid";
 import Simplebar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
@@ -374,11 +397,6 @@ import formItemPropsJson from "@/assets/jsons/form-item-props.json";
 import { Form } from "ant-design-vue";
 
 const useForm = Form.useForm;
-
-const demoForm = ref({
-  model: {},
-  rules: {},
-});
 
 // console.info('componentListsJson =>',componentListsJson);
 
@@ -392,6 +410,8 @@ const activeFilterKey = ref("all");
 
 const activeComponent = ref({ id: "0" });
 
+const activeComponentIndex = ref(-1);
+
 const hided = ref(false);
 
 const componentKeywords = ref("");
@@ -400,15 +420,19 @@ const enabled = ref(true);
 
 const activeComponentCollapseKey = ref(["1"]);
 
-const list = ref([]);
+const list = ref({
+  model: {},
+  rules: {},
+  items: [],
+});
 
 const tabBarStyle = {
   margin: "0",
 };
 
 const checkMove = (e) => {
-  // window.console.log("Future index: " + e.draggedContext.futureIndex,list.value[e.draggedContext.futureIndex]);
-  // activeComponent.value = list.value[e.draggedContext.futureIndex - 1];
+  // window.console.log("Future index: " + e.draggedContext.futureIndex,list.value.items[e.draggedContext.futureIndex]);
+  // activeComponent.value = list.value.items[e.draggedContext.futureIndex - 1];
 };
 
 const cloneComponent = (item) => {
@@ -417,21 +441,13 @@ const cloneComponent = (item) => {
   let itemId = nanoid();
   item.id = itemId;
 
-  let findedIndex = list.value.findIndex((item) => {
+  let findedIndex = list.value.items.findIndex((item) => {
     return item.id === itemId;
   });
 
   console.info("findedIndex =>", findedIndex);
 
   return item;
-};
-
-const addComponent = (item) => {
-  let addedComponent = cloneDeep(item);
-  addedComponent.id = nanoid();
-  list.value.push(addedComponent);
-
-  activeComponent.value = list.value[list.value.length - 1];
 };
 
 const dragging = ref(false);
@@ -476,6 +492,8 @@ const componentLists = ref(componentListsJson);
 
 const componentsProps = componentPropsJson;
 
+const useFormRs = ref({});
+
 const onTabClick = (item) => {
   // console.info("item =>", item);
 
@@ -483,8 +501,15 @@ const onTabClick = (item) => {
 };
 
 const emptyForm = () => {
-  console.info("emptyForm");
-  list.value = [];
+  console.info("emptyForm.useFormRs =>", useFormRs);
+  // validateInfos = {};
+  list.value = {
+    model: {},
+    rules: {},
+    items: [],
+  };
+
+  useFormRs.value = {};
 };
 
 const onTabDblClick = (item) => {
@@ -493,54 +518,156 @@ const onTabDblClick = (item) => {
   hided.value = !hided.value;
 };
 
-const onFilterItemClick = (item) => {
+const onFilterItemClick = (item: any) => {
   // console.info("onFilterItemClick =>", item);
   activeFilterKey.value = item.key;
 };
 
-const onActiveComponent = (item) => {
+const onActiveComponent = (item: any, index: number) => {
   // console.info('onActiveComponent =>',item);
   activeComponent.value = item;
+
+  activeComponentIndex.value = index;
+};
+
+const addComponent = (item: any) => {
+  let addedComponent = cloneDeep(item);
+  addedComponent.id = nanoid();
+
+  let itemName = nanoid();
+  addedComponent.item.name = itemName;
+  list.value.items.push(addedComponent);
+
+  list.value.model[itemName] = "";
+  list.value.rules[itemName] = [
+    {
+      required: true,
+      message: "Please input Activity name",
+      trigger: "change",
+    },
+  ];
+
+  let activeIndex = list.value.items.length - 1;
+
+  activeComponent.value = list.value.items[activeIndex];
+
+  activeComponentIndex.value = activeIndex;
+
+  useFormRs.value = useForm(list.value.model, list.value.rules);
 };
 
 // copyComponent deleteComponent
-const copyComponent = (item, index) => {
+const copyComponent = (item: any, index: number) => {
   let copyedItem = cloneDeep(item);
 
   copyedItem.id = nanoid();
 
-  list.value.splice(index + 1, 0, copyedItem);
+  console.info("copyedItem =>", copyedItem);
+
+  let itemName = nanoid();
+
+  copyedItem.item.name = itemName;
+
+  list.value.items.splice(index + 1, 0, copyedItem);
+  list.value.model[itemName] = "";
+  list.value.rules[itemName] = [
+    {
+      required: true,
+      message: "Please input Activity name",
+      trigger: "change",
+    },
+  ];
   console.info("copyComponent =>", item, index);
-  activeComponent.value = list.value[index + 1];
+
+  let activeIndex = index + 1;
+  activeComponent.value = list.value.items[activeIndex];
+
+  activeComponentIndex.value = activeIndex;
+
+  useFormRs.value = {};
+
+  useFormRs.value = useForm(list.value.model, list.value.rules);
+
+  console.info("useFormRs.value =>", useFormRs.value);
 };
 
-const deleteComponent = (item, index) => {
-  list.value.splice(index, 1);
-  if (list.value.length === 0) {
+const deleteComponent = (item: any, index: number) => {
+  list.value.items.splice(index, 1);
+  if (list.value.items.length === 0) {
     activeComponent.value = { id: "0" };
   } else {
-    if (list.value.length >= index) {
+    if (list.value.items.length >= index) {
       if (index === 0) {
-        activeComponent.value = list.value[0];
+        activeComponent.value = list.value.items[0];
       } else {
-        activeComponent.value = list.value[index - 1];
+        activeComponent.value = list.value.items[index - 1];
       }
     } else {
-      activeComponent.value = list.value[0];
+      activeComponent.value = list.value.items[0];
     }
+  }
+
+  useFormRs.value = {};
+
+  useFormRs.value = useForm(list.value.model, list.value.rules);
+};
+
+const onFormItemNameChange = (item, index, e) => {
+  if (item.field === "name") {
+    let modelKeys = Object.keys(list.value.model);
+    let changedName = list.value.items[activeComponentIndex.value].item.name;
+    modelKeys[activeComponentIndex.value] = changedName;
+    let newModel = Object.fromEntries(modelKeys.map(item=>[item,'']));
+
+    // 更新表单model
+    list.value.model = newModel;
+
+    // 更新表单的验证规则
+    /**
+     * 1.同步重置了验证规则，可想办法保留验证规则
+     */
+    let newRules = Object.fromEntries(modelKeys.map(item=>[item,[]]));
+    list.value.rules = newRules;
+    useFormRs.value = useForm(list.value.model, list.value.rules);
   }
 };
 
-const { resetFields, validate, validateInfos } = useForm(
-  demoForm.value.model,
-  demoForm.value.rules
-);
+
+const saveJson = () => {
+  console.info('saveJson =>',list.value);
+  let fileName = 'demo.json';
+  let content = "data:text/json;charset=utf-8,";
+
+  let tmpData = cloneDeep(list.value);
+
+  console.info('items =>',tmpData.items);
+
+  let items = [];
+
+  tmpData.items.forEach((item)=>{
+    let tmp = pick(item,['item','component','id','title','type']);
+    items.push(tmp);
+  })
+
+  tmpData.items = items;
+
+  // console.info('items =>',items);
+
+    content += JSON.stringify(tmpData, null, 2);
+    var encodedUri = encodeURI(content);
+    var actions = document.createElement("a");
+    actions.setAttribute("href", encodedUri);
+    actions.setAttribute("download", fileName);
+    actions.click();
+
+}
 
 watch(activeComponent, (newActiveComponent: any) => {
   let componentType = newActiveComponent.type;
 
   newActiveComponent.componentProps = componentsProps[componentType];
   newActiveComponent.formItemProps = formItemPropsJson;
+  console.info("watch =>activeComponent");
 });
 </script>
 
