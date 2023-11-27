@@ -1149,7 +1149,7 @@
       }
     }
   ],
-  "card": [
+  "card-layout": [
     {
       "component": "AInput",
       "vModelField": "value",
@@ -1235,7 +1235,7 @@
       }
     }
   ],
-  "grid": [
+  "grid-layout": [
     {
       "component": "AInput",
       "vModelField": "value",

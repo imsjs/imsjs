@@ -25,3 +25,5 @@ export * from "./editor";
 export * from "./vtable";
 
 export * from "./customization-options";
+
+export * from "./grid-layout";

@@ -47,6 +47,7 @@
     "field": "colon",
     "props": {}
   },
+
   {
     "component": "ASwitch",
     "vModelField": "checked",

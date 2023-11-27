@@ -2,9 +2,11 @@
   {
     "title": "输入框",
     "icon": "iconoir:input-field",
-    "key": "AInput",
     "type": "input",
     "vModelField": "value",
+    "col": {
+      "span": 12
+    },
     "item": {
       "label": "输入框",
       "name": "",
@@ -28,9 +30,11 @@
   {
     "title": "文本域",
     "icon": "bi:textarea-resize",
-    "key": "ATextarea",
     "type": "textarea",
     "vModelField": "value",
+    "col": {
+      "span": 12
+    },
     "item": {
       "label": "文本域",
       "name": "",
@@ -50,9 +54,11 @@
   {
     "title": "数字输入框",
     "icon": "fluent-emoji-high-contrast:input-numbers",
-    "key": "AInputNumber",
     "type": "input-number",
     "vModelField": "value",
+    "col": {
+      "span": 8
+    },
     "item": {
       "label": "数字输入框",
       "name": "",
@@ -71,9 +77,11 @@
   {
     "title": "密码输入框",
     "icon": "ph:password-light",
-    "key": "AInputPassword",
     "type": "input-password",
     "vModelField": "value",
+    "col": {
+      "span": 8
+    },
     "item": {
       "label": "密码输入框",
       "name": "",
@@ -92,9 +100,11 @@
   {
     "title": "选择框",
     "icon": "tabler:select",
-    "key": "ASelect",
     "type": "select",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "选择框",
       "name": "",
@@ -131,9 +141,11 @@
   {
     "title": "级联选择器",
     "icon": "uiw:component",
-    "key": "ACascader",
     "type": "cascader",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "级联选择器",
       "name": "",
@@ -185,9 +197,11 @@
   {
     "title": "单选框",
     "icon": "akar-icons:radio-fill",
-    "key": "ARadioGroup",
     "type": "radio-group",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "单选框",
       "name": "",
@@ -223,9 +237,11 @@
   {
     "title": "多选框",
     "icon": "mingcute:checkbox-line",
-    "key": "ACheckboxGroup",
     "type": "checkbox-group",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "多选框",
       "name": "",
@@ -261,9 +277,11 @@
   {
     "title": "日期选择器",
     "icon": "ant-design:calendar-twotone",
-    "key": "ADatePicker",
     "type": "date-picker",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "日期选择器",
       "name": "",
@@ -282,9 +300,11 @@
   {
     "title": "时间选择器",
     "icon": "ant-design:field-time-outlined",
-    "key": "ATimePicker",
     "type": "time-picker",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "时间选择器",
       "name": "",
@@ -303,9 +323,11 @@
   {
     "title": "滑块",
     "icon": "vaadin:slider",
-    "key": "ASlider",
     "type": "slider",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "滑块",
       "name": "",
@@ -324,9 +346,11 @@
   {
     "title": "开关",
     "icon": "line-md:switch-off",
-    "key": "ASwitch",
     "type": "switch",
     "vModelField": "checked",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "开关",
       "name": "",
@@ -345,9 +369,11 @@
   {
     "title": "颜色选择器",
     "icon": "mdi:color",
-    "key": "AInputNumber",
     "type": "color-picker",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "颜色选择器",
       "name": "",
@@ -366,9 +392,11 @@
   {
     "title": "上传",
     "icon": "ant-design:cloud-upload-outlined",
-    "key": "ImsUpload",
     "type": "ims-upload",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "上传",
       "name": "",
@@ -385,33 +413,13 @@
     }
   },
   {
-    "title": "按钮",
-    "icon": "mdi:button",
-    "key": "ImsButton",
-    "type": "ims-button",
-    "vModelField": "value",
-    "item": {
-      "label": "按钮",
-      "name": "",
-      "tooltip": "",
-      "extra": "",
-      "required": false,
-      "colon": true
-    },
-    "component": {
-      "componentName": "ImsButton",
-      "props": {
-        "placeholder": "请输入",
-        "text": "按钮"
-      }
-    }
-  },
-  {
     "title": "卡片布局",
     "icon": "ant-design:credit-card-outlined",
-    "key": "AInputNumber",
-    "type": "card",
+    "type": "card-layout",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "卡片布局",
       "name": "",
@@ -421,7 +429,7 @@
       "colon": true
     },
     "component": {
-      "componentName": "AInputNumber",
+      "componentName": "ImsCardLayout",
       "props": {
         "placeholder": "请输入"
       }
@@ -430,9 +438,11 @@
   {
     "title": "栅格布局",
     "icon": "radix-icons:layout",
-    "key": "AInputNumber",
-    "type": "grid",
+    "type": "grid-layout",
     "vModelField": "value",
+    "col": {
+      "span": 24
+    },
     "item": {
       "label": "栅格布局",
       "name": "",
@@ -441,11 +451,37 @@
       "required": false,
       "colon": true
     },
-    "component": {
-      "componentName": "AInputNumber",
-      "props": {
-        "placeholder": "请输入"
+    "children": [
+      {
+        "title": "栅格布局-列",
+        "icon": "radix-icons:layout",
+        "type": "grid-layout-col",
+        "vModelField": "value",
+        "item": {
+          "label": "栅格布局",
+          "name": "",
+          "tooltip": "",
+          "extra": "",
+          "required": false,
+          "colon": true
+        },
+        "children": []
+      },
+      {
+        "title": "栅格布局-列",
+        "icon": "radix-icons:layout",
+        "type": "grid-layout-col",
+        "vModelField": "value",
+        "item": {
+          "label": "栅格布局",
+          "name": "",
+          "tooltip": "",
+          "extra": "",
+          "required": false,
+          "colon": true
+        },
+        "children": []
       }
-    }
+    ]
   }
 ]

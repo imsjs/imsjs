@@ -1,59 +1,79 @@
 <template>
-  <div class="box-border">
-    <a-select
-          mode="multiple"
-          style="width: 100%"
-          placeholder="Please select"
-          :options="tmpOptions"
-        ></a-select>
-  
+  <div class="flex flex-col">
+    <div class="flex">
+      <div >
+        <Simplebar>
+
+       
+        <VueDraggable
+      
+      v-model="componentLists"
+      :sort="false"
+      :group="{ name: 'components', pull: 'clone', put: false }"
+      :clone="cloneComponent"
+ 
+      :animation="600"
+      ghostClass="ghost"
+      class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded"
+     
+    >
+      <div
+        v-for="item in componentLists"
+        :key="item.type"
+        class="cursor-move h-30 bg-gray-500/5 rounded p-3 cursor-move"
+      >
+        {{ item.title }}
+      </div>
+    </VueDraggable>
+     </Simplebar>
+      </div>
+      <div class="w-full">
+        <nested-draggable v-model="list" class="w-full"></nested-draggable>
+      </div>
+      
+    </div>
+    
+
+    <ImsJsonViewer :data="list"></ImsJsonViewer>
+
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
+import { ref } from 'vue'
+import NestedDraggable from './NestedComponent.vue'
+import { ImsJsonViewer } from '@imsjs/ims-ui-components';
 
-const tmpOptions = [
-  {
-    value: "选项一",
-    label: "选项一",
-  },
-  {
-    value: "选项二",
-    label: "选项二",
-  },
-];
-const dataSource = [
-  {
-    key: "1",
-    name: "胡彦斌",
-    age: 32,
-    address: "西湖区湖底公园1号",
-  },
-  {
-    key: "2",
-    name: "胡彦祖",
-    age: 42,
-    address: "西湖区湖底公园1号",
-  },
-];
+import { VueDraggable } from 'vue-draggable-plus'
+import { cloneDeep } from "lodash-es";
+import { nanoid } from "nanoid";
+import componentListsJson from "@/assets/jsons/component-lists.json";
 
-const columns = [
-  {
-    title: "姓名",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "年龄",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "住址",
-    dataIndex: "address",
-    key: "address",
-  },
-];
+import Simplebar from "simplebar-vue";
+import "simplebar-vue/dist/simplebar.min.css";
+
+
+const componentLists = ref(componentListsJson);
+
+
+const list = ref([
+  
+]);
+
+const cloneComponent = (item:any) => {
+  console.info('item =>',item);
+
+  let tmpItem = cloneDeep(item);
+
+  tmpItem.id = nanoid();
+
+  console.info('tmpItem =>',tmpItem);
+
+  return tmpItem;
+
+
+}
+
+
+
 </script>
-
-<style scoped></style>
