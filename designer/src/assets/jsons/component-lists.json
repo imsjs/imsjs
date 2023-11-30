@@ -13,7 +13,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "AInput",
@@ -41,7 +42,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ATextarea",
@@ -65,7 +67,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "AInputNumber",
@@ -88,7 +91,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "AInputPassword",
@@ -111,7 +115,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ASelect",
@@ -152,7 +157,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ACascader",
@@ -208,7 +214,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ARadioGroup",
@@ -248,7 +255,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ACheckboxGroup",
@@ -288,7 +296,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ADatePicker",
@@ -311,7 +320,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ATimePicker",
@@ -334,7 +344,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ASlider",
@@ -357,7 +368,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ASwitch",
@@ -380,7 +392,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "AInputNumber",
@@ -403,7 +416,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ImsUpload",
@@ -426,7 +440,8 @@
       "tooltip": "",
       "extra": "",
       "required": false,
-      "colon": true
+      "colon": true,
+      "rules": []
     },
     "component": {
       "componentName": "ImsCardLayout",

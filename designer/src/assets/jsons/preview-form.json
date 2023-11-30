@@ -1,57 +1,33 @@
 {
   "model": {
-    "H67_Ha-2Zjh0VHOM4De0X": "",
-    "d53R5nB-CfqSt2OKR7CQJ": "",
-    "4vBmabPMt79sICPburTiP": "",
-    "mEKGm38fcStUFjn6OPGLE": "",
-    "spHqkLDJiUYNi4HeK_s5-": "",
-    "yfkwyTl3MFAVI1n5gxmYN": "",
-    "ZgZN3q3Ftsi9oXktckFdl": ""
+    "name": "",
+    "gender": "",
+    "test1": "",
+    "test2": ""
   },
   "rules": {
-    "H67_Ha-2Zjh0VHOM4De0X": [
+    "D8YY2x__FLWmdXkj4UrDH": [
       {
         "required": true,
         "message": "Please input Activity name",
         "trigger": "change"
       }
     ],
-    "d53R5nB-CfqSt2OKR7CQJ": [
+    "AiiY3RU8goP0H2_P-iK5X": [
       {
         "required": true,
         "message": "Please input Activity name",
         "trigger": "change"
       }
     ],
-    "4vBmabPMt79sICPburTiP": [
+    "P3fOQ-OdoDxB8C5l6ZnuD": [
       {
         "required": true,
         "message": "Please input Activity name",
         "trigger": "change"
       }
     ],
-    "mEKGm38fcStUFjn6OPGLE": [
-      {
-        "required": true,
-        "message": "Please input Activity name",
-        "trigger": "change"
-      }
-    ],
-    "spHqkLDJiUYNi4HeK_s5-": [
-      {
-        "required": true,
-        "message": "Please input Activity name",
-        "trigger": "change"
-      }
-    ],
-    "yfkwyTl3MFAVI1n5gxmYN": [
-      {
-        "required": true,
-        "message": "Please input Activity name",
-        "trigger": "change"
-      }
-    ],
-    "ZgZN3q3Ftsi9oXktckFdl": [
+    "XPpucoPSHqXwn1SarVf0J": [
       {
         "required": true,
         "message": "Please input Activity name",
@@ -83,7 +59,7 @@
           },
           "item": {
             "label": "姓名",
-            "name": "H67_Ha-2Zjh0VHOM4De0X",
+            "name": "name",
             "tooltip": "",
             "extra": "",
             "required": false,
@@ -244,8 +220,143 @@
               "props": {}
             }
           ],
+          "id": "OwgDXGxwE7lYNoTZzTykI",
+          "class": "tree-item"
+        },
+        {
+          "title": "单选框",
+          "icon": "akar-icons:radio-fill",
+          "type": "radio-group",
+          "vModelField": "value",
+          "col": {
+            "span": 24
+          },
+          "item": {
+            "label": "性别",
+            "name": "gender",
+            "tooltip": "",
+            "extra": "",
+            "required": false,
+            "colon": true
+          },
+          "component": {
+            "componentName": "ARadioGroup",
+            "props": {
+              "placeholder": "请输入",
+              "options": [
+                {
+                  "id": "option-0BMV2r47Uz07S3kFA-flow",
+                  "value": "选项一",
+                  "label": "选项一"
+                },
+                {
+                  "id": "option-1BMV2r47Uz07S3kFA-flow",
+                  "value": "选项二",
+                  "label": "选项二"
+                },
+                {
+                  "id": "option-2BMV2r47Uz07S3kFA-flow",
+                  "value": "选项三",
+                  "label": "选项三"
+                }
+              ]
+            }
+          },
+          "id": "tSLr-M--hSlVqssjfHUw5",
           "class": "tree-item",
-          "id": "6k619ERMAjSuJucTtLQZQ"
+          "componentProps": [
+            {
+              "component": "ImsCustomizationOptions",
+              "vModelField": "value",
+              "label": "数据源",
+              "field": "options",
+              "props": {}
+            },
+            {
+              "component": "ARadioGroup",
+              "vModelField": "value",
+              "label": "尺寸",
+              "field": "size",
+              "props": {
+                "options": [
+                  {
+                    "value": "",
+                    "label": "默认"
+                  },
+                  {
+                    "value": "large",
+                    "label": "大"
+                  },
+                  {
+                    "value": "middle",
+                    "label": "中"
+                  },
+                  {
+                    "value": "small",
+                    "label": "小"
+                  }
+                ],
+                "optionType": "button"
+              }
+            }
+          ],
+          "formItemProps": [
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "标签",
+              "field": "label",
+              "props": {
+                "placeholder": "请输入标签"
+              }
+            },
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "model字段",
+              "field": "name",
+              "required": true,
+              "tooltip": {
+                "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
+              },
+              "props": {
+                "placeholder": "请输入model字段"
+              }
+            },
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "提示信息",
+              "field": "tooltip",
+              "props": {
+                "placeholder": "请输入提示信息",
+                "allowClear": true
+              }
+            },
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "额外的提示信息",
+              "field": "extra",
+              "props": {
+                "placeholder": "请输入额外的提示信息"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否展示冒号",
+              "field": "colon",
+              "props": {}
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否必填",
+              "field": "required",
+              "props": {}
+            }
+          ]
         },
         {
           "title": "栅格布局",
@@ -257,7 +368,7 @@
           },
           "item": {
             "label": "栅格布局",
-            "name": "4vBmabPMt79sICPburTiP",
+            "name": "KZSwBUP5L9LNqWnOt0ay6",
             "tooltip": "",
             "extra": "",
             "required": false,
@@ -287,8 +398,8 @@
                     "span": 12
                   },
                   "item": {
-                    "label": "电话",
-                    "name": "mEKGm38fcStUFjn6OPGLE",
+                    "label": "测试01",
+                    "name": "test1",
                     "tooltip": "",
                     "extra": "",
                     "required": false,
@@ -450,10 +561,10 @@
                     }
                   ],
                   "class": "tree-item",
-                  "id": "sT_nvr5-frR5P9DD8nBzM"
+                  "id": "CpqUE1A61So1LDWstV2O_"
                 }
               ],
-              "id": "Lwl4l6xY4kXiANwumyjIE"
+              "id": "WuHqyhIHXgUqtXT7flO1L"
             },
             {
               "title": "栅格布局-列",
@@ -478,8 +589,8 @@
                     "span": 12
                   },
                   "item": {
-                    "label": "微信",
-                    "name": "spHqkLDJiUYNi4HeK_s5-",
+                    "label": "测试02",
+                    "name": "test2",
                     "tooltip": "",
                     "extra": "",
                     "required": false,
@@ -641,14 +752,14 @@
                     }
                   ],
                   "class": "tree-item",
-                  "id": "xjZRPrVFuESakm1_-tCbs"
+                  "id": "FaXvd_ptMVlfZlpohvjXV"
                 }
               ],
-              "id": "B8tl4dUXrNo7SG-2c1zDM"
+              "id": "54QhZXtFh07VAx1qe5XmR"
             }
           ],
           "class": "tree-item",
-          "id": "HHLKRs4Vqmk4jugS1PG6d",
+          "id": "XTPQ39oZweYsw2dw_w-6D",
           "componentProps": [
             {
               "component": "AInput",
@@ -699,308 +810,6 @@
               "label": "是否有边框",
               "field": "bordered",
               "props": {}
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否展示字数",
-              "field": "showCount",
-              "props": {}
-            },
-            {
-              "component": "ARadioGroup",
-              "vModelField": "value",
-              "label": "尺寸",
-              "field": "size",
-              "props": {
-                "options": [
-                  {
-                    "value": "",
-                    "label": "默认"
-                  },
-                  {
-                    "value": "large",
-                    "label": "大"
-                  },
-                  {
-                    "value": "middle",
-                    "label": "中"
-                  },
-                  {
-                    "value": "small",
-                    "label": "小"
-                  }
-                ],
-                "optionType": "button"
-              }
-            }
-          ],
-          "formItemProps": [
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "标签",
-              "field": "label",
-              "props": {
-                "placeholder": "请输入标签"
-              }
-            },
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "model字段",
-              "field": "name",
-              "required": true,
-              "tooltip": {
-                "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
-              },
-              "props": {
-                "placeholder": "请输入model字段"
-              }
-            },
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "提示信息",
-              "field": "tooltip",
-              "props": {
-                "placeholder": "请输入提示信息",
-                "allowClear": true
-              }
-            },
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "额外的提示信息",
-              "field": "extra",
-              "props": {
-                "placeholder": "请输入额外的提示信息"
-              }
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否展示冒号",
-              "field": "colon",
-              "props": {}
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否必填",
-              "field": "required",
-              "props": {}
-            }
-          ]
-        },
-        {
-          "title": "文本域",
-          "icon": "bi:textarea-resize",
-          "type": "textarea",
-          "vModelField": "value",
-          "col": {
-            "span": 12
-          },
-          "item": {
-            "label": "描述",
-            "name": "yfkwyTl3MFAVI1n5gxmYN",
-            "tooltip": "",
-            "extra": "",
-            "required": false,
-            "colon": true
-          },
-          "component": {
-            "componentName": "ATextarea",
-            "props": {
-              "placeholder": "请输入",
-              "bordered": true
-            }
-          },
-          "class": "tree-item",
-          "id": "LD1rnNaFHpY72AgPH-H_L",
-          "componentProps": [
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "占位提示",
-              "field": "placeholder",
-              "props": {
-                "placeholder": "请输入占位提示"
-              }
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "允许清除内容",
-              "field": "allowClear",
-              "props": {}
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否有边框",
-              "field": "bordered",
-              "props": {}
-            },
-            {
-              "component": "AInputNumber",
-              "vModelField": "value",
-              "label": "最大长度",
-              "field": "maxlength",
-              "props": {
-                "placeholder": "请输入最大长度"
-              }
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否展示字数",
-              "field": "showCount",
-              "props": {}
-            },
-            {
-              "component": "ARadioGroup",
-              "vModelField": "value",
-              "label": "尺寸",
-              "field": "size",
-              "props": {
-                "options": [
-                  {
-                    "value": "",
-                    "label": "默认"
-                  },
-                  {
-                    "value": "large",
-                    "label": "大"
-                  },
-                  {
-                    "value": "middle",
-                    "label": "中"
-                  },
-                  {
-                    "value": "small",
-                    "label": "小"
-                  }
-                ],
-                "optionType": "button"
-              }
-            }
-          ],
-          "formItemProps": [
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "标签",
-              "field": "label",
-              "props": {
-                "placeholder": "请输入标签"
-              }
-            },
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "model字段",
-              "field": "name",
-              "required": true,
-              "tooltip": {
-                "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
-              },
-              "props": {
-                "placeholder": "请输入model字段"
-              }
-            },
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "提示信息",
-              "field": "tooltip",
-              "props": {
-                "placeholder": "请输入提示信息",
-                "allowClear": true
-              }
-            },
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "额外的提示信息",
-              "field": "extra",
-              "props": {
-                "placeholder": "请输入额外的提示信息"
-              }
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否展示冒号",
-              "field": "colon",
-              "props": {}
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否必填",
-              "field": "required",
-              "props": {}
-            }
-          ]
-        },
-        {
-          "title": "文本域",
-          "icon": "bi:textarea-resize",
-          "type": "textarea",
-          "vModelField": "value",
-          "col": {
-            "span": 12
-          },
-          "item": {
-            "label": "说明",
-            "name": "ZgZN3q3Ftsi9oXktckFdl",
-            "tooltip": "",
-            "extra": "",
-            "required": false,
-            "colon": true
-          },
-          "component": {
-            "componentName": "ATextarea",
-            "props": {
-              "placeholder": "请输入",
-              "bordered": true
-            }
-          },
-          "class": "tree-item",
-          "id": "3hnbIzGH4E_CJ28CupbWS",
-          "componentProps": [
-            {
-              "component": "AInput",
-              "vModelField": "value",
-              "label": "占位提示",
-              "field": "placeholder",
-              "props": {
-                "placeholder": "请输入占位提示"
-              }
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "允许清除内容",
-              "field": "allowClear",
-              "props": {}
-            },
-            {
-              "component": "ASwitch",
-              "vModelField": "checked",
-              "label": "是否有边框",
-              "field": "bordered",
-              "props": {}
-            },
-            {
-              "component": "AInputNumber",
-              "vModelField": "value",
-              "label": "最大长度",
-              "field": "maxlength",
-              "props": {
-                "placeholder": "请输入最大长度"
-              }
             },
             {
               "component": "ASwitch",

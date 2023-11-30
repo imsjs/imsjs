@@ -49,6 +49,14 @@
   },
 
   {
+    "component": "ImsCustomizationFormItemRules",
+    "vModelField": "value",
+    "label": "校验规则",
+    "field": "rules",
+    "props": {}
+  },
+
+  {
     "component": "ASwitch",
     "vModelField": "checked",
     "label": "是否必填",

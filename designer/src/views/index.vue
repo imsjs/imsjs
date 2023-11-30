@@ -104,7 +104,6 @@
             </div>
 
             <div class="h-200px px-2 overflow-y-auto">
-              
               <a-tree
                 blockNode
                 selectable
@@ -153,7 +152,7 @@
             v-show="activeTabKey === 'source-code'"
             :class="`${prefixCls}-content-left-contents-source-code`"
           >
-            <ims-json-viewer :data="list.items" editable></ims-json-viewer>
+            <ims-json-viewer :data="list" editable></ims-json-viewer>
           </div>
           <div
             v-show="activeTabKey === 'outline'"
@@ -168,8 +167,8 @@
               :tree-data="list.items"
               :fieldNames="fieldNames"
               :draggable="true"
-               @select="onOutlineSelect"
-                v-model:selectedKeys="treeSelectedKeys"
+              @select="onOutlineSelect"
+              v-model:selectedKeys="treeSelectedKeys"
             >
               <template #title="item">
                 <div class="w-full flex justify-between items-center">
@@ -226,7 +225,6 @@
               :class="`${prefixCls}-content-center-canvas-wrapper-canvas`"
               @click="onFormActive"
             >
-           
               <!-- <ims-json-viewer :data="breadcrumbs"></ims-json-viewer>
               <ims-json-viewer :data="activeStorageItem"></ims-json-viewer> -->
               <a-form
@@ -322,10 +320,13 @@
                             activeComponent.item[item.field]
                           "
                           v-bind="item.props"
+                          @focus="(e) => onFormItemFocus(item, index, e)"
+                          @blur="(e) => onFormItemBlur(item, index, e)"
                           @change="(e) => onFormItemNameChange(item, index, e)"
                         ></component>
                       </div>
                     </div>
+              
                   </a-collapse-panel>
                   <a-collapse-panel
                     key="2"
@@ -382,7 +383,11 @@
     </div>
   </div>
 
-  <ImsJsonFormPreview  v-if="previewing" v-model:opening="previewing" :data="list"></ImsJsonFormPreview>
+  <ImsJsonFormPreview
+    v-if="previewing"
+    v-model:opening="previewing"
+    :data="list"
+  ></ImsJsonFormPreview>
 </template>
 <script lang="ts" setup>
 import { useStyle } from "@imsjs/ims-ui";
@@ -424,11 +429,11 @@ const activeComponent = ref({ id: "0", item: {}, component: { props: {} } });
 
 const activeComponentIndex = ref(-1);
 
+const modelKeysIndex = ref(-1);
+
 const hided = ref(false);
 
 const previewing = ref<boolean>(false);
-
-
 
 const componentKeywords = ref("");
 
@@ -438,13 +443,11 @@ const treeSelectedKeys = ref([]);
 
 const activeComponentCollapseKey = ref(["1"]);
 
-
 const onPreview = () => {
-  console.info('onPreview');
+  console.info("onPreview");
 
   previewing.value = true;
-
-}
+};
 
 const list = ref({
   model: {},
@@ -454,16 +457,16 @@ const list = ref({
       item: {
         name: "f_9GqdghhCcT4Dr6VZp-i",
         colon: true,
-        layout:'horizontal',
-        labelAlign:'right',
-        labelCol:{
-          style:{
-            width:'80px'
-          }
-        }
+        layout: "horizontal",
+        labelAlign: "right",
+        labelCol: {
+          style: {
+            width: "80px",
+          },
+        },
       },
       children: [],
-      formItemProps:formPropsJson,
+      formItemProps: formPropsJson,
       component: {
         componentName: "AInputPassword",
         props: {
@@ -527,16 +530,12 @@ const filterItems = [
   },
 ];
 
+const onOutlineSelect = (selectedKeys, { selectedNodes }) => {
+  console.info("onOutlineSelect.selectedKeys =>", selectedKeys);
 
-const onOutlineSelect = (selectedKeys,{ selectedNodes}) => {
-
-  console.info('onOutlineSelect.selectedKeys =>',selectedKeys);
-
-  console.info('onOutlineSelect.selectedNodes =>',selectedNodes);
+  console.info("onOutlineSelect.selectedNodes =>", selectedNodes);
 
   let result = [];
-
-  
 
   findParent(list.value.items, selectedNodes[0], result);
 
@@ -545,8 +544,7 @@ const onOutlineSelect = (selectedKeys,{ selectedNodes}) => {
   breadcrumbs.value = result;
 
   activeStorageItem.value = selectedNodes[0];
-
-}
+};
 
 const componentLists = ref(componentListsJson);
 
@@ -621,15 +619,6 @@ const cloneComponent = (item: any) => {
   let itemName = nanoid();
   addedComponent.item.name = itemName;
 
-  list.value.model[itemName] = "";
-  list.value.rules[itemName] = [
-    {
-      required: true,
-      message: "Please input Activity name",
-      trigger: "change",
-    },
-  ];
-
   addedComponent.componentProps = componentsProps[addedComponent.type]; // 增加 componentProps
   addedComponent.formItemProps = formItemPropsJson; // 增加 formItemProps
 
@@ -637,6 +626,15 @@ const cloneComponent = (item: any) => {
     addedComponent.children.forEach((child) => {
       child.id = nanoid();
     });
+  } else {
+    list.value.model[itemName] = "";
+    list.value.rules[itemName] = [
+      {
+        required: true,
+        message: "Please input Activity name",
+        trigger: "change",
+      },
+    ];
   }
 
   console.info("af => item", addedComponent);
@@ -664,14 +662,16 @@ const addComponent = (item: any) => {
 
   list.value.items[0].children.push(addedComponent);
 
-  list.value.model[itemName] = "";
-  list.value.rules[itemName] = [
-    {
-      required: true,
-      message: "Please input Activity name",
-      trigger: "change",
-    },
-  ];
+  if (addedComponent.type !== "grid-layout") {
+    list.value.model[itemName] = "";
+    list.value.rules[itemName] = [
+      {
+        required: true,
+        message: "Please input Activity name",
+        trigger: "change",
+      },
+    ];
+  }
 
   // let activeIndex = list.value.items.length - 1;
 
@@ -742,11 +742,6 @@ const copyComponent = (item: any, index: number) => {
   ];
   console.info("copyComponent =>", item, index);
 
-  let activeIndex = index + 1;
-  activeComponent.value = list.value.items[activeIndex];
-
-  activeComponentIndex.value = activeIndex;
-
   useFormRs.value = {};
 
   useFormRs.value = useForm(list.value.model, list.value.rules);
@@ -775,43 +770,93 @@ const deleteComponent = (item: any, index: number) => {
   useFormRs.value = useForm(list.value.model, list.value.rules);
 };
 
-const onFormItemNameChange = (item, index, e) => {
+const onFormItemFocus = (item, index, e) => {
+  console.info("onFormItemFocus.item", item);
+  console.info("onFormItemFocus.index, e =>", index);
+  console.info("onFormItemFocus.e =>", e);
 
-
-
-  if(activeComponent.value.type === 'form') {
-
-    if(item.field === "labelCol.style.width") {
-
-      console.info('ok.....',list.value.items[0].item[item.field]);
-
-      list.value.items[0].item.labelCol.style.width = list.value.items[0].item[item.field];
-
-    }
-
-  } else {
-
+  if (activeComponent.value.type !== "form") {
     if (item.field === "name") {
-    let modelKeys = Object.keys(list.value.model);
-    let changedName = list.value.items[activeComponentIndex.value].item.name;
-    modelKeys[activeComponentIndex.value] = changedName;
-    let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
+      console.info(
+        "onFormItemFocus.activeComponent.value =>",
+        activeComponent.value.item.name
+      );
 
-    // 更新表单model
-    list.value.model = newModel;
+      let modelKeys = Object.keys(list.value.model);
 
-    // 更新表单的验证规则
-    /**
-     * 1.同步重置了验证规则，可想办法保留验证规则
-     */
-    let newRules = Object.fromEntries(modelKeys.map((item) => [item, []]));
-    list.value.rules = newRules;
-    useFormRs.value = useForm(list.value.model, list.value.rules);
+      let findedIndex = modelKeys.findIndex(
+        (model) => model === activeComponent.value.item.name
+      );
+
+      modelKeysIndex.value = findedIndex;
+
+      console.info("modelKeys =>", modelKeys);
+
+      console.info("findedIndex =>", findedIndex);
+
+      console.info("modelKeys[findedIndex] =>", modelKeys[findedIndex]);
+    }
   }
+};
 
+const onFormItemBlur = (item, index, e) => {
+  if (activeComponent.value.type !== "form") {
+    if (item.field === "name") {
+      // models
+      let modelKeys = Object.keys(list.value.model);
+
+      modelKeys[modelKeysIndex.value] = activeComponent.value.item.name;
+      let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
+      list.value.model = newModel;
+
+    
+      let rulesKeys = Object.keys(list.value.rules);
+      console.info('list.value.rules =>',list.value.rules);
+      console.info('list.value.rules[modelKeysIndex.value] =>',rulesKeys[modelKeysIndex.value]);
+      // list.value.rules[modelKeysIndex.value] = [];
+
+      list.value.rules[rulesKeys[modelKeysIndex.value]] = [];
+
+
+
+      // modelKeysIndex.value = -1;
+    }
   }
+};
 
-  
+const onFormItemNameChange = (item, index, e) => {
+  console.info("activeComponent.value.type =>", activeComponent.value.type);
+  if (activeComponent.value.type === "form") {
+    if (item.field === "labelCol.style.width") {
+      console.info("ok.....", list.value.items[0].item[item.field]);
+
+      list.value.items[0].item.labelCol.style.width =
+        list.value.items[0].item[item.field];
+    }
+  } else {
+    if (item.field === "name") {
+      let modelKeys = Object.keys(list.value.model);
+
+      console.info("modelKeys =>", modelKeys);
+
+      console.info("activeComponent.value =>", activeComponent.value);
+      let changedName = activeComponent.value.item.name;
+      console.info("changedName", changedName);
+      // modelKeys[activeComponentIndex.value] = changedName;
+      // let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
+
+      // 更新表单model
+      // list.value.model = newModel;
+
+      // 更新表单的验证规则
+      /**
+       * 1.同步重置了验证规则，可想办法保留验证规则
+       */
+      // let newRules = Object.fromEntries(modelKeys.map((item) => [item, []]));
+      // list.value.rules = newRules;
+      // useFormRs.value = useForm(list.value.model, list.value.rules);
+    }
+  }
 };
 
 const saveJson = () => {
@@ -837,7 +882,6 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
   activeComponent.value = result[result.length - 1];
 
   breadcrumbs.value = result;
-
 
   treeSelectedKeys.value = [newActiveStorageItem.id];
 });
@@ -1148,11 +1192,14 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
         height: calc(100% - 48px);
         --at-apply: box-border flex flex-col;
 
+        
+
         &-tabs {
         }
 
         &-contents {
           --at-apply: flex-1 overflow-hidden;
+          position: relative;
         }
       }
     }

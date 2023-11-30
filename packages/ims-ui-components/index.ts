@@ -42,4 +42,6 @@ export * from "./vtable";
 
 export * from "./customization-options";
 
+export * from "./customization-form-item-rules";
+
 export * from "./grid-layout";
