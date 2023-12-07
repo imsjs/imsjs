@@ -23,6 +23,7 @@
     "monaco-editor": "^0.44.0",
     "nanoid": "^5.0.3",
     "simplebar-vue": "^2.3.3",
+    "tree-lodash": "^0.3.1",
     "uuid": "^9.0.1",
     "vue-draggable-plus": "^0.2.7",
     "vuedraggable": "4.1.0"

@@ -1,5 +1,21 @@
 # @imsjs/ims-ui
 
+## 3.0.0
+
+### Major Changes
+
+- f35b47d: add new feat
+
+### Patch Changes
+
+- Updated dependencies [f35b47d]
+  - @imsjs/ims-ui-components@3.0.0
+  - @imsjs/ims-ui-types@3.0.0
+  - @imsjs/ims-ui-constants@3.0.0
+  - @imsjs/ims-ui-enums@3.0.0
+  - @imsjs/ims-ui-hooks@3.0.0
+  - @imsjs/ims-ui-utils@3.0.0
+
 ## 2.1.2
 
 ### Patch Changes

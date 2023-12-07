@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 3.0.0
+
+### Major Changes
+
+- f35b47d: add new feat
+
 ## 2.1.2
 
 ### Patch Changes
