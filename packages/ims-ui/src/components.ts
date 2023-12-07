@@ -23,7 +23,6 @@ import {
   ImsEditor,
   ImsVtable,
   ImsCustomizationOptions,
-  ImsGridLayout,
   ImsCustomizationFormItemRules,
   ImsFormRenderer,
 } from "@imsjs/ims-ui-components";
@@ -52,6 +51,5 @@ export default [
   ImsVtable,
   ImsCustomizationOptions,
   ImsCustomizationFormItemRules,
-  ImsGridLayout,
   ImsFormRenderer,
 ] as Plugin[];

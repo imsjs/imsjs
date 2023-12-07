@@ -25,11 +25,9 @@
     "@imsjs/ims-ui-enums": "workspace:*",
     "@imsjs/ims-ui-hooks": "workspace:*",
     "@imsjs/ims-ui-types": "workspace:*",
-    "@imsjs/ims-ui-utils": "workspace:*",
-    "vuedraggable": "4.1.0"
+    "@imsjs/ims-ui-utils": "workspace:*"
   },
   "devDependencies": {
-    "sortablejs": "^1.15.0",
     "vue": "^3.3.4"
   },
   "publishConfig": {

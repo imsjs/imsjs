@@ -1,11 +1,12 @@
 <template>
-  <div :class="prefixCls">
-    <!-- <ims-json-viewer :data="modelValue"></ims-json-viewer> -->
-    <draggable :list="modelValue" ghost-class="ghost" handle=".handler" item-key="id">
-      <template #item="{ element, index }">
-        <div
+  <div :class="prefixCls" ref="wrapperRef">
+  
+    <div
           :key="index"
           class="flex justify-between items-center border-1 border-solid border-#e5e6eb py-4px px-1 mb-2"
+
+          v-for="(element,index) in modelValue"
+          
         >
           <div class="handler">
             <Icon
@@ -40,8 +41,6 @@
             ></icon>
           </a-space>
         </div>
-      </template>
-    </draggable>
 
     <div>
       <a-button block @click="addOption">添加一项</a-button>
@@ -53,7 +52,7 @@ import { useStyle } from "@imsjs/ims-ui-hooks";
 
 import { ImsCustomizationOptionsProps } from "@imsjs/ims-ui-types";
 
-import draggable from "vuedraggable";
+import { useDraggable } from 'vue-draggable-plus';
 
 import { nanoid } from "nanoid";
 
@@ -75,6 +74,12 @@ defineOptions({
 });
 defineProps<ImsCustomizationOptionsProps>();
 
+const wrapperRef = ref();
+useDraggable(wrapperRef, modelValue, {
+  animation: 150,
+  ghostClass: 'ghost'
+})
+
 const addOption = () => {
   let tmpId = nanoid();
   modelValue.value.push({
@@ -83,7 +88,7 @@ const addOption = () => {
     label: `选项-${tmpId}`,
   });
 
-  console.info("modelValue.value =>", modelValue.value);
+
 };
 
 const deleteOption = (index: number) => {
