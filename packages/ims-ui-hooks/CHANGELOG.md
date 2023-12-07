@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 3.0.1
+
+### Patch Changes
+
+- c7ac95b: test
+
 ## 3.0.0
 
 ### Major Changes

@@ -1,5 +1,16 @@
 # @imsjs/ims-ui-utils
 
+## 3.0.1
+
+### Patch Changes
+
+- c7ac95b: test
+- Updated dependencies [c7ac95b]
+  - @imsjs/ims-ui-types@3.0.1
+  - @imsjs/ims-ui-constants@3.0.1
+  - @imsjs/ims-ui-enums@3.0.1
+  - @imsjs/ims-ui-hooks@3.0.1
+
 ## 3.0.0
 
 ### Major Changes
