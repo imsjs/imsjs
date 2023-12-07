@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.4
+
+### Patch Changes
+
+- caed629: update dep
+
 ## 2.1.3
 
 ### Patch Changes

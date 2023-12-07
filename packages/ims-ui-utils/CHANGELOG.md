@@ -1,5 +1,16 @@
 # @imsjs/ims-ui-utils
 
+## 2.1.4
+
+### Patch Changes
+
+- caed629: update dep
+- Updated dependencies [caed629]
+  - @imsjs/ims-ui-constants@2.1.4
+  - @imsjs/ims-ui-enums@2.1.4
+  - @imsjs/ims-ui-hooks@2.1.4
+  - @imsjs/ims-ui-types@2.1.4
+
 ## 2.1.3
 
 ### Patch Changes
