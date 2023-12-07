@@ -1,5 +1,13 @@
 # @imsjs/ims-ui-enums
 
+## 2.1.3
+
+### Patch Changes
+
+- fa5504b: add new feat
+- Updated dependencies [fa5504b]
+  - @imsjs/ims-ui-hooks@2.1.3
+
 ## 3.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.3
+
+### Patch Changes
+
+- fa5504b: add new feat
+
 ## 3.0.1
 
 ### Patch Changes
