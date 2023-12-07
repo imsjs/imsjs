@@ -1,47 +1,10 @@
 <template>
   <ims-modal :class="prefixCls" v-bind="$attrs" v-model:open="modelOpening">
     <template #title>{{ currentTitle }} </template>
-    <!-- <ims-json-viewer :data="previewFormJson"></ims-json-viewer> -->
-    <!-- <ims-json-viewer :data="useFormRs"></ims-json-viewer> -->
-    <div>
-      <a-form v-bind="testData.items[0].item" v-if="useFormRs">
-        <template v-for="(item, index) in testData.items[0].children">
-          <template v-if="item.type === 'grid-layout'">
-            <a-row >
-              <a-col :key="index" v-for="(rowItem, index) in item.children"  :span="24/item.children.length">
-                <a-form-item
-                  v-bind="
-                    Object.assign(
-                      rowItem.children[0].item,
-                      useFormRs.validateInfos[rowItem.children[0].item.name]
-                    )
-                  "
-                >
-                  <component
-                    :is="rowItem.children[0].component.componentName || 'AInput'"
-                    v-bind="rowItem.children[0].component.props"
-                    v-model:[item.vModelField]="testData.model[rowItem.children[0].item.name]"
-                  ></component>
-                </a-form-item>
-              </a-col>
-            </a-row>
-          </template>
 
-          <a-form-item
-            v-else
-            v-bind="
-              Object.assign(item.item, useFormRs.validateInfos[item.item.name])
-            "
-          >
-            <component
-              :is="item.component.componentName || 'AInput'"
-              v-bind="item.component.props"
-              v-model:[item.vModelField]="testData.model[item.item.name]"
-            ></component>
-          </a-form-item>
-        </template>
-      </a-form>
-    </div>
+   
+    <ImsFormRenderer ref="testRef"  :data="testData"></ImsFormRenderer> 
+
     <template #footer>
       <a-space>
         <a-button @click="submitForm">提交</a-button>
@@ -55,6 +18,8 @@
 
 <script lang="ts" setup>
 import { Form } from "ant-design-vue";
+
+import type { UseFormType } from "@imsjs/ims-ui-types";
 
 import previewFormJson from "@/assets/jsons/preview-form.json";
 
@@ -70,6 +35,8 @@ defineOptions({
 const modelOpening = defineModel<boolean>("opening", { default: false });
 
 const testData = ref(previewFormJson);
+
+const testRef = ref();
 
 const props = withDefaults(
   defineProps<{
@@ -90,32 +57,41 @@ const { prefixCls } = useStyle("ims-json-form-preview");
 
 const currentTitle = ref("预览");
 
-const useFormRs = ref(null);
+const useFormRs = ref<UseFormType>();
 
 const onCancel = () => {
   modelOpening.value = false;
 };
 
 const resetForm = () => {
-  console.info("resetForm =>");
-  useFormRs.value?.resetFields(useFormRs.value.initialModel);
-  useFormRs.value?.resetFields();
+  console.info("testRef =>",testRef.value.formInstance);
+  // 方法一 重置表单
+  // (testRef.value.formInstance as UseFormType).clearValidate();
+  // (testRef.value.formInstance as UseFormType).resetFields();
+
+   // 方法二  效果和方法一致
+  testRef.value.reset();
 };
 
+
+const onValidateChange = (name,status:boolean,errors:string[] | null) => {
+  console.info('validate-change name',name);
+  console.info('validate-change status',status);
+  console.info('validate-change errors',errors);
+}
+
 const submitForm = () => {
-  useFormRs.value
-    .validate()
-    .then(() => {
-      console.log(toRaw(testData.value.model));
-    })
-    .catch((err) => {
-      console.log("error", err);
-    });
+  (testRef.value.formInstance as UseFormType)
+  .validate().then(()=>{
+    console.info('验证成功.....');
+  }).catch((error)=>{
+    console.info('error =>',error);
+  })
+  
+
 };
 
 (async function init() {
-  console.info("init");
-
   useFormRs.value = useForm(testData.value.model, testData.value.rules);
 })();
 </script>

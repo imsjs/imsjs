@@ -7,5 +7,9 @@
   "access": "restricted",
   "baseBranch": "develop",
   "updateInternalDependencies": "patch",
-  "ignore": ["@imsjs/ims-ui-apis", "@imsjs/ims-ui-playground"]
+  "ignore": [
+    "@imsjs/ims-ui-apis",
+    "@imsjs/ims-ui-playground",
+    "@imsjs/ims-designer"
+  ]
 }

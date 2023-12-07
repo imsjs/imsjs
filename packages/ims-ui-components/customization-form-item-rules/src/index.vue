@@ -122,7 +122,7 @@ import { useDraggable } from "vue-draggable-plus";
 
 import { nanoid } from "nanoid";
 
-import formItemRulePropsJson from "@/assets/jsons/form-item-rule-props.json";
+import formItemRulePropsJson from "./form-item-rule-props.json";
 
 type FormItemRule = Rule & {
   // ID
@@ -159,14 +159,11 @@ useDraggable(el, modelValue, {
 const addRule = () => {
   modelValue.value.push({
     required: true,
-    message: "必须填写",
+    message: "校验提示信息",
     trigger: "blur",
     type: "string",
-   
     id: nanoid(),
   });
-
-  console.info("modelValue.value =>", modelValue.value);
 };
 
 const deleteRule = (index: number) => {
@@ -180,6 +177,12 @@ const onConfigRule = (index:number) => {
   currentIndex.value = index;
   opening.value = true;
 };
+
+
+// watch(modelValue.value,()=>{
+//   console.info('watch => modelValue.value =>',modelValue.value);
+// })
+
 </script>
 
 <style lang="less" scoped>

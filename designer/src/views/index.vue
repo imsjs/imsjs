@@ -366,12 +366,12 @@
                       </div>
                     </div>
                   </a-collapse-panel>
-                  <a-collapse-panel key="3" header="字段属性">
+                  <!-- <a-collapse-panel key="3" header="字段属性">
                     <div>字段属性</div>
                   </a-collapse-panel>
                   <a-collapse-panel key="4" header="容器属性">
                     <div>容器属性</div>
-                  </a-collapse-panel>
+                  </a-collapse-panel> -->
                 </a-collapse>
               </div>
               <div v-show="activeKey === '2'" class="px-0">样式</div>
@@ -394,7 +394,9 @@ import { useStyle } from "@imsjs/ims-ui";
 
 import { VueDraggable } from "vue-draggable-plus";
 
-import { cloneDeep } from "lodash-es";
+import { cloneDeep,filter } from "lodash-es";
+
+import { toArray } from "tree-lodash";
 
 import ImsJsonFormPreview from "./preview.vue";
 
@@ -577,6 +579,22 @@ const onFilterItemClick = (item: any) => {
   activeFilterKey.value = item.key;
 };
 
+// 删除 tree-data 中的指定节点
+const removeNodeInTree=(data:any, id:string)=> { // 通过id从数组（树结构）中移除元素
+  if (!data || !data.length) {
+    return false;
+  }
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id === id) {
+      data.splice(i, 1);
+      break;
+    }
+    removeNodeInTree(data[i].children, id)
+  }
+}
+
+
+
 const findParent = (data: any, target: any, result: any) => {
   for (let item of data) {
     if (item.id === target.id) {
@@ -628,13 +646,10 @@ const cloneComponent = (item: any) => {
     });
   } else {
     list.value.model[itemName] = "";
-    list.value.rules[itemName] = [
-      {
-        required: true,
-        message: "Please input Activity name",
-        trigger: "change",
-      },
-    ];
+    // 增加一个空白的校验规则
+    list.value.rules[itemName] = [];
+      
+    
   }
 
   console.info("af => item", addedComponent);
@@ -664,13 +679,9 @@ const addComponent = (item: any) => {
 
   if (addedComponent.type !== "grid-layout") {
     list.value.model[itemName] = "";
-    list.value.rules[itemName] = [
-      {
-        required: true,
-        message: "Please input Activity name",
-        trigger: "change",
-      },
-    ];
+    list.value.rules[itemName] = [];
+      
+    
   }
 
   // let activeIndex = list.value.items.length - 1;
@@ -682,16 +693,9 @@ const addComponent = (item: any) => {
   useFormRs.value = useForm(list.value.model, list.value.rules);
 };
 
+// 删除表单节点
 const deleteItem = (data: any) => {
-  console.info("on deleteItem =>", data);
-
-  let findedIndex = list.value.items.findIndex((item) => {
-    return item.id === data.id;
-  });
-
-  console.info("findedIndex =>", findedIndex);
-
-  list.value.items.splice(findedIndex, 1);
+  removeNodeInTree(list.value.items[0].children,data.id);
 };
 
 /**
@@ -733,13 +737,9 @@ const copyComponent = (item: any, index: number) => {
 
   list.value.items.splice(index + 1, 0, copyedItem);
   list.value.model[itemName] = "";
-  list.value.rules[itemName] = [
-    {
-      required: true,
-      message: "Please input Activity name",
-      trigger: "change",
-    },
-  ];
+  list.value.rules[itemName] = [];
+    
+  
   console.info("copyComponent =>", item, index);
 
   useFormRs.value = {};
@@ -790,11 +790,9 @@ const onFormItemFocus = (item, index, e) => {
 
       modelKeysIndex.value = findedIndex;
 
-      console.info("modelKeys =>", modelKeys);
+     
 
-      console.info("findedIndex =>", findedIndex);
-
-      console.info("modelKeys[findedIndex] =>", modelKeys[findedIndex]);
+      console.info(`modelKeys[${findedIndex}] =>`, modelKeys[findedIndex]);
     }
   }
 };
@@ -802,24 +800,18 @@ const onFormItemFocus = (item, index, e) => {
 const onFormItemBlur = (item, index, e) => {
   if (activeComponent.value.type !== "form") {
     if (item.field === "name") {
+      let currentChangedValue = activeComponent.value.item.name;
       // models
       let modelKeys = Object.keys(list.value.model);
-
-      modelKeys[modelKeysIndex.value] = activeComponent.value.item.name;
+      modelKeys[modelKeysIndex.value] = currentChangedValue;
       let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
       list.value.model = newModel;
 
-    
+      // rules
       let rulesKeys = Object.keys(list.value.rules);
-      console.info('list.value.rules =>',list.value.rules);
-      console.info('list.value.rules[modelKeysIndex.value] =>',rulesKeys[modelKeysIndex.value]);
-      // list.value.rules[modelKeysIndex.value] = [];
-
-      list.value.rules[rulesKeys[modelKeysIndex.value]] = [];
-
-
-
-      // modelKeysIndex.value = -1;
+      rulesKeys[modelKeysIndex.value] = currentChangedValue;
+      let newRules = Object.fromEntries(rulesKeys.map((item) => [item, []]));
+      list.value.rules = newRules;
     }
   }
 };
@@ -864,6 +856,16 @@ const saveJson = () => {
   let content = "data:text/json;charset=utf-8,";
 
   let tmpData = cloneDeep(list.value);
+  console.info('toArray =>',tmpData.items[0].children);
+
+  let formItems = toArray(tmpData.items[0].children).filter(item=>item.type !== 'grid-layout-col' && item.type !== 'grid-layout');
+
+  console.info('formItems =>',formItems);
+  // 校验规则设置
+  formItems.forEach((item)=>{
+    tmpData.rules[item.item.name] = item.item.rules;
+  });
+
   content += JSON.stringify(tmpData, null, 2);
   var encodedUri = encodeURI(content);
   var actions = document.createElement("a");

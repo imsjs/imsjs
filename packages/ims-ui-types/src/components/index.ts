@@ -8,6 +8,8 @@ export * from "./modal";
 
 export * from "./form";
 
+export * from "./form-renderer";
+
 export * from "./curd";
 
 export * from "./table";

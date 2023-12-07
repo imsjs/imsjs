@@ -63,6 +63,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           "@wangeditor/editor",
           "@wangeditor/editor-for-vue",
           "@visactor/vtable",
+          "vue-draggable-plus",
         ],
         output: {
           globals: {
@@ -76,6 +77,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
             sortablejs: "Sortable",
             "@visactor/vtable": "vtable",
             "@wangeditor/editor-for-vue": "editorForVue",
+            "vue-draggable-plus": "vueDraggablePlus",
           },
         },
       },

@@ -55,6 +55,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           "@wangeditor/editor",
           "@wangeditor/editor-for-vue",
           "@visactor/vtable",
+          "vue-draggable-plus",
         ],
         output: {
           globals: {
@@ -69,6 +70,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
             overlayscrollbars: "overlayscrollbars",
             "@visactor/vtable": "vtable",
             "@wangeditor/editor-for-vue": "editorForVue",
+            "vue-draggable-plus": "vueDraggablePlus",
           },
         },
       },

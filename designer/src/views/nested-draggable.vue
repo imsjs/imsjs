@@ -38,7 +38,7 @@
       </div>
       <!-- ||  (element.type === 'grid-layout-col' && element.children.length === 1) -->
       <template v-if="element.hasOwnProperty('children')">
-        <nested-draggable class="children-item" v-model="element.children" :disabled="element.type === 'grid-layout'" filter=".filtered" />
+        <nested-draggable @delete="deleteItem" class="children-item" v-model="element.children" :disabled="element.type === 'grid-layout'" filter=".filtered" />
         <div class="add-col-action flex items-center justify-center " v-if="element.type === 'grid-layout'"  >
           
           <a-space>
