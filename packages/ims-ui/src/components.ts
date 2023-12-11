@@ -25,6 +25,8 @@ import {
   ImsCustomizationOptions,
   ImsCustomizationFormItemRules,
   ImsFormRenderer,
+  ImsCustomizationComponentEvents,
+  ImsFormDesigner,
 } from "@imsjs/ims-ui-components";
 
 export default [
@@ -52,4 +54,6 @@ export default [
   ImsCustomizationOptions,
   ImsCustomizationFormItemRules,
   ImsFormRenderer,
+  ImsCustomizationComponentEvents,
+  ImsFormDesigner,
 ] as Plugin[];

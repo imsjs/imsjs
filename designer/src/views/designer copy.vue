@@ -32,6 +32,8 @@
             v-for="item in tabsItems"
           >
             <icon :icon="item.icon"></icon>
+
+   
             <span class="title">{{ item.title }}</span>
           </div>
         </div>

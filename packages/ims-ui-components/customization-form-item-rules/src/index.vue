@@ -190,7 +190,6 @@ const onConfigRule = (index:number) => {
 
 .@{prefix-cls} {
   --at-apply: w-full py-2 px-2;
-  // border-bottom: 1px dashed #d9d9d9;
   background-color: #eeeeee;
 
   &-wrapper {

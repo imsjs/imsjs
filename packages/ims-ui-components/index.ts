@@ -20,6 +20,8 @@ export * from "./form";
 
 export * from "./form-renderer";
 
+export * from "./form-designer";
+
 export * from "./curd";
 
 export * from "./icon-picker";
@@ -45,3 +47,5 @@ export * from "./vtable";
 export * from "./customization-options";
 
 export * from "./customization-form-item-rules";
+
+export * from "./customization-component-events";

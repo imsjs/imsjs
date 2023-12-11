@@ -1,122 +1,27 @@
 {
   "input": [
     {
-      "component": "AInput",
+      "component": "ASelect",
       "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
+      "label": "CHANGE",
+      "field": "输入框内容变化时的回调",
       "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "tooltip": {
-        "title": "控件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
-      },
-      "props": {
+        "placeholder": "请输入占位提示",
         "options": [
           {
-            "value": "",
-            "label": "默认"
+            "id": "option-0BMV2r47Uz07S3kFA-flow",
+            "value": "选项一",
+            "label": "选项一"
           },
           {
-            "value": "large",
-            "label": "大"
+            "id": "option-1BMV2r47Uz07S3kFA-flow",
+            "value": "选项二",
+            "label": "选项二"
           },
           {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "tooltip": {
-        "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
-      },
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "输入框内容变化时的回调",
-            "callback": "function(e:InputEvent)",
-            "arguments": ["e"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
+            "id": "option-2BMV2r47Uz07S3kFA-flow",
+            "value": "选项三",
+            "label": "选项三"
           }
         ]
       }
@@ -196,30 +101,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "输入框内容变化时的回调",
-            "callback": "function(e:InputEvent)",
-            "arguments": ["e"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          }
-        ]
-      }
     }
   ],
   "input-number": [
@@ -313,37 +194,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化回调",
-            "callback": "function(value: number | string)",
-            "arguments": ["value"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          },
-          {
-            "id": "step",
-            "value": "step",
-            "label": "点击上下箭头的回调",
-            "callback": "(value: number, info: { offset: number, type: 'up' | 'down' }) => void",
-            "arguments": ["value", "info"]
-          }
-        ]
-      }
     }
   ],
   "input-password": [
@@ -437,30 +287,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化回调",
-            "callback": "function(value: number | string)",
-            "arguments": ["value"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          }
-        ]
-      }
     }
   ],
   "select": [
@@ -535,93 +361,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "blur",
-            "value": "blur",
-            "label": "失去焦点的时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
-            "callback": "function(value, option:Option/Array<Option>)",
-            "arguments": ["value", "option"]
-          },
-          {
-            "id": "deselect",
-            "value": "deselect",
-            "label": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
-            "callback": "function(value，option:Option)",
-            "arguments": ["value", "value，option"]
-          },
-          {
-            "id": "dropdownVisibleChange",
-            "value": "dropdownVisibleChange",
-            "label": "展开下拉菜单的回调",
-            "callback": "function(open)",
-            "arguments": ["open"]
-          },
-          {
-            "id": "focus",
-            "value": "focus",
-            "label": "获得焦点时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "inputKeyDown",
-            "value": "inputKeyDown",
-            "label": "键盘按下时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "mouseenter",
-            "value": "mouseenter",
-            "label": "鼠标移入时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "mouseleave",
-            "value": "mouseleave",
-            "label": "鼠标移出时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "popupScroll",
-            "value": "popupScroll",
-            "label": "下拉列表滚动时的回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "search",
-            "value": "search",
-            "label": "文本框值变化时回调",
-            "callback": "function(value: string)",
-            "arguments": ["value"]
-          },
-          {
-            "id": "select",
-            "value": "select",
-            "label": "被选中时调用，参数为选中项的 value (或 key) 值",
-            "callback": "function(value, option:Option)",
-            "arguments": ["value", "option"]
-          }
-        ]
-      }
     }
   ],
   "cascader": [
@@ -715,37 +454,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选择完成后的回调",
-            "callback": "(value, selectedOptions) => void",
-            "arguments": ["value", "selectedOptions"]
-          },
-          {
-            "id": "dropdownVisibleChange",
-            "value": "dropdownVisibleChange",
-            "label": "显示/隐藏浮层的回调",
-            "callback": "(value) => void",
-            "arguments": []
-          },
-          {
-            "id": "search",
-            "value": "search",
-            "label": "监听搜索，返回输入的值",
-            "callback": "(value) => void",
-            "arguments": ["value"]
-          }
-        ]
-      }
     }
   ],
   "radio-group": [
@@ -789,23 +497,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选项变化时的回调函数",
-            "callback": "function(e:Event)",
-            "arguments": ["e"]
-          }
-        ]
-      }
     }
   ],
   "checkbox-group": [
@@ -849,23 +540,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化时回调函数",
-            "callback": "function(checkedValue)",
-            "arguments": ["checkedValue"]
-          }
-        ]
-      }
     }
   ],
   "date-picker": [
@@ -959,30 +633,6 @@
       "label": "是否禁用",
       "field": "disabled",
       "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "openChange",
-            "value": "openChange",
-            "label": "弹出日历和关闭日历的回调",
-            "callback": "function(status)",
-            "arguments": ["status"]
-          },
-          {
-            "id": "panelChange",
-            "value": "panelChange",
-            "label": "日期面板变化时的回调",
-            "callback": "function(value, mode)",
-            "arguments": ["value", "mode"]
-          }
-        ]
-      }
     }
   ],
   "time-picker": [

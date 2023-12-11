@@ -1,13 +1,13 @@
 import type { AppRouteModule } from "@/router/types";
-import { DEFAULT_LAYOUT } from "@/router/constant";
+import { DEFAULT_LAYOUT, EMPTY_LAYOUT } from "@/router/constant";
 
 const preffix = "/demo";
 
 const dashboard: AppRouteModule = {
   path: `${preffix}`,
   name: "ms",
-  component: DEFAULT_LAYOUT,
-  redirect: "/demo/table",
+  component: EMPTY_LAYOUT,
+  redirect: "/demo/designer",
   meta: {
     hideChildrenInMenu: true,
     icon: "simple-icons:about-dot-me",
@@ -15,6 +15,15 @@ const dashboard: AppRouteModule = {
     orderNo: 999,
   },
   children: [
+    {
+      path: "designer",
+      name: "demo.designer",
+      component: () => import("@/views/designer.vue"),
+      meta: {
+        title: "demo.designer",
+        icon: "simple-icons:about-dot-me",
+      },
+    },
     {
       path: "table",
       name: "demo.table",

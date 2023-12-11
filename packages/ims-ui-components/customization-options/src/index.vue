@@ -3,7 +3,7 @@
   
     <div
           :key="index"
-          class="flex justify-between items-center border-1 border-solid border-#e5e6eb py-4px px-1 mb-2"
+          class="flex justify-between items-center rd bg-#fff py-4px px-1 mb-2"
 
           v-for="(element,index) in modelValue"
           
@@ -102,7 +102,9 @@ const deleteOption = (index: number) => {
 @prefix-cls: ~"@{namespace}-customization-options";
 
 .@{prefix-cls} {
-  --at-apply: w-full py-1;
+  
+  --at-apply: w-full py-2 px-2;
+  background-color: #eeeeee;
   // border-bottom: 1px dashed #d9d9d9;
 }
 </style>
