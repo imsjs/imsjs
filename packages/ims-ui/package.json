@@ -1,6 +1,6 @@
 {
   "name": "@imsjs/ims-ui",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "ims-ui",
   "keywords": [
     "ims-ui"
@@ -32,9 +32,8 @@
     "@imsjs/ims-ui-utils": "workspace:*"
   },
   "peerDependencies": {
-    "ant-design-vue": "^4.0.0",
-    "sortablejs": "^1.15.0",
-    "vue": "^3.3.4"
+    "ant-design-vue": "^4.0.7",
+    "vue": "^3.3.11"
   },
   "publishConfig": {
     "access": "public"

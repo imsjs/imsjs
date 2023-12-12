@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.5
+
+### Patch Changes
+
+- 3650e12: add designer
+
 ## 2.1.4
 
 ### Patch Changes

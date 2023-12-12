@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.5
+
+### Patch Changes
+
+- 3650e12: add designer
+- Updated dependencies [3650e12]
+  - @imsjs/ims-ui-types@2.1.5
+  - @imsjs/ims-ui-constants@2.1.5
+  - @imsjs/ims-ui-enums@2.1.5
+  - @imsjs/ims-ui-hooks@2.1.5
+  - @imsjs/ims-ui-utils@2.1.5
+
 ## 2.1.4
 
 ### Patch Changes
