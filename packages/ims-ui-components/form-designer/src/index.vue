@@ -75,35 +75,42 @@
         <div :class="`${prefixCls}-contents-canvas-tools`">
           <div :class="`${prefixCls}-contents-canvas-tools-left`">
            <a-space>
-           
-            <a-radio-group  class="rgi" size="small">
-              <a-radio-button value="a" ><icon icon="ion:arrow-undo-outline"></icon></a-radio-button>
-              <a-radio-button value="b" ><icon icon="ion:arrow-undo-outline"></icon></a-radio-button>
-            </a-radio-group>
-            <a-radio-group  class="rgi" size="small">
-              <a-radio-button value="d" > <icon icon="system-uicons:move"></icon></a-radio-button>
-              <a-radio-button value="c" ><icon icon="ph:selection-plus-light"></icon></a-radio-button>
-              
+            
+            <a-radio-group v-model:value="unReDo" class="rgi" size="small">
+              <a-radio-button value="undo" ><icon icon="ion:arrow-undo-outline"></icon></a-radio-button>
+              <a-radio-button value="redo" ><icon icon="ion:arrow-redo-outline"></icon></a-radio-button>
             </a-radio-group>
 
-            <a-radio-group  class="rgi" size="small">
-              <a-radio-button value="a" ><icon icon="iconoir:pc-check"></icon></a-radio-button>
-              <a-radio-button value="b" ><icon icon="clarity:mobile-line"></icon></a-radio-button>
-              
+            <a-radio-group v-model:value="elementTool" class="rgi" size="small" v-if="operationalView === 'design'">
+              <a-radio-button value="move" > <icon icon="system-uicons:move"></icon></a-radio-button>
+              <a-radio-button value="selection" ><icon icon="ph:selection-plus-light"></icon></a-radio-button>
+            </a-radio-group>
+
+            <a-radio-group v-model:value="targetDevice" class="rgi" size="small">
+              <a-radio-button value="pc" ><icon icon="iconoir:pc-check"></icon></a-radio-button>
+              <a-radio-button value="mobile" ><icon icon="clarity:mobile-line"></icon></a-radio-button>
             </a-radio-group>
             
            </a-space>
           </div>
           <div :class="`${prefixCls}-contents-canvas-tools-right`">
-            <a-radio-group  class="rgi" size="small">
-              <a-radio-button value="a" ><icon icon="ic:outline-color-lens"></icon></a-radio-button>
-              <a-radio-button value="b" ><icon icon="tabler:code-dots"></icon></a-radio-button>
-              <a-radio-button value="c"><icon icon="tabler:code"></icon></a-radio-button>
-              <a-radio-button value="d"> <icon icon="ph:play-bold"></icon></a-radio-button>
+            <a-radio-group v-model:value="operationalView" class="rgi" size="small">
+              <a-radio-button value="design" ><icon icon="ic:outline-color-lens"></icon></a-radio-button>
+              <a-radio-button value="json" ><icon icon="tabler:code-dots"></icon></a-radio-button>
+              <a-radio-button value="code"><icon icon="tabler:code"></icon></a-radio-button>
+              <a-radio-button value="play"> <icon icon="ph:play-bold"></icon></a-radio-button>
             </a-radio-group>
           </div>
         </div>
-        <div :class="`${prefixCls}-contents-canvas-workspace`">workspace</div>
+        <div :class="`${prefixCls}-contents-canvas-workspace`">
+          <div :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-design`" v-show="operationalView === 'design'">
+            <div>design</div>
+            <div class="w-full bd-red h-400px"></div>
+          </div>
+          <div :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-json`" v-show="operationalView === 'json'">json</div>
+          <div :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-code`" v-show="operationalView === 'code'">code</div>
+          <div :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-play`" v-show="operationalView === 'play'">play</div>
+        </div>
       </div>
       <div :class="`${prefixCls}-contents-right`">
         <div
@@ -111,7 +118,7 @@
           style="border-bottom: 1px solid #d9d9d9"
         >
           <a-breadcrumb>
-            <a-breadcrumb-item>表单</a-breadcrumb-item>
+            <a-breadcrumb-item>表单xxx</a-breadcrumb-item>
             <a-breadcrumb-item>输入框</a-breadcrumb-item>
           </a-breadcrumb>
         </div>
@@ -132,8 +139,6 @@
 <script lang="ts" setup>
 import { useStyle } from "@imsjs/ims-ui-hooks";
 
-import type { CSSProperties } from "vue";
-
 import type { ImsFormDesignerProps } from "@imsjs/ims-ui-types";
 
 const props = withDefaults(defineProps<ImsFormDesignerProps>(), {});
@@ -146,33 +151,17 @@ defineOptions({
 });
 const { prefixCls } = useStyle("form-designer");
 
+// 撤销 重做 Undo Redo 
+const unReDo = ref<string>("");
+// 元素工具
+const elementTool = ref<string>("");
+// 目标设备
+const targetDevice = ref<string>("pc");
+// 操作视图
+const operationalView = ref<string>("design");
 
 
-const value1 = ref<string>("a");
 
-const value = ref();
-
-
-const testOptions = [
-  {
-    label:'1',
-    value:1,
-  },
-  {
-    label:'2',
-    value:2,
-  },
-  {
-    label:'3',
-    value:3,
-  },
-  {
-    label:'4',
-    value:4,
-  }
-];
-
-const data = reactive(["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"]);
 </script>
 
 <style lang="less" scoped>
@@ -261,9 +250,6 @@ const data = reactive(["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"]);
                 }
                 
             }
-
-            
-
           }
 
         &-left {
@@ -279,6 +265,25 @@ const data = reactive(["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"]);
 
       &-workspace {
         --at-apply: "flex-1 bg-#fff";
+        &-view {
+          --at-apply: h-full;
+          &-design {
+            border: 1px solid red;
+          }
+
+          &-json {
+            border: 1px solid yellow;
+          }
+
+          &-code {
+            border: 1px solid black;
+          }
+
+          &-play {
+            border: 1px solid green;
+          }
+          // 
+        }
       }
     }
 

@@ -1,4 +1,4 @@
-import type { Plugin } from "vue";
+// import type { Plugin } from "vue";
 
 import {
   ImsButton,
@@ -56,4 +56,4 @@ export default [
   ImsFormRenderer,
   ImsCustomizationComponentEvents,
   ImsFormDesigner,
-] as Plugin[];
+];
