@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <ims-form-designer :events="{a:'aa'}"></ims-form-designer>
+    <ims-form-designer :events="['aa']"></ims-form-designer>
   </div>
 </template>
 <script lang="ts" setup>

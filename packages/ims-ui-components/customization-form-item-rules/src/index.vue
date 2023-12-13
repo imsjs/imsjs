@@ -49,7 +49,7 @@
   <a-drawer
     v-model:open="opening"
     class="custom-class"
-    width="350"
+    width="300"
     root-class-name="root-class-name"
     :style="{ position: 'absolute' }"
     placement="right"

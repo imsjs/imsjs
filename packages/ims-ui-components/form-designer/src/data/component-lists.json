@@ -212,6 +212,7 @@
     }
   },
   {
+    "id": 7,
     "title": "单选框",
     "icon": "akar-icons:radio-fill",
     "type": "radio-group",
@@ -253,6 +254,7 @@
     }
   },
   {
+    "id": 8,
     "title": "多选框",
     "icon": "mingcute:checkbox-line",
     "type": "checkbox-group",
@@ -294,6 +296,7 @@
     }
   },
   {
+    "id": 9,
     "title": "日期选择器",
     "icon": "ant-design:calendar-twotone",
     "type": "date-picker",
@@ -318,6 +321,7 @@
     }
   },
   {
+    "id": 10,
     "title": "时间选择器",
     "icon": "ant-design:field-time-outlined",
     "type": "time-picker",
@@ -342,6 +346,7 @@
     }
   },
   {
+    "id": 11,
     "title": "滑块",
     "icon": "vaadin:slider",
     "type": "slider",
@@ -366,6 +371,7 @@
     }
   },
   {
+    "id": 12,
     "title": "开关",
     "icon": "line-md:switch-off",
     "type": "switch",
@@ -390,6 +396,7 @@
     }
   },
   {
+    "id": 13,
     "title": "颜色选择器",
     "icon": "mdi:color",
     "type": "color-picker",
@@ -414,6 +421,7 @@
     }
   },
   {
+    "id": 14,
     "title": "上传",
     "icon": "ant-design:cloud-upload-outlined",
     "type": "ims-upload",
@@ -438,6 +446,7 @@
     }
   },
   {
+    "id": 15,
     "title": "卡片布局",
     "icon": "ant-design:credit-card-outlined",
     "type": "card-layout",
@@ -462,6 +471,7 @@
     }
   },
   {
+    "id": 16,
     "title": "栅格布局",
     "icon": "radix-icons:layout",
     "type": "grid-layout",

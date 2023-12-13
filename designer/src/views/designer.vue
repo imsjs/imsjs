@@ -967,7 +967,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
         }
 
         &-item {
-          --at-apply: cursor-pointer w-54px flex flex-col items-center
+          --at-apply: cursor-pointer w-54px cursor-pointer flex flex-col items-center
             justify-center mb-2;
 
           .title {
@@ -1028,6 +1028,8 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
                 color: #3d3d3d;
                 font-size: 12px;
 
+                
+
                 &:hover {
                   color: rgb(23, 114, 233);
                   background-color: #3e8bf20f;
@@ -1053,6 +1055,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
                   font-size: 12px;
                   color: rgb(51, 51, 51);
                   user-select: none;
+                  
                 }
 
                 &:hover {

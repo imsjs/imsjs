@@ -1,0 +1,135 @@
+[
+  {
+    "component": "ARadioGroup",
+    "vModelField": "value",
+    "label": "触发类型",
+    "field": "trigger",
+    "props": {
+      "options": [
+        {
+          "value": "blur",
+          "label": "blur"
+        },
+        {
+          "value": "change",
+          "label": "change"
+        }
+      ],
+      "optionType": "button"
+    }
+  },
+  {
+    "component": "ASelect",
+    "vModelField": "value",
+    "label": "数据类型",
+    "field": "type",
+    "props": {
+      "options": [
+        {
+          "value": "string",
+          "label": "字符串"
+        },
+        {
+          "value": "number",
+          "label": "数字"
+        },
+        {
+          "value": "boolean",
+          "label": "布尔值"
+        },
+        {
+          "value": "regexp",
+          "label": "正则表达式"
+        },
+        {
+          "value": "integer",
+          "label": "整数"
+        },
+        {
+          "value": "float",
+          "label": "浮点数"
+        },
+        {
+          "value": "array",
+          "label": "数组"
+        },
+        {
+          "value": "object",
+          "label": "对象"
+        },
+        {
+          "value": "enum",
+          "label": "枚举"
+        },
+        {
+          "value": "date",
+          "label": "日期"
+        },
+        {
+          "value": "url",
+          "label": "URL"
+        },
+        {
+          "value": "hex",
+          "label": "HEX"
+        },
+        {
+          "value": "email",
+          "label": "邮箱"
+        },
+        {
+          "value": "method",
+          "label": "函数"
+        }
+      ],
+      "placeholder": "请选择数据类型",
+      "class": "w-full"
+    }
+  },
+  {
+    "component": "AInput",
+    "vModelField": "value",
+    "label": "错误消息",
+    "field": "message",
+    "required": false,
+    "tooltip": {
+      "title": "表单验证时的错误提示消息"
+    },
+    "props": {
+      "placeholder": "请输入错误提示消息"
+    }
+  },
+  {
+    "component": "AInputNumber",
+    "vModelField": "value",
+    "label": "最小长度",
+    "field": "min",
+    "props": {
+      "placeholder": "请输入提示信息",
+      "allowClear": true
+    }
+  },
+  {
+    "component": "AInputNumber",
+    "vModelField": "value",
+    "label": "最大长度",
+    "field": "max",
+    "props": {
+      "placeholder": "请输入额外的提示信息"
+    }
+  },
+  {
+    "component": "ASwitch",
+    "vModelField": "checked",
+    "label": "不允许空白",
+    "field": "whitespace",
+    "props": {}
+  },
+  {
+    "component": "ASwitch",
+    "vModelField": "checked",
+    "label": "是否必填",
+    "field": "required",
+    "props": {}
+  }
+]

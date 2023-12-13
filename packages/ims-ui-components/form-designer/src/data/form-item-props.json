@@ -1,0 +1,66 @@
+[
+  {
+    "component": "AInput",
+    "vModelField": "value",
+    "label": "标签",
+    "field": "label",
+    "props": {
+      "placeholder": "请输入标签"
+    }
+  },
+  {
+    "component": "AInput",
+    "vModelField": "value",
+    "label": "model字段",
+    "field": "name",
+    "required": true,
+    "tooltip": {
+      "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
+    },
+    "props": {
+      "placeholder": "请输入model字段"
+    }
+  },
+  {
+    "component": "AInput",
+    "vModelField": "value",
+    "label": "提示信息",
+    "field": "tooltip",
+    "props": {
+      "placeholder": "请输入提示信息",
+      "allowClear": true
+    }
+  },
+  {
+    "component": "AInput",
+    "vModelField": "value",
+    "label": "额外的提示信息",
+    "field": "extra",
+    "props": {
+      "placeholder": "请输入额外的提示信息"
+    }
+  },
+  {
+    "component": "ASwitch",
+    "vModelField": "checked",
+    "label": "是否展示冒号",
+    "field": "colon",
+    "props": {}
+  },
+
+  {
+    "component": "ImsCustomizationFormItemRules",
+    "vModelField": "value",
+    "label": "校验规则",
+    "field": "rules",
+    "props": {}
+  },
+
+  {
+    "component": "ASwitch",
+    "vModelField": "checked",
+    "label": "是否必填",
+    "field": "required",
+    "props": {}
+  }
+]

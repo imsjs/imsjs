@@ -15,7 +15,7 @@ export function configUnoCss(): PluginOption[] {
     shortcuts: [
       ["wh-full", "w-full h-full"],
       ["f-c-c", "flex justify-center items-center"],
-      ["bd-red", "border-1 border-red-800 border-solid"],
+      ["bd-red", "border-1 border-red border-solid"],
     ],
     presets: [
       presetAttributify(),

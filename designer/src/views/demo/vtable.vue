@@ -401,10 +401,12 @@ import { cloneDeep, filter } from "lodash-es";
 
 import { toArray } from "tree-lodash";
 
-import ImsJsonFormPreview from "./preview.vue";
-
 import { nanoid } from "nanoid";
 import { StorageSerializers, useStorage } from "@vueuse/core";
+
+import ImsJsonFormPreview from "./preview.vue";
+
+
 
 import Simplebar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
@@ -970,6 +972,9 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
           --at-apply: cursor-pointer w-54px flex flex-col items-center
             justify-center mb-2;
 
+
+            
+
           .title {
             font-size: 14px;
             color: #777;
@@ -1028,6 +1033,8 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
                 color: #3d3d3d;
                 font-size: 12px;
 
+                
+
                 &:hover {
                   color: rgb(23, 114, 233);
                   background-color: #3e8bf20f;
@@ -1042,8 +1049,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
               &-item {
                 border: 1px solid #eaeaea;
-                --at-apply: p-2 cursor-pointer rd flex items-center
-                  justify-start;
+                --at-apply: p-2 cursor-pointer rd flex items-center justify-start;
                 .icon {
                   font-size: 14px;
                   --at-apply: mr-1;

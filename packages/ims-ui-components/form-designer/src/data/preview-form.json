@@ -1,0 +1,393 @@
+{
+  "model": {
+    "name": ""
+  },
+  "rules": {
+    "name": []
+  },
+  "items": [
+    {
+      "item": {
+        "name": "f_9GqdghhCcT4Dr6VZp-i",
+        "colon": true,
+        "layout": "horizontal",
+        "labelAlign": "right",
+        "labelCol": {
+          "style": {
+            "width": "80px"
+          }
+        }
+      },
+      "children": [
+        {
+          "title": "文本域",
+          "icon": "bi:textarea-resize",
+          "type": "textarea",
+          "vModelField": "value",
+          "col": {
+            "span": 12
+          },
+          "item": {
+            "label": "文本域",
+            "name": "name",
+            "tooltip": "",
+            "extra": "",
+            "required": false,
+            "colon": true,
+            "rules": []
+          },
+          "component": {
+            "componentName": "ATextarea",
+            "events": {},
+            "props": {
+              "placeholder": "请输入",
+              "bordered": true,
+              "events": {
+                "pressEnter": ["e"],
+                "change": ["e"]
+              }
+            }
+          },
+          "id": "j-WDvzRFI5hleJmGyekUH",
+          "class": "tree-item",
+          "componentProps": [
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "占位提示",
+              "field": "placeholder",
+              "props": {
+                "placeholder": "请输入占位提示"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "允许清除内容",
+              "field": "allowClear",
+              "props": {}
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否有边框",
+              "field": "bordered",
+              "props": {}
+            },
+            {
+              "component": "AInputNumber",
+              "vModelField": "value",
+              "label": "最大长度",
+              "field": "maxlength",
+              "props": {
+                "placeholder": "请输入最大长度"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否展示字数",
+              "field": "showCount",
+              "props": {}
+            },
+            {
+              "component": "ARadioGroup",
+              "vModelField": "value",
+              "label": "尺寸",
+              "field": "size",
+              "props": {
+                "options": [
+                  {
+                    "value": "",
+                    "label": "默认"
+                  },
+                  {
+                    "value": "large",
+                    "label": "大"
+                  },
+                  {
+                    "value": "middle",
+                    "label": "中"
+                  },
+                  {
+                    "value": "small",
+                    "label": "小"
+                  }
+                ],
+                "optionType": "button"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否禁用",
+              "field": "disabled",
+              "props": {}
+            },
+            {
+              "component": "ImsCustomizationComponentEvents",
+              "vModelField": "value",
+              "label": "事件",
+              "field": "events",
+              "props": {
+                "events": [
+                  {
+                    "id": "change",
+                    "value": "change",
+                    "label": "输入框内容变化时的回调",
+                    "callback": "function(e:InputEvent)",
+                    "arguments": ["e"]
+                  },
+                  {
+                    "id": "pressEnter",
+                    "value": "pressEnter",
+                    "label": "按下回车的回调",
+                    "callback": "function(e)",
+                    "arguments": ["e"]
+                  }
+                ]
+              }
+            }
+          ],
+          "formItemProps": [
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "标签",
+              "field": "label",
+              "props": {
+                "placeholder": "请输入标签"
+              }
+            },
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "model字段",
+              "field": "name",
+              "required": true,
+              "tooltip": {
+                "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
+              },
+              "props": {
+                "placeholder": "请输入model字段"
+              }
+            },
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "提示信息",
+              "field": "tooltip",
+              "props": {
+                "placeholder": "请输入提示信息",
+                "allowClear": true
+              }
+            },
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "额外的提示信息",
+              "field": "extra",
+              "props": {
+                "placeholder": "请输入额外的提示信息"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否展示冒号",
+              "field": "colon",
+              "props": {}
+            },
+            {
+              "component": "ImsCustomizationFormItemRules",
+              "vModelField": "value",
+              "label": "校验规则",
+              "field": "rules",
+              "props": {}
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否必填",
+              "field": "required",
+              "props": {}
+            }
+          ],
+          "componentEvents": [
+            {
+              "component": "AInput",
+              "vModelField": "value",
+              "label": "占位提示",
+              "field": "placeholder",
+              "props": {
+                "placeholder": "请输入占位提示"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "允许清除内容",
+              "field": "allowClear",
+              "props": {}
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否有边框",
+              "field": "bordered",
+              "props": {}
+            },
+            {
+              "component": "AInputNumber",
+              "vModelField": "value",
+              "label": "最大长度",
+              "field": "maxlength",
+              "props": {
+                "placeholder": "请输入最大长度"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否展示字数",
+              "field": "showCount",
+              "props": {}
+            },
+            {
+              "component": "ARadioGroup",
+              "vModelField": "value",
+              "label": "尺寸",
+              "field": "size",
+              "props": {
+                "options": [
+                  {
+                    "value": "",
+                    "label": "默认"
+                  },
+                  {
+                    "value": "large",
+                    "label": "大"
+                  },
+                  {
+                    "value": "middle",
+                    "label": "中"
+                  },
+                  {
+                    "value": "small",
+                    "label": "小"
+                  }
+                ],
+                "optionType": "button"
+              }
+            },
+            {
+              "component": "ASwitch",
+              "vModelField": "checked",
+              "label": "是否禁用",
+              "field": "disabled",
+              "props": {}
+            }
+          ]
+        }
+      ],
+      "formItemProps": [
+        {
+          "component": "AInput",
+          "vModelField": "value",
+          "label": "表单名称",
+          "field": "name",
+          "props": {
+            "placeholder": "请输入表单名称",
+            "allowClear": true
+          }
+        },
+        {
+          "component": "ARadioGroup",
+          "vModelField": "value",
+          "label": "表单布局",
+          "field": "layout",
+          "props": {
+            "options": [
+              {
+                "value": "horizontal",
+                "label": "水平"
+              },
+              {
+                "value": "vertical",
+                "label": "垂直"
+              },
+              {
+                "value": "inline",
+                "label": "内联"
+              }
+            ],
+            "optionType": "button"
+          }
+        },
+        {
+          "component": "ARadioGroup",
+          "vModelField": "value",
+          "label": "标签的文本对齐方式",
+          "field": "labelAlign",
+          "props": {
+            "options": [
+              {
+                "value": "left",
+                "label": "左对齐"
+              },
+              {
+                "value": "right",
+                "label": "右对齐"
+              }
+            ],
+            "optionType": "button"
+          }
+        },
+        {
+          "component": "AInput",
+          "vModelField": "value",
+          "label": "label 标签布局",
+          "field": "labelCol.style.width",
+          "tooltip": {
+            "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
+          },
+          "props": {
+            "placeholder": "请输入额外的提示信息"
+          }
+        },
+        {
+          "component": "AInput",
+          "vModelField": "value",
+          "label": "额外的提示信息",
+          "field": "extra",
+          "props": {
+            "placeholder": "请输入额外的提示信息"
+          }
+        },
+        {
+          "component": "ASwitch",
+          "vModelField": "checked",
+          "label": "是否展示冒号",
+          "field": "colon",
+          "props": {}
+        },
+        {
+          "component": "ASwitch",
+          "vModelField": "checked",
+          "label": "是否必填",
+          "field": "required",
+          "props": {}
+        }
+      ],
+      "component": {
+        "componentName": "AInputPassword",
+        "props": {
+          "placeholder": "请输入"
+        }
+      },
+      "id": "tHGUhT0q4Ddzuf86gjg21",
+      "title": "表单",
+      "type": "form"
+    }
+  ]
+}
