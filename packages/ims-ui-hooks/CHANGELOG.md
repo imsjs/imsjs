@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.6
+
+### Patch Changes
+
+- 5855157: feat form-designer
+
 ## 2.1.5
 
 ### Patch Changes

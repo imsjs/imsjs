@@ -1,5 +1,13 @@
 # @imsjs/ims-ui-enums
 
+## 2.1.6
+
+### Patch Changes
+
+- 5855157: feat form-designer
+- Updated dependencies [5855157]
+  - @imsjs/ims-ui-hooks@2.1.6
+
 ## 2.1.5
 
 ### Patch Changes
