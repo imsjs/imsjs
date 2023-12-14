@@ -19,12 +19,11 @@
                 <span class="break-all text-10px">{{ element.value }}</span>
               </a-checkbox>
             </div>
-
-            <div class="flex-1">
-              <div class="text-8px text-#0000004f mb-1 w-full text-wrap">
+            <div class="flex-1 w-100px text-10px">
+              <div class="text-#0000004f mb-1  overflow-hidden text-ellipsis">
                 {{ element.label }}
               </div>
-              <div class="text-8px text-#c41d7f w-full text-wrap">
+              <div class="text-#c41d7f overflow-hidden text-ellipsis italic">
                 {{ element.callback }}
               </div>
             </div>

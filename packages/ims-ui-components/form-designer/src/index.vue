@@ -211,13 +211,14 @@
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-json`"
             v-show="operationalView === 'json'"
           >
+          
             <ims-json-viewer :data="list" editable></ims-json-viewer>
           </div>
           <div
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-code`"
             v-show="operationalView === 'code'"
           >
-            code
+            {{ list }}
           </div>
           <div
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-play`"
@@ -612,8 +613,6 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 .@{prefix-cls} {
   --at-apply: w-full h-full flex flex-col overflow-hidden;
 
-  // overflow-hidden
-
   &-header {
     --at-apply: h-48px min-h-48px flex justify-between items-center;
 
@@ -765,6 +764,15 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
           &-form {
             --at-apply: box-border px-3 py-8;
+
+            &:first-child {
+               border: 2px solid red;
+            }
+
+            // .ims-nested-draggable {
+            //   border: 2px solid red;
+            //   --at-apply: "h-50%";
+            // }
             // border: 2px solid red;
           }
         }
