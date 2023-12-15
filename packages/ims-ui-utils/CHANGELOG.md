@@ -1,5 +1,16 @@
 # @imsjs/ims-ui-utils
 
+## 2.1.7
+
+### Patch Changes
+
+- 3dc1096: update form de
+- Updated dependencies [3dc1096]
+  - @imsjs/ims-ui-constants@2.1.7
+  - @imsjs/ims-ui-enums@2.1.7
+  - @imsjs/ims-ui-hooks@2.1.7
+  - @imsjs/ims-ui-types@2.1.7
+
 ## 2.1.6
 
 ### Patch Changes

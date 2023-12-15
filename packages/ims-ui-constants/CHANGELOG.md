@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.7
+
+### Patch Changes
+
+- 3dc1096: update form de
+
 ## 2.1.6
 
 ### Patch Changes
