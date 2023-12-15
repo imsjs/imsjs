@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.8
+
+### Patch Changes
+
+- 74f11c2: fixed form Designer
+
 ## 2.1.7
 
 ### Patch Changes

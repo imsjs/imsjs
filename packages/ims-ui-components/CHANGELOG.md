@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.8
+
+### Patch Changes
+
+- 74f11c2: fixed form Designer
+- Updated dependencies [74f11c2]
+  - @imsjs/ims-ui-constants@2.1.8
+  - @imsjs/ims-ui-enums@2.1.8
+  - @imsjs/ims-ui-hooks@2.1.8
+  - @imsjs/ims-ui-types@2.1.8
+  - @imsjs/ims-ui-utils@2.1.8
+
 ## 2.1.7
 
 ### Patch Changes
