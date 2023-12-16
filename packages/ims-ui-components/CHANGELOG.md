@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.9
+
+### Patch Changes
+
+- bc0c2b6: add class
+- Updated dependencies [bc0c2b6]
+  - @imsjs/ims-ui-constants@2.1.9
+  - @imsjs/ims-ui-enums@2.1.9
+  - @imsjs/ims-ui-hooks@2.1.9
+  - @imsjs/ims-ui-types@2.1.9
+  - @imsjs/ims-ui-utils@2.1.9
+
 ## 2.1.8
 
 ### Patch Changes

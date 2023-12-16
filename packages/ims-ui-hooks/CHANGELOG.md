@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.9
+
+### Patch Changes
+
+- bc0c2b6: add class
+
 ## 2.1.8
 
 ### Patch Changes

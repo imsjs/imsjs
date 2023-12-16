@@ -1,5 +1,13 @@
 # @imsjs/ims-ui-enums
 
+## 2.1.9
+
+### Patch Changes
+
+- bc0c2b6: add class
+- Updated dependencies [bc0c2b6]
+  - @imsjs/ims-ui-hooks@2.1.9
+
 ## 2.1.8
 
 ### Patch Changes
