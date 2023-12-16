@@ -50,7 +50,7 @@
                       </a-input>
                     </a-input-group>
                   </div>
-                  <Simplebar>
+                  <Simplebar class="simple-bar-init">
                     <a-row
                       ref="componentsListsRef"
                       :class="`${prefixCls}-contents-left-nav-bar-tabs-components-components-lists`"
@@ -190,7 +190,7 @@
             data-simplebar-auto-hide="false"
             v-show="operationalView === 'design'"
           >
-            <Simplebar>
+            <Simplebar class="simple-bar-init">
               <!-- {{ list.items[0].children }} -->
 
               <a-form
@@ -252,7 +252,7 @@
           data-simplebar
           data-simplebar-auto-hide="false"
         >
-          <Simplebar>
+          <Simplebar class="simple-bar-init">
             <div v-show="formComponentProp === 'form-props'" class="px-2" >
              
               <div
@@ -612,6 +612,11 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
 .@{prefix-cls} {
   --at-apply: w-full h-full flex flex-col overflow-hidden;
+
+  .simple-bar-init {
+    height: 100%;
+    // border: 1px solid red;
+  }
 
   &-header {
     --at-apply: h-48px min-h-48px flex justify-between items-center;
