@@ -2,7 +2,7 @@
 
   <VueDraggable :class="prefixCls" group="components" tag="div" v-model="list">
     
-    
+    <div class="bd-red p-2">{{ modelValue }}</div>
     <div
     
       v-for="element in modelValue"
@@ -69,7 +69,7 @@ import { computed } from "vue";
 
 import { StorageSerializers, useStorage } from '@vueuse/core'
 
-const activeItem =  useStorage('active-item',{id:'0'}, undefined, { serializer: StorageSerializers.object });
+const activeItem =  useStorage('active-item',null, undefined, { serializer: StorageSerializers.object });
 
 interface IList {
   id: string;

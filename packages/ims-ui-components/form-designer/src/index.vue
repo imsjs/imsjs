@@ -73,7 +73,7 @@
                 <div
                   :class="`${prefixCls}-contents-left-nav-bar-tabs-components-outline`"
                 >
-                  outline
+                  Outline
                 </div>
               </div>
             </a-tab-pane>
@@ -367,7 +367,7 @@ const componentLists = ref(componentListsJson);
 
 const componentsProps = componentPropsJson;
 
-const activeStorageItem = useStorage("active-item", null, undefined, {
+const activeStorageItem = useStorage("active-item", {id:'0'}, undefined, {
   serializer: StorageSerializers.object,
 });
 
