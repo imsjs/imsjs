@@ -73,7 +73,46 @@
                 <div
                   :class="`${prefixCls}-contents-left-nav-bar-tabs-components-outline`"
                 >
-                  Outline
+                  <a-tree
+                    blockNode
+                    selectable
+                    :showLine="true"
+                    :class="`${prefixCls}-contents-left-nav-bar-tabs-components-outline-tree ${prefixCls}-components-outline-tree`"
+                    :showIcon="false"
+                    :tree-data="list.items"
+                    :fieldNames="fieldNames"
+                    :draggable="true"
+                    :height="300"
+                    @select="onOutlineSelect"
+                    v-model:selectedKeys="treeSelectedKeys"
+                  >
+                    <template #title="item">
+                      <div class="w-full flex justify-between items-center">
+                        <div class="title-wrapper flex">
+                          <div class="title-name">
+                            {{ item.title }}
+                          </div>
+                          <span class="ml-1 text-#0000004f text-10px">{{
+                            item.type
+                          }}</span>
+                        </div>
+
+                        <a-space>
+                          <icon
+                            icon="ant-design:delete-outlined"
+                            class="action hover-color-#1677ff"
+                            :inline="true"
+                          />
+                          <!-- eye-outlined -->
+                          <icon
+                            icon="ant-design:eye-invisible-outlined"
+                            class="action hover-color-#1677ff"
+                            :inline="true"
+                          />
+                        </a-space>
+                      </div>
+                    </template>
+                  </a-tree>
                 </div>
               </div>
             </a-tab-pane>
@@ -85,9 +124,50 @@
                 </div>
               </template>
 
-              <div class="tab-wrapper">大纲</div>
+              <div class="tab-wrapper">
+                <a-tree
+                    blockNode
+                    selectable
+                    :showLine="true"
+                    :class="`${prefixCls}-components-outline-tree`"
+                    :showIcon="false"
+                    :tree-data="list.items"
+                    :fieldNames="fieldNames"
+                    :draggable="true"
+                    :height="300"
+                    @select="onOutlineSelect"
+                    v-model:selectedKeys="treeSelectedKeys"
+                  >
+                    <template #title="item">
+                      <div class="w-full flex justify-between items-center">
+                        <div class="title-wrapper flex">
+                          <div class="title-name">
+                            {{ item.title }}
+                          </div>
+                          <span class="ml-1 text-#0000004f text-10px">{{
+                            item.type
+                          }}</span>
+                        </div>
+
+                        <a-space>
+                          <icon
+                            icon="ant-design:delete-outlined"
+                            class="action hover-color-#1677ff"
+                            :inline="true"
+                          />
+                          <!-- eye-outlined -->
+                          <icon
+                            icon="ant-design:eye-invisible-outlined"
+                            class="action hover-color-#1677ff"
+                            :inline="true"
+                          />
+                        </a-space>
+                      </div>
+                    </template>
+                  </a-tree>
+              </div>
             </a-tab-pane>
-            <a-tab-pane key="3">
+            <!-- <a-tab-pane key="3">
               <template #tab>
                 <div class="flex flex-col justify-center items-center">
                   <div><icon icon="ri:code-box-line"></icon></div>
@@ -96,7 +176,8 @@
               </template>
 
               <div class="tab-wrapper">源码</div>
-            </a-tab-pane>
+            </a-tab-pane> -->
+
             <a-tab-pane key="4">
               <template #tab>
                 <div class="flex flex-col justify-center items-center">
@@ -162,6 +243,7 @@
                   :value="item.value"
                   :key="item.value"
                   v-for="item in fileActions"
+                  @click="onFileActionChange(item)"
                 >
                   <icon :icon="item.icon"></icon>
                 </a-radio-button>
@@ -211,50 +293,53 @@
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-json`"
             v-show="operationalView === 'json'"
           >
-          
-            <ims-json-viewer :data="list" editable></ims-json-viewer>
+            <div>JSON</div>
+            <!-- <ims-json-viewer :data="list" editable></ims-json-viewer> -->
           </div>
           <div
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-code`"
             v-show="operationalView === 'code'"
           >
-            {{ list }}
+            <div>CODE</div>
           </div>
           <div
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-play`"
             v-show="operationalView === 'play'"
+            data-simplebar
+            data-simplebar-auto-hide="false"
           >
-            <ImsFormRenderer ref="testRef" :data="list" />
+            <Simplebar class="simple-bar-init">
+              <div class="p-2">
+                <ImsFormRenderer ref="testRef" :data="list" />
+              </div>
+            </Simplebar>
           </div>
         </div>
       </div>
       <div :class="`${prefixCls}-contents-right`">
         <div :class="`${prefixCls}-contents-right-header`">
-
           <div :class="`${prefixCls}-contents-right-header-breadcrumb`">
-          <a-breadcrumb separator=">">
-            <a-breadcrumb-item v-for="breadcrumb in breadcrumbs">{{
-              breadcrumb.title
-            }}</a-breadcrumb-item>
-          </a-breadcrumb>
+            <a-breadcrumb separator=">">
+              <a-breadcrumb-item v-for="breadcrumb in breadcrumbs">{{
+                breadcrumb.title
+              }}</a-breadcrumb-item>
+            </a-breadcrumb>
+          </div>
+          <div :class="`${prefixCls}-contents-right-header-tabs-wrapper`">
+            <a-tabs centered v-model:activeKey="formComponentProp">
+              <a-tab-pane key="form-props" tab="表单属性"> </a-tab-pane>
+              <a-tab-pane key="component-props" tab="组件属性"> </a-tab-pane>
+            </a-tabs>
+          </div>
         </div>
-        <div :class="`${prefixCls}-contents-right-header-tabs-wrapper`">
-          <a-tabs centered v-model:activeKey="formComponentProp">
-            <a-tab-pane key="form-props" tab="表单属性"> </a-tab-pane>
-            <a-tab-pane key="component-props" tab="组件属性"> </a-tab-pane>
-          </a-tabs>
-        </div>
-        
-        </div>
-        
+
         <div
           :class="`${prefixCls}-contents-right-props-wrapper`"
           data-simplebar
           data-simplebar-auto-hide="false"
         >
           <Simplebar class="simple-bar-init">
-            <div v-show="formComponentProp === 'form-props'" class="px-2" >
-             
+            <div v-show="formComponentProp === 'form-props'" class="px-2">
               <div
                 class="py-1"
                 :key="`form-item-${index}`"
@@ -291,15 +376,15 @@
                       activeComponent.item[item.field]
                     "
                     v-bind="item.props"
-                    
+                    @focus="(e) => onFormItemFocus(item, index, e)"
+                    @blur="(e) => onFormItemBlur(item, index, e)"
+                    @change="(e) => onFormItemNameChange(item, index, e)"
                   ></component>
                 </div>
               </div>
-
             </div>
 
             <div v-show="formComponentProp === 'component-props'" class="px-2">
-             
               <div class="py-1" v-for="item in activeComponent.componentProps">
                 <div
                   class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
@@ -367,11 +452,15 @@ const componentLists = ref(componentListsJson);
 
 const componentsProps = componentPropsJson;
 
-const activeStorageItem = useStorage("active-item", {id:'0'}, undefined, {
+const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
   serializer: StorageSerializers.object,
 });
 
 const activeComponent = ref({ id: "0", item: {}, component: { props: {} } });
+
+const activeComponentIndex = ref(-1);
+
+const modelKeysIndex = ref(-1);
 
 const props = withDefaults(defineProps<ImsFormDesignerProps>(), {});
 
@@ -392,19 +481,29 @@ const elementTool = ref<string>("");
 // 目标设备
 const targetDevice = ref<string>("pc");
 
+interface toolAction {
+  id: string;
+  icon: string;
+  value: string;
+  label: string;
+}
+
 // 文件处理
 const fileActions = [
   {
+    id: "save",
     icon: "ant-design:cloud-download-outlined",
     value: "save",
     label: "保存",
   },
   {
+    id: "upload",
     icon: "ant-design:cloud-upload-outlined",
     value: "upload",
     label: "上传",
   },
   {
+    id: "clear",
     icon: "ant-design:clear-outlined",
     value: "clear",
     label: "清空",
@@ -413,25 +512,72 @@ const fileActions = [
 
 const fileAction = ref<string>("");
 
+const onFileActionChange = (item: toolAction) => {
+  console.info("onFileActionClick =>", item.value);
+
+  if (item.value === "save") {
+    console.info("onFileActionClick 保存 =>", item.value);
+    let fileName = "ims-designer-data.json";
+    let content = "data:text/json;charset=utf-8,";
+
+    let tmpData = cloneDeep(list.value);
+    console.info("toArray =>", tmpData.items[0].children);
+
+    let formItems = toArray(tmpData.items[0].children).filter(
+      (item) => item.type !== "grid-layout-col" && item.type !== "grid-layout"
+    );
+
+    console.info("formItems =>", formItems);
+    // 校验规则设置
+    formItems.forEach((item) => {
+      tmpData.rules[item.item.name] = item.item.rules;
+    });
+
+    content += JSON.stringify(tmpData, null, 2);
+    var encodedUri = encodeURI(content);
+    var actions = document.createElement("a");
+    actions.setAttribute("href", encodedUri);
+    actions.setAttribute("download", fileName);
+    actions.click();
+  }
+
+  if (item.value === "upload") {
+    console.info("onFileActionClick 上传 =>", item.value);
+  }
+
+  if (item.value === "clear") {
+    console.info("onFileActionClick 清空 =>", item.value);
+
+    // 直接清空所有的配置,可以考虑 增加确认提示之后再进行清空
+    list.value.items[0].children = [];
+    list.value.model = {};
+    list.value.rules = {};
+  }
+};
+
 // 操作视图
 
 const operationalViewActions = [
   {
+    id: "design",
     icon: "ic:outline-color-lens",
     value: "design",
     label: "设计",
   },
   {
+    id: "json",
     icon: "tabler:code-dots",
     value: "json",
     label: "JSON",
   },
   {
+    id: "code",
     icon: "tabler:code",
     value: "code",
     label: "代码",
   },
   {
+    id: "play",
     icon: "ph:play-bold",
     value: "play",
     label: "预览",
@@ -592,7 +738,109 @@ const addGridCol = (data: any) => {
   list.value.items[0].children[findedIndex].children.push(originalColData);
 };
 
+const onFormItemFocus = (item, index, e) => {
+  console.info("onFormItemFocus.item", item);
+  console.info("onFormItemFocus.index, e =>", index);
+  console.info("onFormItemFocus.e =>", e);
+
+  if (activeComponent.value.type !== "form") {
+    if (item.field === "name") {
+      console.info(
+        "onFormItemFocus.activeComponent.value =>",
+        activeComponent.value.item.name
+      );
+
+      let modelKeys = Object.keys(list.value.model);
+
+      let findedIndex = modelKeys.findIndex(
+        (model) => model === activeComponent.value.item.name
+      );
+
+      modelKeysIndex.value = findedIndex;
+
+      console.info(`modelKeys[${findedIndex}] =>`, modelKeys[findedIndex]);
+    }
+  }
+};
+
+const onFormItemBlur = (item, index, e) => {
+  if (activeComponent.value.type !== "form") {
+    if (item.field === "name") {
+      let currentChangedValue = activeComponent.value.item.name;
+      // models
+      let modelKeys = Object.keys(list.value.model);
+      modelKeys[modelKeysIndex.value] = currentChangedValue;
+      let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
+      list.value.model = newModel;
+
+      // rules
+      let rulesKeys = Object.keys(list.value.rules);
+      rulesKeys[modelKeysIndex.value] = currentChangedValue;
+      let newRules = Object.fromEntries(rulesKeys.map((item) => [item, []]));
+      list.value.rules = newRules;
+    }
+  }
+};
+
+const onFormItemNameChange = (item, index, e) => {
+  console.info("activeComponent.value.type =>", activeComponent.value.type);
+  if (activeComponent.value.type === "form") {
+    if (item.field === "labelCol.style.width") {
+      console.info("ok.....", list.value.items[0].item[item.field]);
+
+      list.value.items[0].item.labelCol.style.width =
+        list.value.items[0].item[item.field];
+    }
+  } else {
+    if (item.field === "name") {
+      let modelKeys = Object.keys(list.value.model);
+
+      console.info("modelKeys =>", modelKeys);
+
+      console.info("activeComponent.value =>", activeComponent.value);
+      let changedName = activeComponent.value.item.name;
+      console.info("changedName", changedName);
+      // modelKeys[activeComponentIndex.value] = changedName;
+      // let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
+
+      // 更新表单model
+      // list.value.model = newModel;
+
+      // 更新表单的验证规则
+      /**
+       * 1.同步重置了验证规则，可想办法保留验证规则
+       */
+      // let newRules = Object.fromEntries(modelKeys.map((item) => [item, []]));
+      // list.value.rules = newRules;
+      // useFormRs.value = useForm(list.value.model, list.value.rules);
+    }
+  }
+};
+
 const breadcrumbs = ref([]);
+
+const treeSelectedKeys = ref([]);
+const fieldNames = {
+  children: "children",
+  title: "title",
+  key: "id",
+};
+
+const onOutlineSelect = (selectedKeys, { selectedNodes }) => {
+  console.info("onOutlineSelect.selectedKeys =>", selectedKeys);
+
+  console.info("onOutlineSelect.selectedNodes =>", selectedNodes);
+
+  let result = [];
+
+  findParent(list.value.items, selectedNodes[0], result);
+
+  activeComponent.value = result[result.length - 1];
+
+  breadcrumbs.value = result;
+
+  activeStorageItem.value = selectedNodes[0];
+};
 
 watch(activeStorageItem, (newActiveStorageItem: any) => {
   let result = [];
@@ -638,6 +886,9 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
   // 内容区域
   &-contents {
     --at-apply: flex-1 flex h-full;
+
+    overflow: hidden;
+
     // height: calc(100% -48px);
     &-left {
       --at-apply: flex flex-row h-full;
@@ -666,6 +917,8 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
           &-components {
             --at-apply: h-full flex flex-col box-border;
+
+            overflow: hidden;
             &-components {
               --at-apply: flex-1 pb-12;
               overflow: hidden;
@@ -709,7 +962,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
             &-outline {
               // border: 1px solid red;
-              --at-apply: h-300px bd-red;
+              --at-apply: h-300px;
             }
           }
         }
@@ -719,7 +972,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
     &-canvas {
       --at-apply: "bg-#eeeeee flex-1 px-2 flex flex-col  h-full box-border";
-      // border: 1px solid red;
+
       overflow: hidden;
       &-tools {
         --at-apply: py-2 px-1 flex justify-between items-center;
@@ -750,35 +1003,38 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
           // border: 1px solid #eaeaea;
 
           &-json {
-            border: 1px solid yellow;
+            // border: 2px solid red;
           }
 
           &-code {
-            border: 1px solid black;
+            border: 2px solid black;
           }
 
           &-play {
-            border: 1px solid green;
+            --at-apply: box-border;
+            overflow: hidden;
           }
           //
         }
 
         &-view-design {
-          --at-apply: h-full box-border pb-12;
+          --at-apply: h-full box-border;
           overflow: hidden;
 
           &-form {
-            --at-apply: box-border px-3 py-8;
+            --at-apply: box-border px-3 pt-8;
 
-            &:first-child {
-               border: 2px solid red;
-            }
-
-            // .ims-nested-draggable {
+            // div:first-child {
             //   border: 2px solid red;
-            //   --at-apply: "h-50%";
+            //   height: calc(100% - 65px);
+            //   &::before {
+            //     content: '拖住组件';
+            //     display: flex;
+            //     justify-content: center;
+            //     align-items: center;
+            //     height: 100%;
+            //   }
             // }
-            // border: 2px solid red;
           }
         }
       }
@@ -803,9 +1059,23 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
       }
 
       &-props-wrapper {
-        --at-apply: flex-1 h-full  py-1 pb-140px;
+        overflow: hidden;
+        --at-apply: flex-1 h-full py-1;
       }
     }
   }
 }
+</style>
+
+<style lang="less">
+
+
+
+.ims-form-designer-components-outline-tree {
+  .ant-tree-switcher,
+  ant-tree-switcher_close {
+    --at-apply: f-c-c;
+  }
+}
+
 </style>

@@ -49,7 +49,7 @@
   <a-drawer
     v-model:open="opening"
     class="custom-class"
-    width="300"
+    width="350"
     root-class-name="root-class-name"
     :style="{ position: 'absolute' }"
     placement="right"
@@ -64,7 +64,7 @@
           :inline="true"
           class="text-#000 cursor-pointer hover:color-#1677ff"
         />
-        <span class="ml-2 text-#666 text-12px">配置规则</span>
+        <span class="ml-2 text-#666 text-12px">配置校验规则</span>
       </div>
     </template>
     <div class="" v-if="modelValue.length">

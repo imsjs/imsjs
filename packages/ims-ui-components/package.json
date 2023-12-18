@@ -27,6 +27,7 @@
     "@imsjs/ims-ui-types": "workspace:*",
     "@imsjs/ims-ui-utils": "workspace:*",
     "monaco-editor": "^0.45.0",
+    "monaco-editor-vue3": "^0.1.10",
     "simplebar-vue": "^2.3.3",
     "splitpanes": "^3.1.5",
     "tree-lodash": "^0.3.1"
