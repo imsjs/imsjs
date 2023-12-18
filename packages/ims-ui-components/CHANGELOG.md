@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.10
+
+### Patch Changes
+
+- 7f8319a: realse v2.1.9
+- Updated dependencies [7f8319a]
+  - @imsjs/ims-ui-constants@2.1.10
+  - @imsjs/ims-ui-enums@2.1.10
+  - @imsjs/ims-ui-hooks@2.1.10
+  - @imsjs/ims-ui-types@2.1.10
+  - @imsjs/ims-ui-utils@2.1.10
+
 ## 2.1.9
 
 ### Patch Changes

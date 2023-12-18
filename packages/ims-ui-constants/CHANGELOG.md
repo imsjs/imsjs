@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.10
+
+### Patch Changes
+
+- 7f8319a: realse v2.1.9
+
 ## 2.1.9
 
 ### Patch Changes
