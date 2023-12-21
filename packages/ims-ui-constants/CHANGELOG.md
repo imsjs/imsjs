@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.11
+
+### Patch Changes
+
+- 104ead0: add events
+
 ## 2.1.10
 
 ### Patch Changes

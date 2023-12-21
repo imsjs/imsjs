@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.11
+
+### Patch Changes
+
+- 104ead0: add events
+- Updated dependencies [104ead0]
+  - @imsjs/ims-ui-constants@2.1.11
+  - @imsjs/ims-ui-enums@2.1.11
+  - @imsjs/ims-ui-hooks@2.1.11
+  - @imsjs/ims-ui-types@2.1.11
+  - @imsjs/ims-ui-utils@2.1.11
+
 ## 2.1.10
 
 ### Patch Changes

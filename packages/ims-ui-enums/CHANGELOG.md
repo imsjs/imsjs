@@ -1,5 +1,13 @@
 # @imsjs/ims-ui-enums
 
+## 2.1.11
+
+### Patch Changes
+
+- 104ead0: add events
+- Updated dependencies [104ead0]
+  - @imsjs/ims-ui-hooks@2.1.11
+
 ## 2.1.10
 
 ### Patch Changes
