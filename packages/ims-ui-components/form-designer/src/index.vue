@@ -61,6 +61,7 @@
                         class="p-1"
                       >
                         <div
+                          @click="quickAddComponent(item)"
                           :class="`${prefixCls}-contents-left-nav-bar-tabs-components-components-lists-item`"
                         >
                           <icon class="icon" :icon="item.icon"></icon>
@@ -126,45 +127,45 @@
 
               <div class="tab-wrapper">
                 <a-tree
-                    blockNode
-                    selectable
-                    :showLine="true"
-                    :class="`${prefixCls}-components-outline-tree`"
-                    :showIcon="false"
-                    :tree-data="list.items"
-                    :fieldNames="fieldNames"
-                    :draggable="true"
-                    :height="300"
-                    @select="onOutlineSelect"
-                    v-model:selectedKeys="treeSelectedKeys"
-                  >
-                    <template #title="item">
-                      <div class="w-full flex justify-between items-center">
-                        <div class="title-wrapper flex">
-                          <div class="title-name">
-                            {{ item.title }}
-                          </div>
-                          <span class="ml-1 text-#0000004f text-10px">{{
-                            item.type
-                          }}</span>
+                  blockNode
+                  selectable
+                  :showLine="true"
+                  :class="`${prefixCls}-components-outline-tree`"
+                  :showIcon="false"
+                  :tree-data="list.items"
+                  :fieldNames="fieldNames"
+                  :draggable="true"
+                  :height="300"
+                  @select="onOutlineSelect"
+                  v-model:selectedKeys="treeSelectedKeys"
+                >
+                  <template #title="item">
+                    <div class="w-full flex justify-between items-center">
+                      <div class="title-wrapper flex">
+                        <div class="title-name">
+                          {{ item.title }}
                         </div>
-
-                        <a-space>
-                          <icon
-                            icon="ant-design:delete-outlined"
-                            class="action hover-color-#1677ff"
-                            :inline="true"
-                          />
-                          <!-- eye-outlined -->
-                          <icon
-                            icon="ant-design:eye-invisible-outlined"
-                            class="action hover-color-#1677ff"
-                            :inline="true"
-                          />
-                        </a-space>
+                        <span class="ml-1 text-#0000004f text-10px">{{
+                          item.type
+                        }}</span>
                       </div>
-                    </template>
-                  </a-tree>
+
+                      <a-space>
+                        <icon
+                          icon="ant-design:delete-outlined"
+                          class="action hover-color-#1677ff"
+                          :inline="true"
+                        />
+                        <!-- eye-outlined -->
+                        <icon
+                          icon="ant-design:eye-invisible-outlined"
+                          class="action hover-color-#1677ff"
+                          :inline="true"
+                        />
+                      </a-space>
+                    </div>
+                  </template>
+                </a-tree>
               </div>
             </a-tab-pane>
             <!-- <a-tab-pane key="3">
@@ -232,6 +233,13 @@
               </a-radio-group>
             </a-space>
           </div>
+          <div :class="`${prefixCls}-contents-canvas-tools-center`">
+            <span v-if="list.items[0].item.title">{{
+              list.items[0].item.title
+            }}</span>
+            <span v-if="list.items[0].item.title">-</span>
+            <span class="text-14px">{{ list.items[0].item.name }}</span>
+          </div>
           <div :class="`${prefixCls}-contents-canvas-tools-right`">
             <a-space>
               <a-radio-group
@@ -273,8 +281,6 @@
             v-show="operationalView === 'design'"
           >
             <Simplebar class="simple-bar-init">
-              <!-- {{ list.items[0].children }} -->
-
               <a-form
                 :class="`${prefixCls}-contents-canvas-workspace-view-design-form`"
                 v-bind="list.items[0].item"
@@ -283,7 +289,10 @@
                   @add-col="addGridCol"
                   @delete="deleteItem"
                   @copy="copyItem"
-                  :class="`${prefixCls}-contents-canvas-workspace-view-design-form-draggable`"
+                  :class="[
+                    `${prefixCls}-contents-canvas-workspace-view-design-form-draggable`,
+                    { 'no-item': !list.items[0].children.length },
+                  ]"
                   v-model="list.items[0].children"
                 ></nested-draggable>
               </a-form>
@@ -294,7 +303,6 @@
             v-show="operationalView === 'json'"
           >
             <div>JSON</div>
-            <!-- <ims-json-viewer :data="list" editable></ims-json-viewer> -->
           </div>
           <div
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-code`"
@@ -320,15 +328,34 @@
         <div :class="`${prefixCls}-contents-right-header`">
           <div :class="`${prefixCls}-contents-right-header-breadcrumb`">
             <a-breadcrumb separator=">">
-              <a-breadcrumb-item v-for="breadcrumb in breadcrumbs">{{
-                breadcrumb.title
-              }}</a-breadcrumb-item>
+              <a-breadcrumb-item
+                v-for="breadcrumb in breadcrumbs"
+                class="cursor-pointer"
+                @click="breadcrumbClick(breadcrumb)"
+                >{{ breadcrumb.title }}</a-breadcrumb-item
+              >
             </a-breadcrumb>
           </div>
           <div :class="`${prefixCls}-contents-right-header-tabs-wrapper`">
             <a-tabs centered v-model:activeKey="formComponentProp">
-              <a-tab-pane key="form-props" tab="表单属性"> </a-tab-pane>
-              <a-tab-pane key="component-props" tab="组件属性"> </a-tab-pane>
+              <a-tab-pane
+                key="form-props"
+                :disabled="
+                  activeComponent.type === 'grid-layout' ||
+                  activeComponent.type === 'grid-layout-col'
+                "
+                tab="表单属性"
+              >
+              </a-tab-pane>
+              <a-tab-pane
+                key="component-props"
+                :disabled="
+                  activeComponent.type === 'grid-layout' ||
+                  activeComponent.type === 'grid-layout-col'
+                "
+                tab="组件属性"
+              >
+              </a-tab-pane>
             </a-tabs>
           </div>
         </div>
@@ -406,11 +433,12 @@
                 </div>
                 <div class="">
                   <component
+                    v-if="activeComponent.component"
                     :is="item.component || 'AInput'"
                     v-model:[item.vModelField]="
                       activeComponent.component.props[item.field]
                     "
-                    v-bind="item.props"
+                    v-bind="item.props || {}"
                   ></component>
                 </div>
               </div>
@@ -456,13 +484,15 @@ const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
   serializer: StorageSerializers.object,
 });
 
-const activeComponent = ref({ id: "0", item: {}, component: { props: {} } });
-
 const activeComponentIndex = ref(-1);
 
 const modelKeysIndex = ref(-1);
 
 const props = withDefaults(defineProps<ImsFormDesignerProps>(), {});
+
+const emits = defineEmits<{
+  save: [data?: any];
+}>();
 
 console.info("props =>", props);
 
@@ -491,10 +521,10 @@ interface toolAction {
 // 文件处理
 const fileActions = [
   {
-    id: "save",
+    id: "download",
     icon: "ant-design:cloud-download-outlined",
-    value: "save",
-    label: "保存",
+    value: "download",
+    label: "下载",
   },
   {
     id: "upload",
@@ -508,26 +538,25 @@ const fileActions = [
     value: "clear",
     label: "清空",
   },
+  {
+    id: "save",
+    icon: "ant-design:save-outlined",
+    value: "save",
+    label: "保存",
+  },
 ];
 
 const fileAction = ref<string>("");
 
 const onFileActionChange = (item: toolAction) => {
-  console.info("onFileActionClick =>", item.value);
-
-  if (item.value === "save") {
-    console.info("onFileActionClick 保存 =>", item.value);
+  if (item.value === "download") {
     let fileName = "ims-designer-data.json";
     let content = "data:text/json;charset=utf-8,";
 
     let tmpData = cloneDeep(list.value);
-    console.info("toArray =>", tmpData.items[0].children);
-
     let formItems = toArray(tmpData.items[0].children).filter(
       (item) => item.type !== "grid-layout-col" && item.type !== "grid-layout"
     );
-
-    console.info("formItems =>", formItems);
     // 校验规则设置
     formItems.forEach((item) => {
       tmpData.rules[item.item.name] = item.item.rules;
@@ -546,12 +575,19 @@ const onFileActionChange = (item: toolAction) => {
   }
 
   if (item.value === "clear") {
-    console.info("onFileActionClick 清空 =>", item.value);
-
     // 直接清空所有的配置,可以考虑 增加确认提示之后再进行清空
     list.value.items[0].children = [];
     list.value.model = {};
     list.value.rules = {};
+    // 修改 breadcrumbs 为第一个
+    breadcrumbs.value = [breadcrumbs.value[0]];
+    // 同时更新选中项目
+    activeStorageItem.value = breadcrumbs.value[0];
+  }
+
+  if (item.value === "save") {
+    // 保存
+    emits('save',list.value);
   }
 };
 
@@ -590,36 +626,44 @@ const componentsListsRef = ref();
 
 const formComponentProp = ref("form-props");
 
-const list = ref({
-  model: {},
-  rules: {},
-  items: [
-    {
-      item: {
-        name: "f_9GqdghhCcT4Dr6VZp-i",
-        colon: true,
-        layout: "horizontal",
-        labelAlign: "right",
-        labelCol: {
-          style: {
-            width: "80px",
+const list = defineModel("value", {
+  default: {
+    model: {},
+    rules: {},
+    items: [
+      {
+        item: {
+          name: "f_9GqdghhCcT4Dr6VZp-i",
+          colon: true,
+          layout: "horizontal",
+          labelAlign: "right",
+          labelCol: {
+            style: {
+              width: "80px",
+            },
           },
         },
-      },
-      children: [],
-      formItemProps: formPropsJson,
-      component: {
-        componentName: "AInputPassword",
-        props: {
-          placeholder: "请输入",
+        children: [],
+        formItemProps: formPropsJson,
+        component: {
+          componentName: "AInputPassword",
+          props: {
+            placeholder: "请输入",
+          },
         },
+        id: "tHGUhT0q4Ddzuf86gjg21",
+        title: "表单",
+        type: "form",
       },
-      id: "tHGUhT0q4Ddzuf86gjg21",
-      title: "表单",
-      type: "form",
-    },
-  ],
+    ],
+  },
 });
+
+const activeComponent = ref({ id: "0", item: {}, component: { props: {} } });
+
+activeComponent.value = list.value.items[0];
+
+const breadcrumbs = ref([list.value.items[0]]);
 
 useDraggable(componentsListsRef, componentLists, {
   animation: 150,
@@ -642,6 +686,7 @@ useDraggable(componentsListsRef, componentLists, {
     addedComponent.componentEvents = componentEventsJson[addedComponent.type]; // 增加 componentEvents
 
     if (addedComponent.type === "grid-layout") {
+      addedComponent.formItemProps = {};
       addedComponent.children.forEach((child) => {
         child.id = nanoid();
       });
@@ -651,12 +696,37 @@ useDraggable(componentsListsRef, componentLists, {
       list.value.rules[itemName] = [];
     }
 
-    console.info("af => item", addedComponent);
-
     return addedComponent;
   },
   sort: false,
 });
+
+const quickAddComponent = (item: any) => {
+  let addedComponent = cloneDeep(item);
+  addedComponent.id = nanoid();
+
+  addedComponent.class = "tree-item";
+
+  if (addedComponent.type === "grid-layout") {
+    addedComponent.children.forEach((child) => {
+      child.id = nanoid();
+    });
+  }
+
+  let itemName = nanoid();
+  addedComponent.item.name = itemName;
+
+  addedComponent.componentProps = componentsProps[addedComponent.type]; // 增加 componentProps
+  addedComponent.formItemProps = formItemPropsJson; // 增加 formIte
+  addedComponent.componentEvents = componentEventsJson[addedComponent.type]; // 增加 componentEvents
+
+  list.value.items[0].children.push(addedComponent);
+
+  if (addedComponent.type !== "grid-layout") {
+    list.value.model[itemName] = "";
+    list.value.rules[itemName] = [];
+  }
+};
 
 // 删除 tree-data 中的指定节点
 const removeNodeInTree = (data: any, id: string) => {
@@ -817,7 +887,22 @@ const onFormItemNameChange = (item, index, e) => {
   }
 };
 
-const breadcrumbs = ref([]);
+const activeComponentChange = (data: any, updateActiveItem: boolean = true) => {
+  let result = [];
+  findParent(list.value.items, data, result);
+  activeComponent.value = result[result.length - 1];
+  breadcrumbs.value = result;
+  if (updateActiveItem === true) {
+    activeStorageItem.value = data;
+  }
+};
+
+const breadcrumbClick = (breadcrumb) => {
+  if (breadcrumb.id === breadcrumbs.value[breadcrumbs.value.length - 1].id) {
+    return false;
+  }
+  activeComponentChange(breadcrumb);
+};
 
 const treeSelectedKeys = ref([]);
 const fieldNames = {
@@ -827,31 +912,11 @@ const fieldNames = {
 };
 
 const onOutlineSelect = (selectedKeys, { selectedNodes }) => {
-  console.info("onOutlineSelect.selectedKeys =>", selectedKeys);
-
-  console.info("onOutlineSelect.selectedNodes =>", selectedNodes);
-
-  let result = [];
-
-  findParent(list.value.items, selectedNodes[0], result);
-
-  activeComponent.value = result[result.length - 1];
-
-  breadcrumbs.value = result;
-
-  activeStorageItem.value = selectedNodes[0];
+  activeComponentChange(selectedNodes[0]);
 };
 
 watch(activeStorageItem, (newActiveStorageItem: any) => {
-  let result = [];
-
-  findParent(list.value.items, newActiveStorageItem, result);
-
-  activeComponent.value = result[result.length - 1];
-
-  breadcrumbs.value = result;
-
-  // treeSelectedKeys.value = [newActiveStorageItem.id];
+  activeComponentChange(newActiveStorageItem, false);
 });
 </script>
 
@@ -989,6 +1054,11 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
           --at-apply: flex;
         }
 
+        &-center {
+          --at-apply: flex items-center justify-center;
+          // border: 1px solid red;
+        }
+
         &-right {
           --at-apply: flex;
         }
@@ -1024,17 +1094,18 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
           &-form {
             --at-apply: box-border px-3 pt-8;
 
-            // div:first-child {
-            //   border: 2px solid red;
-            //   height: calc(100% - 65px);
-            //   &::before {
-            //     content: '拖住组件';
-            //     display: flex;
-            //     justify-content: center;
-            //     align-items: center;
-            //     height: 100%;
-            //   }
-            // }
+            div:first-child.no-item {
+              // border: 2px solid red;
+              height: calc(100% - 65px);
+              &::before {
+                content: "拖拽组件到这里";
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                // color: red;
+              }
+            }
           }
         }
       }
@@ -1068,14 +1139,10 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 </style>
 
 <style lang="less">
-
-
-
 .ims-form-designer-components-outline-tree {
   .ant-tree-switcher,
   ant-tree-switcher_close {
     --at-apply: f-c-c;
   }
 }
-
 </style>

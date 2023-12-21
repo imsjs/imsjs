@@ -529,13 +529,7 @@
         "optionType": "button"
       }
     },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
+
     {
       "component": "ImsCustomizationComponentEvents",
       "vModelField": "value",
@@ -1629,97 +1623,6 @@
       "props": {}
     }
   ],
-  "grid-layout": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ]
+  "grid-layout": [],
+  "grid-layout-col": []
 }

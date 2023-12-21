@@ -479,28 +479,14 @@
     "col": {
       "span": 24
     },
-    "item": {
-      "label": "栅格布局",
-      "name": "",
-      "tooltip": "",
-      "extra": "",
-      "required": false,
-      "colon": true
-    },
+    "item": {},
     "children": [
       {
         "title": "栅格布局-列",
         "icon": "radix-icons:layout",
         "type": "grid-layout-col",
         "vModelField": "value",
-        "item": {
-          "label": "栅格布局",
-          "name": "",
-          "tooltip": "",
-          "extra": "",
-          "required": false,
-          "colon": true
-        },
+        "item": {},
         "children": []
       },
       {
@@ -508,14 +494,7 @@
         "icon": "radix-icons:layout",
         "type": "grid-layout-col",
         "vModelField": "value",
-        "item": {
-          "label": "栅格布局",
-          "name": "",
-          "tooltip": "",
-          "extra": "",
-          "required": false,
-          "colon": true
-        },
+        "item": {},
         "children": []
       }
     ]

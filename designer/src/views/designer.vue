@@ -718,11 +718,7 @@ const addComponent = (item: any) => {
     list.value.rules[itemName] = [];
   }
 
-  // let activeIndex = list.value.items.length - 1;
 
-  // activeComponent.value = list.value.items[activeIndex];
-
-  // activeComponentIndex.value = activeIndex;
 
   useFormRs.value = useForm(list.value.model, list.value.rules);
 };

@@ -1,16 +1,23 @@
 <template>
-
   <VueDraggable :class="prefixCls" group="components" tag="div" v-model="list">
-    
-    
     <div
-    
       v-for="element in modelValue"
       :key="element.id"
-      :class="['item', { active: element.id === activeItem.id,filtered:element.type === 'grid-layout-col','py-2':element.type === 'grid-layout-col','mb-24px':element.type === 'grid-layout' }]"
+      :class="[
+        'item',
+        {
+          active: element.id === activeItem.id,
+          filtered: element.type === 'grid-layout-col',
+          'py-2': element.type === 'grid-layout-col',
+          'mb-24px': element.type === 'grid-layout',
+        },
+      ]"
       @click.stop.prevent="onActiveItem(element)"
     >
-      <div class="tool-bar" :style="{display: element.id === activeItem.id ? 'block':'none'}" >
+      <div
+        class="tool-bar"
+        :style="{ display: element.id === activeItem.id ? 'block' : 'none' }"
+      >
         <div class="flex items-center justify-between w-full">
           <div class="text-#0000004f text-12px">
             {{ element.type }}
@@ -36,14 +43,26 @@
           </div>
         </div>
       </div>
-      
+
       <template v-if="element.hasOwnProperty('children')">
-        <nested-draggable @delete="deleteItem" class="children-item" v-model="element.children" :disabled="element.type === 'grid-layout'" filter=".filtered" />
-        <div class="add-col-action flex items-center justify-center " v-if="element.type === 'grid-layout'"  >
-          
+        <nested-draggable
+          @delete="deleteItem"
+          class="children-item"
+          v-model="element.children"
+          :disabled="element.type === 'grid-layout'"
+          filter=".filtered"
+        />
+        <div
+          class="add-col-action flex items-center justify-center"
+          v-if="element.type === 'grid-layout'"
+        >
           <a-space>
             <span class="text-#0000004f text-10px">----</span>
-            <span class="text-#0000004f text-10px cursor-pointer hover:color-#1890ff" @click="onAddCol(element)">添加列</span>
+            <span
+              class="text-#0000004f text-10px cursor-pointer hover:color-#1890ff"
+              @click="onAddCol(element)"
+              >添加列</span
+            >
             <span class="text-#0000004f text-10px">----</span>
           </a-space>
         </div>
@@ -53,7 +72,6 @@
         v-else
         v-bind="Object.assign({ label: element.title }, element.item)"
       >
-      
         <component
           :is="element.component.componentName || 'AInput'"
           v-bind="element.component.props"
@@ -67,9 +85,11 @@ import { useStyle } from "@imsjs/ims-ui-hooks";
 import { VueDraggable } from "vue-draggable-plus";
 import { computed } from "vue";
 
-import { StorageSerializers, useStorage } from '@vueuse/core'
+import { StorageSerializers, useStorage } from "@vueuse/core";
 
-const activeItem =  useStorage('active-item',{id:'0'}, undefined, { serializer: StorageSerializers.object });
+const activeItem = useStorage("active-item", { id: "0" }, undefined, {
+  serializer: StorageSerializers.object,
+});
 
 interface IList {
   id: string;
@@ -90,13 +110,11 @@ const { prefixCls } = useStyle("nested-draggable");
 
 const props = defineProps<Props>();
 
-
-
 const emits = defineEmits<{
-  'update:modelValue': [value: IList[]],
-  'delete': [item:any],
-  'copy': [item:any],
-  'addCol': [item:any]
+  "update:modelValue": [value: IList[]];
+  delete: [item: any];
+  copy: [item: any];
+  addCol: [item: any];
 }>();
 
 const list = computed({
@@ -104,43 +122,31 @@ const list = computed({
   set: (value) => emits("update:modelValue", value),
 });
 
+const deleteItem = (item: any) => {
+  emits("delete", item);
+};
 
-const deleteItem = (item:any) => {
-  console.info('deleteItem =>',item);
+const copyItem = (item: any) => {
+  emits("copy", item);
+};
 
-  emits('delete',item);
-
-}
-
-const copyItem = (item:any) => {
-  console.info('copyItem =>',item);
-
-  emits('copy',item);
-
-}
-
-
-const onAddCol = (item:any) => {
-  console.info('onAddCol =>',item);
-  emits('addCol',item);
-}
+const onAddCol = (item: any) => {
+  emits("addCol", item);
+};
 
 const onActiveItem = (item: any) => {
-  console.info('onActiveItem =>',item);
   activeItem.value = item;
 };
 </script>
 <style scoped>
-
 .ims-nested-draggable {
   min-height: 60px;
-  
+
   padding: 0;
   margin: 0;
 }
 .item {
   /* border: 1px solid red;  mb-24px */
-  
 
   --at-apply: w-full;
 
@@ -155,9 +161,9 @@ const onActiveItem = (item: any) => {
 
   .tool-bar {
     position: absolute;
-      top: -23px;
+    top: -23px;
     background-color: transparent;
-    --at-apply: w-full  flex justify-end;
+    --at-apply: w-full flex justify-end;
     display: none;
     .action {
       border-radius: 2px;
@@ -186,7 +192,6 @@ const onActiveItem = (item: any) => {
 }
 
 .ims-nested-draggable.children-item {
-
   .item {
     /* background-color: red; */
 
@@ -201,20 +206,15 @@ const onActiveItem = (item: any) => {
       }
 
       &::after {
-        content: '网络列';
-       
+        content: "网络列";
+
         width: 100%;
-        background-color: #F0F0F0;
+        background-color: #f0f0f0;
         /* padding: 16px; */
 
         --at-apply: flex items-center justify-center text-#0000004f text-12px;
-
       }
     }
-
-    
   }
-  
-  
 }
 </style>

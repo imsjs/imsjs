@@ -2,6 +2,16 @@
   {
     "component": "AInput",
     "vModelField": "value",
+    "label": "表单标题",
+    "field": "title",
+    "props": {
+      "placeholder": "请输入表单标题",
+      "allowClear": true
+    }
+  },
+  {
+    "component": "AInput",
+    "vModelField": "value",
     "label": "表单名称",
     "field": "name",
     "props": {
@@ -80,14 +90,6 @@
     "vModelField": "checked",
     "label": "是否展示冒号",
     "field": "colon",
-    "props": {}
-  },
-
-  {
-    "component": "ASwitch",
-    "vModelField": "checked",
-    "label": "是否必填",
-    "field": "required",
     "props": {}
   }
 ]

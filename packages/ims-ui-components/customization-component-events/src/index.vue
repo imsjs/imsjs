@@ -6,10 +6,11 @@
       class="w-full"
     >
       <a-row>
-        <a-col :span="24" v-for="(element, index) in props.events">
+        <a-col :span="24" v-for="(element, index) in props.events" v-if="props.events">
           <div
             :key="index"
-            class="flex justify-between items-center rd bg-#fff py-2 px-2 mb-2"
+            class="flex justify-between items-center rd bg-#fff py-2 px-2"
+            :class="{'mb-2':index !== (props.events.length - 1)}"
           >
             <div class="handler flex justify-left items-center w-145px">
               <a-checkbox
@@ -69,7 +70,7 @@ const onChange = (checkedValue) => {
 @prefix-cls: ~"@{namespace}-customization-component-events";
 
 .@{prefix-cls} {
-  --at-apply: w-full py-2 px-2;
+  --at-apply: w-full p-2;
   background-color: #eeeeee;
 
   // border: 1px dashed #d9d9d9;
