@@ -1,10 +1,13 @@
 <template>
   <div class="box-border">
     <ims-table :lists="dataSource" :columns="columns"></ims-table>
+
+    <!-- <a-table :dataSource="dataSource" :pagination="false" :columns="columns" /> -->
   </div>
 </template>
 
 <script lang="ts" setup>
+// import { VueDraggable } from 'vue-draggable-plus';
 const dataSource = [
   {
     key: "1",

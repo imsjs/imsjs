@@ -1,7 +1,7 @@
 <template>
   <DefineCurd class="tmp-reuse" v-slot="{ text, record, index, column }">
     <a-space>
-      {{ record.deletedAt }}
+      
       <ims-button
         type="link"
         size="small"
@@ -39,7 +39,7 @@
     </a-space>
   </DefineCurd>
   <div :class="`${prefixCls}-wrapper`">
-    <!-- <ims-json-viewer :data="lists"></ims-json-viewer> -->
+    <ims-json-viewer :data="lists"></ims-json-viewer>
     <div  :class="`${prefixCls}-content`"  ref="contentElRef">
       <a-table
         :class="prefixCls"
@@ -252,7 +252,14 @@ import { ref, h, useAttrs, unref } from "vue";
 
 import { ImsTableProps, DragEndParams, ImsTableColumn } from "@imsjs/ims-ui-types";
 
+import ImsTableSortable from "./sortable.vue";
+
 import ImsSchemeSetting from "./scheme-setting.vue";
+
+
+
+import { map, intersection } from "lodash-es";
+
 
 
 import {
@@ -268,6 +275,8 @@ defineOptions({
 });
 const { prefixCls } = useStyle("table");
 const {
+  sortable = false,
+  animation = 600,
   uri = false,
   schemes = [],
   footerBar = true,
@@ -316,25 +325,46 @@ const tableScroll = ref({
 });
 
 onMounted(()=>{
+//   console.group('onMounted');
 
+//   console.info('contentElRef =>',contentElRef.value);
+
+
+//   // const { height: wrapperHeight } = useElementSize(document.querySelector('.ims-table'));
+
+// // console.info('wrapperHeight =>',wrapperHeight);
+
+//   console.groupEnd();
 })
 
 // 表格高度 
 useResizeObserver(contentElRef, (entries) => {
- 
+  // console.info('entries =>',entries);
   const entry = entries[0];
 
-
+  // console.info('entry =>',entry);
 
   const { height } = entry.contentRect;
+  // tableScroll.value.x = width;
+  // if (height - 60 > 180) {
+  //   tableScroll.value.y = height - 110;
+  // } else {
+  //   tableScroll.value.y = 180 - 60;
+  // }
 
+  // tableScroll.value.y = height - 120;
 
   tableScroll.value.y = height - 60;
 
+
+  // console.info('tableScroll.value.y =>',tableScroll.value.y);
+
+  // console.info("tableScroll =>", tableScroll.value);
 });
 
 const internalProcess = uri !== false;
-
+// console.info("ims-table:internalProcess =>", internalProcess);
+// large middle small
 let tableSize = ref(["large"]);
 
 const state = reactive({
@@ -534,7 +564,41 @@ const sortedKeys = ref<string[] | number[]>([]);
 
 const tblComponents = ref({});
 
+if (sortable) {
+  tblComponents.value = {
+    body: {
+      wrapper: h(ImsTableSortable, {
+        rowKey: attrs.rowKey,
+        animation: animation,
+        // dragHandler: dragHandler,
+        onDragEnd: (dragEvent, indexs, keys) => {
+          console.info("keys =>", keys);
 
+          sortedKeys.value = map(lists, attrs.rowKey);
+
+          // 获取拖拽排序后 与 原值的交集 如何能把第一次 拖动 生成的排除掉 可以提高效率
+          let sortedIntersectionKeys = intersection(keys, sortedKeys.value);
+
+          const sortabledData = sortedIntersectionKeys.map(
+            (item) =>
+              lists[lists.findIndex((element) => element[attrs.rowKey] == item)]
+          );
+
+          // const sortabledData = [];
+
+          console.info("onDragEnd.sortabledDataSource =>", sortabledData);
+
+          emit("dragEnd", {
+            keys: sortedIntersectionKeys,
+            indexs: indexs,
+            dragEvent: dragEvent,
+            sortabledDataSource: sortabledData,
+          });
+        },
+      }),
+    },
+  };
+}
 
 
 </script>

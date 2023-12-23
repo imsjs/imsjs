@@ -1,75 +1,87 @@
 <template>
-    <div class="wh-full">
-      <div class="border-1 border-solid border-red-700">
-        <a-menu
-          id="dddddd"
-          v-model:openKeys="openKeys"
-          v-model:selectedKeys="selectedKeys"
-          style="width: 256px"
-          mode="inline"
-          theme="dark"
-          @click="handleClick"
-        >
-          <a-sub-menu key="sub1" @titleClick="titleClick">
-            <template #title>Navigation One</template>
-            <a-menu-item-group key="g1">
-              <template #title>Item 1</template>
-              <a-menu-item key="1">Option 1</a-menu-item>
-              <a-menu-item key="2">Option 2</a-menu-item>
-            </a-menu-item-group>
-            <a-menu-item-group key="g2" title="Item 2">
-              <a-menu-item key="3">Option 3</a-menu-item>
-              <a-menu-item key="4">Option 4</a-menu-item>
-            </a-menu-item-group>
-          </a-sub-menu>
-          <a-sub-menu key="sub2" @titleClick="titleClick">
-            <template #title>Navigation Two</template>
-            <a-menu-item key="5">Option 5</a-menu-item>
-            <a-menu-item key="6">Option 6</a-menu-item>
-            <a-sub-menu key="sub3" title="Submenu">
-              <a-menu-item key="7">Option 7</a-menu-item>
-              <a-menu-item key="8">Option 8</a-menu-item>
-            </a-sub-menu>
-          </a-sub-menu>
-          <a-sub-menu key="sub4">
-            <template #title>Navigation Three</template>
-            <a-menu-item key="9">Option 9</a-menu-item>
-            <a-menu-item key="10">Option 10</a-menu-item>
-            <a-menu-item key="11">Option 11</a-menu-item>
-            <a-menu-item key="12">Option 12</a-menu-item>
-          </a-sub-menu>
-        </a-menu>
-      </div>
+  <div class="wh-full">
+    <ImsJsonViewer :data="dataSource"></ImsJsonViewer>
+    <div>
+     <ImsTable :lists="dataSource" :columns="columns" :sortable="true"></ImsTable>
     </div>
-  </template>
-  <script lang="ts">
-  import { defineComponent, ref, watch } from 'vue';
-  
-  import type { MenuProps } from 'ant-design-vue';
-  export default defineComponent({
-    setup() {
-      const selectedKeys = ref<string[]>(['1']);
-      const openKeys = ref<string[]>(['sub1']);
-      const handleClick: MenuProps['onClick'] = (e) => {
-        console.log('click', e);
-      };
-      const titleClick = (e: Event) => {
-        console.log('titleClick', e);
-      };
-      watch(
-        () => openKeys,
-        (val) => {
-          console.log('openKeys', val);
-        }
-      );
-      return {
-        selectedKeys,
-        openKeys,
-  
-        handleClick,
-        titleClick
-      };
-    }
-  });
-  </script>
-  
+  </div>
+</template>
+<script lang="ts" setup>
+import { ImsJsonViewer, ImsTable } from "@imsjs/ims-ui-components";
+import { VueDraggable } from "vue-draggable-plus";
+import { SortableEvent } from "sortablejs";
+
+
+const onEnd = (e:SortableEvent) =>{
+  console.info('onEnd e =>',e);
+  console.info('dataSource.value =>',dataSource.value);
+  // let rs = dataSource.value.filter(item => item !== undefined);
+
+  // console.info('onEnd rs =>',rs);
+
+
+  // dataSource.value = rs;
+
+
+  // console.info('dataSource.value =>',dataSource.value);
+
+}
+
+const onCustomUpadte = (evt: SortableEvent) => {
+  console.info('customUpadte =>',evt);
+}
+
+
+const tblScroll = ref({
+  x:'max-content',
+});
+
+const dataSource = [
+  {
+    id:1,
+    key: "1",
+    name: "胡彦斌",
+    age: 32,
+    address: "西湖区湖底公园1号",
+  },
+  {
+    id:2,
+    key: "2",
+    name: "胡彦祖",
+    age: 42,
+    address: "西湖区湖底公园1号222222",
+  },
+  {
+    id:3,
+    key: "3",
+    name: "胡彦斌",
+    age: 32,
+    address: "西湖区湖底公园1号3333",
+  },
+  {
+    id:4,
+    key: "4",
+    name: "胡彦祖",
+    age: 42,
+    address: "西湖区湖底公园1号4444",
+  },
+];
+
+const columns = [
+  {
+    title: "姓名",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "年龄",
+    dataIndex: "age",
+    key: "age",
+  },
+  {
+    title: "住址",
+    dataIndex: "address",
+    key: "address",
+  },
+];
+</script>
