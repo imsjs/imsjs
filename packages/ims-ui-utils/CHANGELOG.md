@@ -1,5 +1,16 @@
 # @imsjs/ims-ui-utils
 
+## 2.1.12
+
+### Patch Changes
+
+- fe3e971: ims-table dnd
+- Updated dependencies [fe3e971]
+  - @imsjs/ims-ui-types@2.1.12
+  - @imsjs/ims-ui-constants@2.1.12
+  - @imsjs/ims-ui-enums@2.1.12
+  - @imsjs/ims-ui-hooks@2.1.12
+
 ## 2.1.11
 
 ### Patch Changes

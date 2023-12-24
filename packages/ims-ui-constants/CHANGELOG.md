@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.12
+
+### Patch Changes
+
+- fe3e971: ims-table dnd
+
 ## 2.1.11
 
 ### Patch Changes
