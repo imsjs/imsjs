@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.13
+
+### Patch Changes
+
+- d780f4c: test
+- Updated dependencies [d780f4c]
+  - @imsjs/ims-ui-constants@2.1.13
+  - @imsjs/ims-ui-enums@2.1.13
+  - @imsjs/ims-ui-hooks@2.1.13
+  - @imsjs/ims-ui-types@2.1.13
+  - @imsjs/ims-ui-utils@2.1.13
+
 ## 2.1.12
 
 ### Patch Changes
