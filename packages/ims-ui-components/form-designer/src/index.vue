@@ -318,7 +318,9 @@
           >
             <Simplebar class="simple-bar-init">
               <div class="p-2">
-                <ImsFormRenderer ref="testRef" :data="list" />
+                <!-- <ImsFormRenderer ref="testRef" v-if="operationalView === 'play'" :data="list" /> -->
+
+                <component is="ImsFormRenderer" ref="testRef" v-if="operationalView === 'play'" :data="list" ></component>
               </div>
             </Simplebar>
           </div>
