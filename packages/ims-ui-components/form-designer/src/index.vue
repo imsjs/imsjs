@@ -455,6 +455,8 @@ import { useStyle } from "@imsjs/ims-ui-hooks";
 
 import type { ImsFormDesignerProps } from "@imsjs/ims-ui-types";
 
+import ImsFormRenderer from "../../form-renderer";
+
 import Simplebar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
 
@@ -587,7 +589,7 @@ const onFileActionChange = (item: toolAction) => {
 
   if (item.value === "save") {
     // 保存
-    emits('save',list.value);
+    emits("save", list.value);
   }
 };
 
@@ -768,6 +770,9 @@ const findParent = (data: any, target: any, result: any) => {
 // 删除表单节点
 const deleteItem = (data: any) => {
   removeNodeInTree(list.value.items[0].children, data.id);
+  // 同时删除 model 和 rules
+  delete list.value.model[data.item.name];
+  delete list.value.rules[data.item.name];
 };
 
 // 删除表单节点

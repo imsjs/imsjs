@@ -19,7 +19,7 @@ defineOptions({
 const { prefixCls } = useStyle("table-sortable");
 
 const props = withDefaults(defineProps<SortableProps>(), {
-  rowKey: "id",
+  rowKey: "key",
   animation: 600,
   dragHandler: undefined,
 });
@@ -59,7 +59,7 @@ onMounted(() => {
     scroll: true,
 
     // handle: '.draggables',
-    // onEnd: onDragEnd,
+    onEnd: onDragEnd,
   });
 });
 

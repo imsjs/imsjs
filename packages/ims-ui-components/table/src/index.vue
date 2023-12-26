@@ -1,7 +1,6 @@
 <template>
   <DefineCurd class="tmp-reuse" v-slot="{ text, record, index, column }">
     <a-space>
-      
       <ims-button
         type="link"
         size="small"
@@ -39,13 +38,13 @@
     </a-space>
   </DefineCurd>
   <div :class="`${prefixCls}-wrapper`">
-    <ims-json-viewer :data="lists"></ims-json-viewer>
-    <div  :class="`${prefixCls}-content`"  ref="contentElRef">
+    <!-- <ims-json-viewer :data="modelLists"></ims-json-viewer> -->
+    <div :class="`${prefixCls}-content`" ref="contentElRef">
       <a-table
         :class="prefixCls"
         v-bind="$attrs"
         ref="tableRef"
-        :data-source="lists || []"
+        :data-source="modelLists || []"
         :components="tblComponents"
         bordered
         expandFixed="right"
@@ -224,7 +223,7 @@
       <div>
         <slot name="footer-action"></slot>
       </div>
-      
+
       <a-pagination
         v-bind="paginations"
         @change="onPaginationChange"
@@ -234,7 +233,6 @@
         show-quick-jumper
       ></a-pagination>
     </div>
-
   </div>
 </template>
 
@@ -250,17 +248,17 @@ import {
 
 import { ref, h, useAttrs, unref } from "vue";
 
-import { ImsTableProps, DragEndParams, ImsTableColumn } from "@imsjs/ims-ui-types";
+import {
+  ImsTableProps,
+  DragEndParams,
+  ImsTableColumn,
+} from "@imsjs/ims-ui-types";
 
 import ImsTableSortable from "./sortable.vue";
 
 import ImsSchemeSetting from "./scheme-setting.vue";
 
-
-
 import { map, intersection } from "lodash-es";
-
-
 
 import {
   createReusableTemplate,
@@ -273,6 +271,11 @@ const COMPONENT_NAME = "ImsTable";
 defineOptions({
   name: COMPONENT_NAME,
 });
+
+const modelLists = defineModel<object[]>("lists", {
+  default: [],
+});
+
 const { prefixCls } = useStyle("table");
 const {
   sortable = false,
@@ -281,7 +284,6 @@ const {
   schemes = [],
   footerBar = true,
   paginations,
-  lists = [],
   columns,
 } = defineProps<ImsTableProps>();
 
@@ -324,20 +326,15 @@ const tableScroll = ref({
   // y: wrapperHeight.value - 56,
 });
 
-onMounted(()=>{
-//   console.group('onMounted');
+onMounted(() => {
+  //   console.group('onMounted');
+  //   console.info('contentElRef =>',contentElRef.value);
+  //   // const { height: wrapperHeight } = useElementSize(document.querySelector('.ims-table'));
+  // // console.info('wrapperHeight =>',wrapperHeight);
+  //   console.groupEnd();
+});
 
-//   console.info('contentElRef =>',contentElRef.value);
-
-
-//   // const { height: wrapperHeight } = useElementSize(document.querySelector('.ims-table'));
-
-// // console.info('wrapperHeight =>',wrapperHeight);
-
-//   console.groupEnd();
-})
-
-// 表格高度 
+// 表格高度
 useResizeObserver(contentElRef, (entries) => {
   // console.info('entries =>',entries);
   const entry = entries[0];
@@ -355,7 +352,6 @@ useResizeObserver(contentElRef, (entries) => {
   // tableScroll.value.y = height - 120;
 
   tableScroll.value.y = height - 60;
-
 
   // console.info('tableScroll.value.y =>',tableScroll.value.y);
 
@@ -434,8 +430,6 @@ const slots = useSlots();
 const slotsNames = Object.keys(slots);
 
 const attrs = useAttrs();
-
-
 
 states.value.currentColumns = columns;
 
@@ -558,8 +552,6 @@ const onResizeColumn = (width: number, column: any) => {
   column.width = width;
 };
 
-
-
 const sortedKeys = ref<string[] | number[]>([]);
 
 const tblComponents = ref({});
@@ -572,22 +564,20 @@ if (sortable) {
         animation: animation,
         // dragHandler: dragHandler,
         onDragEnd: (dragEvent, indexs, keys) => {
-          console.info("keys =>", keys);
-
-          sortedKeys.value = map(lists, attrs.rowKey);
-
+          console.info("attrs.rowKey =>", attrs.rowKey);
+          // 获取所有数据的key 数组，并把转成字符串
+          sortedKeys.value = map(modelLists.value, attrs.rowKey).map(String);
           // 获取拖拽排序后 与 原值的交集 如何能把第一次 拖动 生成的排除掉 可以提高效率
           let sortedIntersectionKeys = intersection(keys, sortedKeys.value);
-
           const sortabledData = sortedIntersectionKeys.map(
             (item) =>
-              lists[lists.findIndex((element) => element[attrs.rowKey] == item)]
+              modelLists.value[
+                modelLists.value.findIndex(
+                  (element) => element[attrs.rowKey] == item
+                )
+              ]
           );
-
-          // const sortabledData = [];
-
-          console.info("onDragEnd.sortabledDataSource =>", sortabledData);
-
+          modelLists.value = sortabledData;
           emit("dragEnd", {
             keys: sortedIntersectionKeys,
             indexs: indexs,
@@ -599,8 +589,6 @@ if (sortable) {
     },
   };
 }
-
-
 </script>
 
 <style lang="less" scoped>
@@ -613,21 +601,16 @@ if (sortable) {
   overflow: hidden;
 }
 
-
 .@{prefix-cls}-content {
-  
   --at-apply: h-full flex-1 w-full;
 
   overflow: hidden;
 }
 
-
 .@{prefix-cls}-footer-bar {
   // border: 1px solid green;
   --at-apply: w-full;
 }
-
-
 
 .@{prefix-cls} {
   --at-apply: h-full flex-1;

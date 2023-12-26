@@ -96,7 +96,7 @@ const { data } = props;
 
 foreach(props.data.items[0].children, (item) => {
   if (item.component && item.component.props.events) {
-    console.info(item.item.label, item.item, item.component.props.events);
+    // console.info(item.item.label, item.item, item.component.props.events);
     let emitsEvents = {};
     for (const key in item.component.props.events) {
       emitsEvents[key] = (...args: any) => {

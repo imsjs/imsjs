@@ -13,11 +13,9 @@ export interface ImsTableProps {
   sortable?: boolean;
   animation?: number;
   dragHandler?: string | undefined;
-
   dataTable?: object;
   columns: any[];
   schemes?: any[];
-  lists?: object[];
   paginations?: any;
   footerBar?: boolean | object;
   uri?: string | false;

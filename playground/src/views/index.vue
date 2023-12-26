@@ -1,8 +1,8 @@
 <template>
   <div class="wh-full">
-    <ImsJsonViewer :data="dataSource"></ImsJsonViewer>
+    <ImsJsonViewer :data="dataSourceTest"></ImsJsonViewer>
     <div>
-     <ImsTable :lists="dataSource" :columns="columns" :sortable="true"></ImsTable>
+     <ImsTable  :columns="columns" rowKey="id" v-model:lists="dataSourceTest" :sortable="true"></ImsTable>
     </div>
   </div>
 </template>
@@ -35,6 +35,37 @@ const onCustomUpadte = (evt: SortableEvent) => {
 const tblScroll = ref({
   x:'max-content',
 });
+
+const dataSourceTest = ref<object[]>([
+  {
+    id:1,
+    key: "1",
+    name: "胡彦斌",
+    age: 32,
+    address: "西湖区湖底公园1号",
+  },
+  {
+    id:2,
+    key: "2",
+    name: "胡彦祖",
+    age: 42,
+    address: "西湖区湖底公园1号222222",
+  },
+  {
+    id:3,
+    key: "3",
+    name: "胡彦斌",
+    age: 32,
+    address: "西湖区湖底公园1号3333",
+  },
+  {
+    id:4,
+    key: "4",
+    name: "胡彦祖",
+    age: 42,
+    address: "西湖区湖底公园1号4444",
+  },
+]);
 
 const dataSource = [
   {
