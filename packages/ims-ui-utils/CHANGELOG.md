@@ -1,5 +1,16 @@
 # @imsjs/ims-ui-utils
 
+## 2.1.15
+
+### Patch Changes
+
+- c447c50: update preview
+- Updated dependencies [c447c50]
+  - @imsjs/ims-ui-constants@2.1.15
+  - @imsjs/ims-ui-enums@2.1.15
+  - @imsjs/ims-ui-hooks@2.1.15
+  - @imsjs/ims-ui-types@2.1.15
+
 ## 2.1.14
 
 ### Patch Changes

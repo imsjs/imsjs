@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.15
+
+### Patch Changes
+
+- c447c50: update preview
+
 ## 2.1.14
 
 ### Patch Changes
