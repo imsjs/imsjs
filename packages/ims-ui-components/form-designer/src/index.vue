@@ -601,6 +601,14 @@ const onFileActionChange = (item: toolAction) => {
 
   if (item.value === "save") {
     // 保存
+
+    let formItems = toArray(list.value.items[0].children).filter(
+      (item) => item.type !== "grid-layout-col" && item.type !== "grid-layout"
+    );
+    // 校验规则设置
+    formItems.forEach((item) => {
+      list.value.rules[item.item.name] = item.item.rules;
+    });
     emits("save", list.value);
   }
 };

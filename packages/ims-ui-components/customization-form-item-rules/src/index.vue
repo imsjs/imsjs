@@ -64,7 +64,7 @@
       </div>
     </template>
     <div class="" v-if="modelValue.length">
-      <div v-for="item in formItemRulePropsJson" class=" mb-2">
+      <div v-for="item in formItemRulePropsJson" class="mb-2">
         <div
           class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
         >
@@ -90,13 +90,10 @@
           </div>
         </div>
         <div class="">
-                       
           <component
             :is="item.component || 'AInput'"
             v-bind="item.props"
-            v-model:[item.vModelField]="
-                            modelValue[currentIndex][item.field]
-                          "
+            v-model:[item.vModelField]="modelValue[currentIndex][item.field]"
           ></component>
         </div>
       </div>
@@ -158,13 +155,11 @@ const deleteRule = (index: number) => {
   modelValue.value.splice(index, 1);
 };
 
-const onConfigRule = (index:number) => {
+const onConfigRule = (index: number) => {
   console.info("onConfigRule");
   currentIndex.value = index;
   opening.value = true;
 };
-
-
 </script>
 
 <style lang="less" scoped>

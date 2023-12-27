@@ -7,7 +7,7 @@ const dashboard: AppRouteModule = {
   path: `${preffix}`,
   name: "ms",
   component: EMPTY_LAYOUT,
-  redirect: "/demo/designer",
+  redirect: "/demo/preview",
   meta: {
     hideChildrenInMenu: true,
     icon: "simple-icons:about-dot-me",
@@ -15,15 +15,6 @@ const dashboard: AppRouteModule = {
     orderNo: 999,
   },
   children: [
-    {
-      path: "designer",
-      name: "demo.designer",
-      component: () => import("@/views/designer.vue"),
-      meta: {
-        title: "demo.designer",
-        icon: "simple-icons:about-dot-me",
-      },
-    },
     {
       path: "table",
       name: "demo.table",
@@ -52,11 +43,11 @@ const dashboard: AppRouteModule = {
       },
     },
     {
-      path: "designer",
-      name: "demo.designer",
-      component: () => import("@/views/demo/designer.vue"),
+      path: "preview",
+      name: "demo.preview",
+      component: () => import("@/views/demo/preview.vue"),
       meta: {
-        title: "demo.designer",
+        title: "demo.preview",
         icon: "simple-icons:about-dot-me",
       },
     },

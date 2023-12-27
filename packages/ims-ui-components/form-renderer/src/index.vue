@@ -10,7 +10,10 @@
               :span="24 / item.children.length"
             >
               <a-form-item
-                v-if="rowItem.children.length && rowItem.children[0].item.displayState === true"
+                v-if="
+                  rowItem.children.length &&
+                  rowItem.children[0].item.displayState === true
+                "
                 v-bind="
                   Object.assign(
                     rowItem.children[0].item,
@@ -32,7 +35,6 @@
         </template>
 
         <template v-else>
-          
           <a-form-item
             v-if="item.item.displayState === true"
             v-bind="
@@ -52,6 +54,12 @@
         </template>
       </template>
     </a-form>
+
+    <div>
+      <a-space>
+        <a-button @click="onTestValidate">验证</a-button>
+      </a-space>
+    </div>
   </div>
 </template>
 
@@ -123,12 +131,25 @@ const reset = () => {
 };
 
 (async function init() {
+
+  console.info('props.data.rules =>',props.data.rules);
+
+
   formInstance.value = useForm(props.data.model, props.data.rules, {
     onValidate: (name, status, errors) => {
       emits("validateChange", name, status, errors);
     },
   });
+
+  console.info("formInstance.value =>", formInstance.value);
+
+  formInstance.value.validate();
 })();
+
+const onTestValidate = () => {
+  console.info("onTestValidate");
+  formInstance.value.validate();
+};
 
 defineExpose<ImsFormExpose>({
   formInstance: formInstance.value,

@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls">
 
-    <!-- <ImsJsonViewer :data="list"></ImsJsonViewer> -->
+
 
   
 
