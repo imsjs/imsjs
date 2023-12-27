@@ -1,5 +1,13 @@
 # @imsjs/ims-ui-types
 
+## 2.1.16
+
+### Patch Changes
+
+- f0182cc: test
+- Updated dependencies [f0182cc]
+  - @imsjs/ims-ui-enums@2.1.16
+
 ## 2.1.15
 
 ### Patch Changes

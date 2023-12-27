@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.16
+
+### Patch Changes
+
+- f0182cc: test
+
 ## 2.1.15
 
 ### Patch Changes
