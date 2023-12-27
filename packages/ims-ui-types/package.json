@@ -1,6 +1,6 @@
 {
   "name": "@imsjs/ims-ui-types",
-  "version": "2.1.16",
+  "version": "2.1.17",
   "description": "",
   "main": "index.ts",
   "module": "index.ts",

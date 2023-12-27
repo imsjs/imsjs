@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-constants
 
+## 2.1.17
+
+### Patch Changes
+
+- a59c33d: v2.1.17
+
 ## 2.1.16
 
 ### Patch Changes
