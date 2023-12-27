@@ -1,5 +1,17 @@
 # @imsjs/ims-ui-components
 
+## 2.1.18
+
+### Patch Changes
+
+- 293cec1: v2.1.18
+- Updated dependencies [293cec1]
+  - @imsjs/ims-ui-constants@2.1.18
+  - @imsjs/ims-ui-enums@2.1.18
+  - @imsjs/ims-ui-hooks@2.1.18
+  - @imsjs/ims-ui-types@2.1.18
+  - @imsjs/ims-ui-utils@2.1.18
+
 ## 2.1.17
 
 ### Patch Changes

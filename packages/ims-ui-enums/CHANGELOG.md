@@ -1,5 +1,13 @@
 # @imsjs/ims-ui-enums
 
+## 2.1.18
+
+### Patch Changes
+
+- 293cec1: v2.1.18
+- Updated dependencies [293cec1]
+  - @imsjs/ims-ui-hooks@2.1.18
+
 ## 2.1.17
 
 ### Patch Changes
