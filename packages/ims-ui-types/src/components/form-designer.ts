@@ -1,3 +1,4 @@
 export interface ImsFormDesignerProps {
-  events?: [];
+  /** 是否展头部 */
+  showHeader?: boolean;
 }

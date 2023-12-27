@@ -1,6 +1,6 @@
 [
   {
-    "component": "ARadioGroup",
+    "component": "ACheckboxGroup",
     "vModelField": "value",
     "label": "触发类型",
     "field": "trigger",
@@ -14,8 +14,7 @@
           "value": "change",
           "label": "change"
         }
-      ],
-      "optionType": "button"
+      ]
     }
   },
   {

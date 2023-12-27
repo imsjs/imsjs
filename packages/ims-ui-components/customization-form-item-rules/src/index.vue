@@ -1,9 +1,6 @@
 <template>
   <div :class="prefixCls">
     <div :class="`${prefixCls}-wrapper`" ref="el">
-
-     
-
       <div
         :class="`${prefixCls}-wrapper-item`"
         :key="item.id"
@@ -30,7 +27,6 @@
             :inline="true"
             class="cursor-pointer hover:color-#1677ff"
           />
-
           <icon
             icon="ant-design:delete-outlined"
             @click="deleteRule(index)"
@@ -68,8 +64,6 @@
       </div>
     </template>
     <div class="" v-if="modelValue.length">
-      <!-- {{ formItemRulePropsJson }} -->
-
       <div v-for="item in formItemRulePropsJson" class=" mb-2">
         <div
           class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
@@ -103,8 +97,6 @@
             v-model:[item.vModelField]="
                             modelValue[currentIndex][item.field]
                           "
-            
-
           ></component>
         </div>
       </div>
@@ -113,13 +105,9 @@
 </template>
 <script lang="ts" setup>
 import { useStyle } from "@imsjs/ims-ui-hooks";
-
 import type { ImsCustomizationFormItemRulesProps } from "@imsjs/ims-ui-types";
-
 import type { Rule } from "ant-design-vue/es/form";
-
 import { useDraggable } from "vue-draggable-plus";
-
 import { nanoid } from "nanoid";
 
 import formItemRulePropsJson from "./form-item-rule-props.json";
@@ -160,16 +148,14 @@ const addRule = () => {
   modelValue.value.push({
     required: true,
     message: "校验提示信息",
-    trigger: "blur",
+    trigger: ["change"],
     type: "string",
     id: nanoid(),
   });
 };
 
 const deleteRule = (index: number) => {
-  // initOptions.value.splice(index, 1);
   modelValue.value.splice(index, 1);
-  // modelValue.value = initOptions.value;
 };
 
 const onConfigRule = (index:number) => {
@@ -178,10 +164,6 @@ const onConfigRule = (index:number) => {
   opening.value = true;
 };
 
-
-// watch(modelValue.value,()=>{
-//   console.info('watch => modelValue.value =>',modelValue.value);
-// })
 
 </script>
 

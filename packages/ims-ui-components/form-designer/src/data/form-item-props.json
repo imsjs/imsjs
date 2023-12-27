@@ -47,6 +47,16 @@
     "field": "colon",
     "props": {}
   },
+  {
+    "component": "ASwitch",
+    "vModelField": "checked",
+    "label": "展示状态",
+    "field": "displayState",
+    "tooltip": {
+      "title": "控制组件的展示状态，关闭不会展示，但会保留字段"
+    },
+    "props": {}
+  },
 
   {
     "component": "ImsCustomizationFormItemRules",

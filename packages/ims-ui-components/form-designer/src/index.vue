@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <div :class="`${prefixCls}-header`">
+    <div :class="`${prefixCls}-header`" v-if="showHeader === true">
       <div :class="`${prefixCls}-header-logo`">LOGO</div>
       <div :class="`${prefixCls}-header-center`">Ims Designer</div>
       <div :class="`${prefixCls}-header-right`">right</div>
@@ -234,11 +234,11 @@
             </a-space>
           </div>
           <div :class="`${prefixCls}-contents-canvas-tools-center`">
-            <span v-if="list.items[0].item.title">{{
+            <!-- <span v-if="list.items[0].item.title">{{
               list.items[0].item.title
             }}</span>
             <span v-if="list.items[0].item.title">-</span>
-            <span class="text-14px">{{ list.items[0].item.name }}</span>
+            <span class="text-14px">{{ list.items[0].item.name }}</span> -->
           </div>
           <div :class="`${prefixCls}-contents-canvas-tools-right`">
             <a-space>
@@ -302,7 +302,12 @@
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-json`"
             v-show="operationalView === 'json'"
           >
-            <div>JSON</div>
+            <!-- <div>JSON</div> -->
+            <component
+              is="ImsJsonViewer"
+              v-if="operationalView === 'json'"
+              :data="list"
+            ></component>
           </div>
           <div
             :class="`${prefixCls}-contents-canvas-workspace-view ${prefixCls}-contents-canvas-workspace-view-code`"
@@ -318,9 +323,12 @@
           >
             <Simplebar class="simple-bar-init">
               <div class="p-2">
-                <!-- <ImsFormRenderer ref="testRef" v-if="operationalView === 'play'" :data="list" /> -->
-
-                <component is="ImsFormRenderer" ref="testRef" v-if="operationalView === 'play'" :data="list" ></component>
+                <component
+                  is="ImsFormRenderer"
+                  ref="testRef"
+                  v-if="operationalView === 'play'"
+                  :data="list"
+                ></component>
               </div>
             </Simplebar>
           </div>
@@ -492,7 +500,9 @@ const activeComponentIndex = ref(-1);
 
 const modelKeysIndex = ref(-1);
 
-const props = withDefaults(defineProps<ImsFormDesignerProps>(), {});
+const props = withDefaults(defineProps<ImsFormDesignerProps>(), {
+  showHeader:false,
+});
 
 const emits = defineEmits<{
   save: [data?: any];
@@ -690,6 +700,8 @@ useDraggable(componentsListsRef, componentLists, {
     addedComponent.componentEvents = componentEventsJson[addedComponent.type]; // 增加 componentEvents
 
     if (addedComponent.type === "grid-layout") {
+      addedComponent.componentProps = [];
+      addedComponent.componentEvents = [];
       addedComponent.formItemProps = {};
       addedComponent.children.forEach((child) => {
         child.id = nanoid();
@@ -711,18 +723,21 @@ const quickAddComponent = (item: any) => {
 
   addedComponent.class = "tree-item";
 
-  if (addedComponent.type === "grid-layout") {
-    addedComponent.children.forEach((child) => {
-      child.id = nanoid();
-    });
-  }
-
   let itemName = nanoid();
   addedComponent.item.name = itemName;
 
   addedComponent.componentProps = componentsProps[addedComponent.type]; // 增加 componentProps
   addedComponent.formItemProps = formItemPropsJson; // 增加 formIte
   addedComponent.componentEvents = componentEventsJson[addedComponent.type]; // 增加 componentEvents
+
+  if (addedComponent.type === "grid-layout") {
+    addedComponent.componentProps = [];
+    addedComponent.componentEvents = [];
+    addedComponent.formItemProps = {};
+    addedComponent.children.forEach((child) => {
+      child.id = nanoid();
+    });
+  }
 
   list.value.items[0].children.push(addedComponent);
 

@@ -10,7 +10,7 @@
               :span="24 / item.children.length"
             >
               <a-form-item
-                v-if="rowItem.children.length"
+                v-if="rowItem.children.length && rowItem.children[0].item.displayState === true"
                 v-bind="
                   Object.assign(
                     rowItem.children[0].item,
@@ -31,19 +31,25 @@
           </a-row>
         </template>
 
-        <a-form-item
-          v-else
-          v-bind="
-            Object.assign(item.item, formInstance.validateInfos[item.item.name])
-          "
-        >
-          <component
-            :is="item.component.componentName || 'AInput'"
-            v-bind="item.component.props"
-            v-on="item.component?.emitsEvents || {}"
-            v-model:[item.vModelField]="data.model[item.item.name]"
-          ></component>
-        </a-form-item>
+        <template v-else>
+          
+          <a-form-item
+            v-if="item.item.displayState === true"
+            v-bind="
+              Object.assign(
+                item.item,
+                formInstance.validateInfos[item.item.name]
+              )
+            "
+          >
+            <component
+              :is="item.component.componentName || 'AInput'"
+              v-bind="item.component.props"
+              v-on="item.component?.emitsEvents || {}"
+              v-model:[item.vModelField]="data.model[item.item.name]"
+            ></component>
+          </a-form-item>
+        </template>
       </template>
     </a-form>
   </div>

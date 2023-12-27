@@ -2,7 +2,21 @@
   <div class="wh-full">
     <ImsJsonViewer :data="dataSourceTest"></ImsJsonViewer>
     <div>
-     <ImsTable  :columns="columns" rowKey="id" v-model:lists="dataSourceTest" :sortable="true"></ImsTable>
+      <vue-draggable
+      v-model="dataSourceTest"
+      class="aa-xx"
+      :animation="150"
+      target=".ant-table-tbody"
+      draggable=".ant-table-row"
+    >
+ 
+      <a-table
+        :dataSource="dataSourceTest"
+        :columns="columns"
+        :scroll="{ y: 400 }"
+      />
+    </vue-draggable>
+     <!-- <ImsTable  :columns="columns" rowKey="id" v-model:lists="dataSourceTest" :sortable="true"></ImsTable> -->
     </div>
   </div>
 </template>
@@ -15,16 +29,6 @@ import { SortableEvent } from "sortablejs";
 const onEnd = (e:SortableEvent) =>{
   console.info('onEnd e =>',e);
   console.info('dataSource.value =>',dataSource.value);
-  // let rs = dataSource.value.filter(item => item !== undefined);
-
-  // console.info('onEnd rs =>',rs);
-
-
-  // dataSource.value = rs;
-
-
-  // console.info('dataSource.value =>',dataSource.value);
-
 }
 
 const onCustomUpadte = (evt: SortableEvent) => {
