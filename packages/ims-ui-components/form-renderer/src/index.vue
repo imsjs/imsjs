@@ -54,12 +54,6 @@
         </template>
       </template>
     </a-form>
-
-    <div>
-      <a-space>
-        <a-button @click="onTestValidate">验证</a-button>
-      </a-space>
-    </div>
   </div>
 </template>
 
@@ -131,9 +125,7 @@ const reset = () => {
 };
 
 (async function init() {
-
-  console.info('props.data.rules =>',props.data.rules);
-
+  console.info("props.data.rules =>", props.data.rules);
 
   formInstance.value = useForm(props.data.model, props.data.rules, {
     onValidate: (name, status, errors) => {
@@ -145,11 +137,6 @@ const reset = () => {
 
   formInstance.value.validate();
 })();
-
-const onTestValidate = () => {
-  console.info("onTestValidate");
-  formInstance.value.validate();
-};
 
 defineExpose<ImsFormExpose>({
   formInstance: formInstance.value,
