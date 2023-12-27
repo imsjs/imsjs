@@ -15,33 +15,33 @@ const dashboard: AppRouteModule = {
     orderNo: 999,
   },
   children: [
-    {
-      path: "table",
-      name: "demo.table",
-      component: () => import("@/views/demo/table.vue"),
-      meta: {
-        title: "demo.table",
-        icon: "simple-icons:about-dot-me",
-      },
-    },
-    {
-      path: "vtable",
-      name: "demo.vtable",
-      component: () => import("@/views/demo/vtable.vue"),
-      meta: {
-        title: "demo.table",
-        icon: "simple-icons:about-dot-me",
-      },
-    },
-    {
-      path: "editor",
-      name: "demo.editor",
-      component: () => import("@/views/demo/editor.vue"),
-      meta: {
-        title: "demo.editor",
-        icon: "simple-icons:about-dot-me",
-      },
-    },
+    // {
+    //   path: "table",
+    //   name: "demo.table",
+    //   component: () => import("@/views/demo/table.vue"),
+    //   meta: {
+    //     title: "demo.table",
+    //     icon: "simple-icons:about-dot-me",
+    //   },
+    // },
+    // {
+    //   path: "vtable",
+    //   name: "demo.vtable",
+    //   component: () => import("@/views/demo/vtable.vue"),
+    //   meta: {
+    //     title: "demo.table",
+    //     icon: "simple-icons:about-dot-me",
+    //   },
+    // },
+    // {
+    //   path: "editor",
+    //   name: "demo.editor",
+    //   component: () => import("@/views/demo/editor.vue"),
+    //   meta: {
+    //     title: "demo.editor",
+    //     icon: "simple-icons:about-dot-me",
+    //   },
+    // },
     {
       path: "preview",
       name: "demo.preview",

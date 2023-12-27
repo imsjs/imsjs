@@ -125,17 +125,11 @@ const reset = () => {
 };
 
 (async function init() {
-  console.info("props.data.rules =>", props.data.rules);
-
   formInstance.value = useForm(props.data.model, props.data.rules, {
     onValidate: (name, status, errors) => {
       emits("validateChange", name, status, errors);
     },
   });
-
-  console.info("formInstance.value =>", formInstance.value);
-
-  formInstance.value.validate();
 })();
 
 defineExpose<ImsFormExpose>({
