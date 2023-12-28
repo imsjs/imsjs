@@ -1,5 +1,11 @@
 # @imsjs/ims-ui-hooks
 
+## 2.1.19
+
+### Patch Changes
+
+- 692b3e1: v2.1.19
+
 ## 2.1.18
 
 ### Patch Changes
