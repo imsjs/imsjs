@@ -488,18 +488,31 @@
       "field": "bordered",
       "props": {}
     },
+
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "禁用",
-      "field": "disabled",
-      "props": {}
+      "component": "AInputNumber",
+      "vModelField": "value",
+      "label": "数据源的字段映射",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "当您传入的数据源的字段不是组件期望的字段时，可以使用该属性进行自定义映射。默认值：{ label: \"label\", value: \"value\", children: \"children\" }"
+      },
+      "props": {
+        "placeholder": "请输入最大长度"
+      }
     },
     {
       "component": "ImsCustomizationOptions",
       "vModelField": "value",
       "label": "数据源",
       "field": "options",
+      "props": {}
+    },
+    {
+      "component": "ASwitch",
+      "vModelField": "checked",
+      "label": "禁用",
+      "field": "disabled",
       "props": {}
     },
     {
@@ -628,33 +641,7 @@
         "placeholder": "请输入占位提示"
       }
     },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
+
     {
       "component": "ASwitch",
       "vModelField": "checked",
@@ -674,6 +661,51 @@
       "vModelField": "checked",
       "label": "是否展示字数",
       "field": "showCount",
+      "props": {}
+    },
+    {
+      "component": "ASwitch",
+      "vModelField": "checked",
+      "label": "多选节点",
+      "field": "multiple",
+      "props": {}
+    },
+    {
+      "component": "ARadioGroup",
+      "vModelField": "value",
+      "label": "次级菜单的展开方式",
+      "field": "expandTrigger",
+      "props": {
+        "options": [
+          {
+            "value": "click",
+            "label": "点击"
+          },
+          {
+            "value": "hover",
+            "label": "滑入"
+          }
+        ],
+        "optionType": "button"
+      }
+    },
+    {
+      "component": "AInputNumber",
+      "vModelField": "value",
+      "label": "数据源的字段映射",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "当您传入的数据源的字段不是组件期望的字段时，可以使用该属性进行自定义映射。默认值：{ label: \"label\", value: \"value\", children: \"children\" }"
+      },
+      "props": {
+        "placeholder": "请输入最大长度"
+      }
+    },
+    {
+      "component": "ImsCustomizationOptions",
+      "vModelField": "value",
+      "label": "数据源",
+      "field": "options",
       "props": {}
     },
     {
@@ -710,6 +742,7 @@
       "field": "disabled",
       "props": {}
     },
+
     {
       "component": "ImsCustomizationComponentEvents",
       "vModelField": "value",

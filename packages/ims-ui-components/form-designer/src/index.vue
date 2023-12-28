@@ -420,38 +420,49 @@
                 </div>
               </div>
             </div>
-
+            <!-- 组件属性 -->
             <div v-show="formComponentProp === 'component-props'" class="px-2">
-              <div class="py-1" v-for="item in activeComponent.componentProps">
-                <div
-                  class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
-                >
-                  <div>
-                    <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
-                      <span class="py-1 border-b-dashed border-b-1">{{
-                        item.label
+              <template v-for="item in activeComponent.componentProps">
+                <div class="py-1" v-if="item.field !== 'fieldNames'">
+                  <div
+                    class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
+                  >
+                    <div>
+                      <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
+                        <span class="py-1 border-b-dashed border-b-1">{{
+                          item.label
+                        }}</span>
+                      </a-tooltip>
+                      <span v-else class="py-1">{{ item.label }}</span>
+                      <span class="ml-1 text-12px text-#0000004f italic">{{
+                        item.field
                       }}</span>
-                    </a-tooltip>
-                    <span v-else class="py-1">{{ item.label }}</span>
-                    <span class="ml-1 text-12px text-#0000004f italic">{{
-                      item.field
-                    }}</span>
+                    </div>
+                    <div>
+                      <div class="b border-solid border-#e5e6eb p-2px">
+                        <icon icon="tabler:code" color="#0000004f"></icon>
+                      </div>
+                      <!-- <a-button size="small">{}</a-button> -->
+                    </div>
                   </div>
-                  <div>
-                    <a-button size="small">{}</a-button>
+                  <div class="">
+                    <component
+                      v-if="activeComponent.component"
+                      :is="item.component || 'AInput'"
+                      v-model:[item.vModelField]="
+                        activeComponent.component.props[item.field]
+                      "
+                      v-bind="item.props || {}"
+                    ></component>
                   </div>
                 </div>
-                <div class="">
-                  <component
-                    v-if="activeComponent.component"
-                    :is="item.component || 'AInput'"
-                    v-model:[item.vModelField]="
-                      activeComponent.component.props[item.field]
-                    "
-                    v-bind="item.props || {}"
-                  ></component>
-                </div>
-              </div>
+
+                <ImsDesignerCustomizationFieldNames
+                  :type="activeComponent.type"
+                  v-model:value="activeComponent.component.props[item.field]"
+                  v-else
+                ></ImsDesignerCustomizationFieldNames>
+              </template>
             </div>
           </Simplebar>
         </div>
@@ -481,6 +492,8 @@ import { StorageSerializers, useStorage } from "@vueuse/core";
 
 import NestedDraggable from "./components/nested-draggable.vue";
 
+import ImsDesignerCustomizationFieldNames from "./components/customization-field-names.vue";
+
 import componentListsJson from "./data/component-lists.json";
 import componentPropsJson from "./data/component-props.json";
 import componentEventsJson from "./data/component-events.json";
@@ -501,7 +514,7 @@ const activeComponentIndex = ref(-1);
 const modelKeysIndex = ref(-1);
 
 const props = withDefaults(defineProps<ImsFormDesignerProps>(), {
-  showHeader:false,
+  showHeader: false,
 });
 
 const emits = defineEmits<{

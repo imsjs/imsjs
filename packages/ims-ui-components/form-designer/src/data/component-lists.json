@@ -136,7 +136,13 @@
       "componentName": "ASelect",
       "props": {
         "bordered": true,
+        "allowClear": true,
         "placeholder": "请选择",
+        "fieldNames": {
+          "label": "label",
+          "value": "value",
+          "options": null
+        },
         "options": [
           {
             "id": "option-0BMV2r47Uz07S3kFA-flow",
@@ -180,6 +186,11 @@
     "component": {
       "componentName": "ACascader",
       "props": {
+        "fieldNames": {
+          "label": "label",
+          "value": "value",
+          "children": "children"
+        },
         "options": [
           {
             "value": "zhejiang",
@@ -213,7 +224,10 @@
               }
             ]
           }
-        ]
+        ],
+        "bordered": true,
+        "allowClear": true,
+        "expandTrigger": "click"
       }
     }
   },
