@@ -83,7 +83,8 @@
     "component": {
       "componentName": "AInputNumber",
       "props": {
-        "placeholder": "请输入"
+        "placeholder": "请输入",
+        "keyboard": true
       }
     }
   },
@@ -109,7 +110,9 @@
     "component": {
       "componentName": "AInputPassword",
       "props": {
-        "placeholder": "请输入"
+        "placeholder": "请输入",
+        "visibilityToggle": true,
+        "showCount": false
       }
     }
   },
@@ -141,23 +144,23 @@
         "fieldNames": {
           "label": "label",
           "value": "value",
-          "options": null
+          "options": "options"
         },
         "options": [
           {
-            "id": "option-0BMV2r47Uz07S3kFA-flow",
-            "value": "选项一",
-            "label": "选项一"
+            "id": "1",
+            "label": "选项一",
+            "value": "选项一"
           },
           {
-            "id": "option-1BMV2r47Uz07S3kFA-flow",
-            "value": "选项二",
-            "label": "选项二"
+            "id": "2",
+            "label": "选项二",
+            "value": "选项二"
           },
           {
-            "id": "option-2BMV2r47Uz07S3kFA-flow",
-            "value": "选项三",
-            "label": "选项三"
+            "id": "3",
+            "label": "选项三",
+            "value": "选项三"
           }
         ],
         "events": {}
@@ -191,6 +194,7 @@
           "value": "value",
           "children": "children"
         },
+        "changeOnSelect": false,
         "options": [
           {
             "value": "zhejiang",

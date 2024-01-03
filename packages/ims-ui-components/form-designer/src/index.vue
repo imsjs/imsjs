@@ -377,91 +377,24 @@
         >
           <Simplebar class="simple-bar-init">
             <div v-show="formComponentProp === 'form-props'" class="px-2">
-              <div
-                class="py-1"
-                :key="`form-item-${index}`"
-                v-for="(item, index) in activeComponent.formItemProps"
-              >
-                <div
-                  class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
-                >
-                  <div class="flex items-center">
-                    <icon
-                      icon="mdi:required"
-                      v-if="item.required === true"
-                      style="margin-right: 2px; font-size: 8px; color: #ff4d4f"
-                      :inline="true"
-                    />
-                    <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
-                      <span class="py-1 border-b-dashed border-b-1">{{
-                        item.label
-                      }}</span>
-                    </a-tooltip>
-                    <span v-else class="py-1">{{ item.label }}</span>
-                    <span class="ml-1 text-12px text-#0000004f italic">{{
-                      item.field
-                    }}</span>
-                  </div>
-                  <div>
-                    <a-button size="small">{}</a-button>
-                  </div>
-                </div>
-                <div class="">
-                  <component
-                    :is="item.component || 'AInput'"
-                    v-model:[item.vModelField]="
-                      activeComponent.item[item.field]
-                    "
-                    v-bind="item.props"
-                    @focus="(e) => onFormItemFocus(item, index, e)"
-                    @blur="(e) => onFormItemBlur(item, index, e)"
-                    @change="(e) => onFormItemNameChange(item, index, e)"
-                  ></component>
-                </div>
-              </div>
+              <template v-for="item in activeComponent.formItemProps">
+                <ImsDesignerCustomizationProp
+                  v-bind="item"
+                  v-model:value="activeComponent.item[item.field]"
+                  @focus="(e) => onFormItemFocus(item, index, e)"
+                  @blur="(e) => onFormItemBlur(item, index, e)"
+                  @change="(e) => onFormItemNameChange(item, index, e)"
+                ></ImsDesignerCustomizationProp>
+              </template>
             </div>
+
             <!-- 组件属性 -->
             <div v-show="formComponentProp === 'component-props'" class="px-2">
               <template v-for="item in activeComponent.componentProps">
-                <div class="py-1" v-if="item.field !== 'fieldNames'">
-                  <div
-                    class="text-13px text-#4e5969 mb-1 flex justify-between items-center"
-                  >
-                    <div>
-                      <a-tooltip v-if="item.tooltip" v-bind="item.tooltip">
-                        <span class="py-1 border-b-dashed border-b-1">{{
-                          item.label
-                        }}</span>
-                      </a-tooltip>
-                      <span v-else class="py-1">{{ item.label }}</span>
-                      <span class="ml-1 text-12px text-#0000004f italic">{{
-                        item.field
-                      }}</span>
-                    </div>
-                    <div>
-                      <div class="b border-solid border-#e5e6eb p-2px">
-                        <icon icon="tabler:code" color="#0000004f"></icon>
-                      </div>
-                      <!-- <a-button size="small">{}</a-button> -->
-                    </div>
-                  </div>
-                  <div class="">
-                    <component
-                      v-if="activeComponent.component"
-                      :is="item.component || 'AInput'"
-                      v-model:[item.vModelField]="
-                        activeComponent.component.props[item.field]
-                      "
-                      v-bind="item.props || {}"
-                    ></component>
-                  </div>
-                </div>
-
-                <ImsDesignerCustomizationFieldNames
-                  :type="activeComponent.type"
+                <ImsDesignerCustomizationProp
+                  v-bind="item"
                   v-model:value="activeComponent.component.props[item.field]"
-                  v-else
-                ></ImsDesignerCustomizationFieldNames>
+                ></ImsDesignerCustomizationProp>
               </template>
             </div>
           </Simplebar>
@@ -492,10 +425,10 @@ import { StorageSerializers, useStorage } from "@vueuse/core";
 
 import NestedDraggable from "./components/nested-draggable.vue";
 
-import ImsDesignerCustomizationFieldNames from "./components/customization-field-names.vue";
+import ImsDesignerCustomizationProp from "./components/customizations/customization-prop.vue";
 
 import componentListsJson from "./data/component-lists.json";
-import componentPropsJson from "./data/component-props.json";
+import componentsProps from "./data/component-props.json";
 import componentEventsJson from "./data/component-events.json";
 
 import formItemPropsJson from "./data/form-item-props.json";
@@ -503,7 +436,9 @@ import formPropsJson from "./data/form-props.json";
 
 const componentLists = ref(componentListsJson);
 
-const componentsProps = componentPropsJson;
+// const componentsProps = componentPropsJson;
+
+console.info("componentsProps =>", componentsProps);
 
 const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
   serializer: StorageSerializers.object,
@@ -746,6 +681,8 @@ const quickAddComponent = (item: any) => {
 
   let itemName = nanoid();
   addedComponent.item.name = itemName;
+
+  console.info(addedComponent.type, componentsProps[addedComponent.type]);
 
   addedComponent.componentProps = componentsProps[addedComponent.type]; // 增加 componentProps
   addedComponent.formItemProps = formItemPropsJson; // 增加 formIte

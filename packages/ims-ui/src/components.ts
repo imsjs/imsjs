@@ -22,10 +22,7 @@ import {
   ImsOverlayScrollbar,
   ImsEditor,
   ImsVtable,
-  ImsCustomizationOptions,
-  ImsCustomizationFormItemRules,
   ImsFormRenderer,
-  ImsCustomizationComponentEvents,
   ImsFormDesigner,
 } from "@imsjs/ims-ui-components";
 
@@ -51,9 +48,6 @@ export default [
   ImsOverlayScrollbar,
   ImsEditor,
   ImsVtable,
-  ImsCustomizationOptions,
-  ImsCustomizationFormItemRules,
   ImsFormRenderer,
-  ImsCustomizationComponentEvents,
   ImsFormDesigner,
 ];

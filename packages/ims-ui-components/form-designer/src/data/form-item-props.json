@@ -1,76 +1,109 @@
 [
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "标签",
     "field": "label",
-    "props": {
-      "placeholder": "请输入标签"
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入标签"
+      }
     }
   },
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "model字段",
     "field": "name",
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入model字段"
+      }
+    },
     "required": true,
     "tooltip": {
       "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
-    },
-    "props": {
-      "placeholder": "请输入model字段"
     }
   },
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "提示信息",
     "field": "tooltip",
-    "props": {
-      "placeholder": "请输入提示信息",
-      "allowClear": true
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入提示信息",
+        "allowClear": true
+      }
     }
   },
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "额外的提示信息",
     "field": "extra",
-    "props": {
-      "placeholder": "请输入额外的提示信息"
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入额外的提示信息"
+      }
     }
   },
   {
-    "component": "ASwitch",
-    "vModelField": "checked",
     "label": "是否展示冒号",
     "field": "colon",
-    "props": {}
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ASwitch",
+      "vModelField": "checked",
+      "props": {}
+    }
   },
   {
-    "component": "ASwitch",
-    "vModelField": "checked",
     "label": "展示状态",
     "field": "displayState",
+    "visibilityToggler": false,
+    "show": true,
     "tooltip": {
       "title": "控制组件的展示状态，关闭不会展示，但会保留字段"
     },
-    "props": {}
+    "component": {
+      "name": "ASwitch",
+      "vModelField": "checked",
+      "props": {}
+    }
   },
-
   {
-    "component": "ImsCustomizationFormItemRules",
-    "vModelField": "value",
     "label": "校验规则",
     "field": "rules",
-    "props": {}
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "控制组件的展示状态，关闭不会展示，但会保留字段"
+    },
+    "component": {
+      "name": "ImsDesignerCustomizationRules",
+      "vModelField": "value",
+      "props": {}
+    }
   },
-
   {
-    "component": "ASwitch",
-    "vModelField": "checked",
     "label": "是否必填",
     "field": "required",
-    "props": {}
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ASwitch",
+      "vModelField": "checked",
+      "props": {}
+    }
   }
 ]

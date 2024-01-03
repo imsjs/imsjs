@@ -1,11 +1,6 @@
 <template>
   <div :class="prefixCls">
-
-
-
-  
-
-      <ims-form-designer :events="['aa']" v-model:value="list" @save="onSave"></ims-form-designer>
+    <ims-form-designer v-model:value="list" @save="onSave"></ims-form-designer>
   </div>
 </template>
 <script lang="ts" setup>
@@ -14,7 +9,6 @@ import { ImsJsonViewer, useStyle } from "@imsjs/ims-ui";
 import formPropsJson from "@/assets/jsons/form-props.json";
 
 const { prefixCls } = useStyle("designer-demo");
-
 
 const showing = ref(false);
 
@@ -49,18 +43,17 @@ const list = ref({
   ],
 });
 
-const onSave = (data:any) => {
-  console.info('onSave => data',data);
+const onSave = (data: any) => {
+  console.info("onSave => data", data);
 
-  console.info('onSave => list',list.value);
-}
+  console.info("onSave => list", list.value);
+};
 
 const showDesigner = () => {
-  console.info('sdd');
+  console.info("sdd");
 
   showing.value = true;
-}
-
+};
 </script>
 
 <style lang="less" scoped>

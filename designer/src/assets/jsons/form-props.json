@@ -1,95 +1,111 @@
 [
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "表单标题",
     "field": "title",
-    "props": {
-      "placeholder": "请输入表单标题",
-      "allowClear": true
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入表单标题",
+        "allowClear": true
+      }
     }
   },
   {
-    "component": "AInput",
-    "vModelField": "value",
-    "label": "表单名称",
-    "field": "name",
-    "props": {
-      "placeholder": "请输入表单名称",
-      "allowClear": true
-    }
-  },
-  {
-    "component": "ARadioGroup",
-    "vModelField": "value",
     "label": "表单布局",
     "field": "layout",
-    "props": {
-      "options": [
-        {
-          "value": "horizontal",
-          "label": "水平"
-        },
-        {
-          "value": "vertical",
-          "label": "垂直"
-        },
-        {
-          "value": "inline",
-          "label": "内联"
-        }
-      ],
-      "optionType": "button"
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ARadioGroup",
+      "vModelField": "value",
+      "props": {
+        "options": [
+          {
+            "value": "horizontal",
+            "label": "水平"
+          },
+          {
+            "value": "vertical",
+            "label": "垂直"
+          },
+          {
+            "value": "inline",
+            "label": "内联"
+          }
+        ],
+        "optionType": "button"
+      }
     }
   },
-
   {
-    "component": "ARadioGroup",
-    "vModelField": "value",
     "label": "标签的文本对齐方式",
     "field": "labelAlign",
-    "props": {
-      "options": [
-        {
-          "value": "left",
-          "label": "左对齐"
-        },
-        {
-          "value": "right",
-          "label": "右对齐"
-        }
-      ],
-      "optionType": "button"
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ARadioGroup",
+      "vModelField": "value",
+      "props": {
+        "options": [
+          {
+            "value": "left",
+            "label": "左对齐"
+          },
+          {
+            "value": "right",
+            "label": "右对齐"
+          }
+        ],
+        "optionType": "button"
+      }
     }
   },
-
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "label 标签布局",
     "field": "labelCol.style.width",
+    "visibilityToggler": false,
+    "show": true,
     "tooltip": {
       "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
     },
-    "props": {
-      "placeholder": "请输入额外的提示信息"
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入额外的提示信息"
+      }
     }
   },
-
   {
-    "component": "AInput",
-    "vModelField": "value",
     "label": "额外的提示信息",
     "field": "extra",
-    "props": {
-      "placeholder": "请输入额外的提示信息"
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
+    },
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入额外的提示信息"
+      }
     }
   },
   {
-    "component": "ASwitch",
-    "vModelField": "checked",
     "label": "是否展示冒号",
     "field": "colon",
-    "props": {}
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ASwitch",
+      "vModelField": "checked",
+      "props": {
+        "placeholder": "请输入额外的提示信息"
+      }
+    }
   }
 ]

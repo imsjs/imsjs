@@ -43,9 +43,3 @@ export * from "./overlay-scrollbar";
 export * from "./editor";
 
 export * from "./vtable";
-
-export * from "./customization-options";
-
-export * from "./customization-form-item-rules";
-
-export * from "./customization-component-events";

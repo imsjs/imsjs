@@ -14,6 +14,8 @@ import { configEnhanceLog } from "./plugins/enhanceLogPlugin";
 
 import { configVisualizer } from "./plugins/visualizerPlugin";
 
+// import VueDevTools from "vite-plugin-vue-devtools";
+
 // import { configDts } from "./plugins/dtsPlugin";
 
 // configDts
@@ -33,11 +35,11 @@ export function configVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     Vue({
       script: {
-        defineModel: true,
         propsDestructure: true,
       },
     }),
     vueJsx(),
+    // VueDevTools(),
   ];
   if (!isBuild) {
     vitePlugins.push(configMkcert(viteEnv));

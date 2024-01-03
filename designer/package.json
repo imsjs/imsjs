@@ -29,6 +29,7 @@
     "vuedraggable": "4.1.0"
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.7"
+    "@types/uuid": "^9.0.7",
+    "vite-plugin-vue-devtools": "^7.0.2"
   }
 }

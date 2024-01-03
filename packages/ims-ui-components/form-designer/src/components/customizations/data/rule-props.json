@@ -1,0 +1,174 @@
+[
+  {
+    "label": "触发类型",
+    "field": "trigger",
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ACheckboxGroup",
+      "vModelField": "value",
+      "props": {
+        "options": [
+          {
+            "value": "blur",
+            "label": "blur"
+          },
+          {
+            "value": "change",
+            "label": "change"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "数据类型",
+    "field": "type",
+    "visibilityToggler": false,
+    "show": true,
+    "component": {
+      "name": "ASelect",
+      "vModelField": "value",
+      "props": {
+        "options": [
+          {
+            "value": "string",
+            "label": "字符串"
+          },
+          {
+            "value": "number",
+            "label": "数字"
+          },
+          {
+            "value": "boolean",
+            "label": "布尔值"
+          },
+          {
+            "value": "regexp",
+            "label": "正则表达式"
+          },
+          {
+            "value": "integer",
+            "label": "整数"
+          },
+          {
+            "value": "float",
+            "label": "浮点数"
+          },
+          {
+            "value": "array",
+            "label": "数组"
+          },
+          {
+            "value": "object",
+            "label": "对象"
+          },
+          {
+            "value": "enum",
+            "label": "枚举"
+          },
+          {
+            "value": "date",
+            "label": "日期"
+          },
+          {
+            "value": "url",
+            "label": "URL"
+          },
+          {
+            "value": "hex",
+            "label": "HEX"
+          },
+          {
+            "value": "email",
+            "label": "邮箱"
+          },
+          {
+            "value": "method",
+            "label": "函数"
+          }
+        ],
+        "placeholder": "请选择数据类型",
+        "class": "w-full"
+      }
+    }
+  },
+  {
+    "label": "错误消息",
+    "field": "message",
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "表单验证时的错误提示消息"
+    },
+    "component": {
+      "name": "AInput",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入错误提示消息"
+      }
+    }
+  },
+  {
+    "label": "最小长度",
+    "field": "min",
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "表单验证时的错误提示消息"
+    },
+    "component": {
+      "name": "AInputNumber",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入最小长度",
+        "allowClear": true
+      }
+    }
+  },
+  {
+    "label": "最大长度",
+    "field": "max",
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "表单验证时的错误提示消息"
+    },
+    "component": {
+      "name": "AInputNumber",
+      "vModelField": "value",
+      "props": {
+        "placeholder": "请输入最大长度",
+        "allowClear": true
+      }
+    }
+  },
+  {
+    "label": "不允许空白",
+    "field": "whitespace",
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "表单验证时的错误提示消息"
+    },
+    "component": {
+      "name": "ASwitch",
+      "vModelField": "checked",
+      "props": {}
+    }
+  },
+  {
+    "label": "是否必填",
+    "field": "required",
+    "visibilityToggler": false,
+    "show": true,
+    "tooltip": {
+      "title": "表单验证时的错误提示消息"
+    },
+    "component": {
+      "name": "ASwitch",
+      "vModelField": "checked",
+      "props": {}
+    }
+  }
+]
