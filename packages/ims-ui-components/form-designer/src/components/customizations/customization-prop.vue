@@ -2,10 +2,13 @@
   <div :class="prefixCls">
     <ImsDesignerCustomizationPropHeader
       v-bind="$attrs"
-      :toggler="visibilityToggler"
-      v-model:show="modelShow"
+      :visible-toggler="visibilityToggler"
+      v-model:visible="modelVisible"
+      :apply="modelApply"
+      :apply-toggler="applyToggler"
+      @apply-change="onApplyChange"
     ></ImsDesignerCustomizationPropHeader>
-    <div :class="`${prefixCls}-content`" v-show="modelShow">
+    <div :class="`${prefixCls}-content`" v-show="modelVisible">
       <component
         :is="
           Object.prototype.hasOwnProperty.call(
@@ -45,6 +48,8 @@ interface ImsDesignerCustomizationPropProps {
   component: Record<string, any>;
   /** 显隐切换器 */
   visibilityToggler?: boolean;
+  /** 应用开关 */
+  applyToggler?: boolean;
 }
 
 // props 配置组件
@@ -57,6 +62,7 @@ const customizationPropComponents: Record<string, Component> = {
 
 const {
   visibilityToggler = false,
+  applyToggler = false,
   component = {
     name: "AInput",
     vModelField: "value",
@@ -68,11 +74,19 @@ const {
 
 const { prefixCls } = useStyle("designer-customization-prop");
 
-const modelShow = defineModel<boolean>("show", {
+const modelVisible = defineModel<boolean>("visible", {
   default: true,
 });
 
 const modelValue = defineModel("value");
+
+const modelApply = defineModel<boolean>("apply", {
+  default: false,
+});
+
+const onApplyChange = (apply: any) => {
+  modelApply.value = apply;
+};
 </script>
 
 <style lang="less" scoped>

@@ -390,10 +390,11 @@
 
             <!-- 组件属性 -->
             <div v-show="formComponentProp === 'component-props'" class="px-2">
-              <template v-for="item in activeComponent.componentProps">
+              <template v-for="(item, index) in activeComponent.componentProps">
                 <ImsDesignerCustomizationProp
                   v-bind="item"
                   v-model:value="activeComponent.component.props[item.field]"
+                  v-model:apply="item.apply"
                 ></ImsDesignerCustomizationProp>
               </template>
             </div>
@@ -416,7 +417,7 @@ import "simplebar-vue/dist/simplebar.min.css";
 
 import { useDraggable } from "vue-draggable-plus";
 
-import { cloneDeep, filter } from "lodash-es";
+import { cloneDeep } from "lodash-es";
 
 import { toArray } from "tree-lodash";
 
@@ -435,10 +436,6 @@ import formItemPropsJson from "./data/form-item-props.json";
 import formPropsJson from "./data/form-props.json";
 
 const componentLists = ref(componentListsJson);
-
-// const componentsProps = componentPropsJson;
-
-console.info("componentsProps =>", componentsProps);
 
 const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
   serializer: StorageSerializers.object,

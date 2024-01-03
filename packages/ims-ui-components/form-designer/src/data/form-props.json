@@ -3,7 +3,7 @@
     "label": "表单标题",
     "field": "title",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -17,7 +17,7 @@
     "label": "表单布局",
     "field": "layout",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ARadioGroup",
       "vModelField": "value",
@@ -44,7 +44,7 @@
     "label": "标签的文本对齐方式",
     "field": "labelAlign",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ARadioGroup",
       "vModelField": "value",
@@ -67,7 +67,7 @@
     "label": "label 标签布局",
     "field": "labelCol.style.width",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "tooltip": {
       "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
     },
@@ -83,7 +83,7 @@
     "label": "额外的提示信息",
     "field": "extra",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "tooltip": {
       "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
     },
@@ -99,7 +99,7 @@
     "label": "是否展示冒号",
     "field": "colon",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",

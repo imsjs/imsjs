@@ -3,7 +3,7 @@
     "label": "标签",
     "field": "label",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -16,7 +16,7 @@
     "label": "model字段",
     "field": "name",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -33,7 +33,7 @@
     "label": "提示信息",
     "field": "tooltip",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -47,7 +47,7 @@
     "label": "额外的提示信息",
     "field": "extra",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -60,7 +60,7 @@
     "label": "是否展示冒号",
     "field": "colon",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",
@@ -71,7 +71,7 @@
     "label": "展示状态",
     "field": "displayState",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "tooltip": {
       "title": "控制组件的展示状态，关闭不会展示，但会保留字段"
     },
@@ -85,9 +85,9 @@
     "label": "校验规则",
     "field": "rules",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "tooltip": {
-      "title": "控制组件的展示状态，关闭不会展示，但会保留字段"
+      "title": "Form 组件提供了表单验证的功能，只需要通过 rules 属性传入约定的验证规则，并将 FormItem 的 name 属性设置为需校验的字段名即可。校验规则参见 async-validator"
     },
     "component": {
       "name": "ImsDesignerCustomizationRules",
@@ -99,7 +99,7 @@
     "label": "是否必填",
     "field": "required",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",

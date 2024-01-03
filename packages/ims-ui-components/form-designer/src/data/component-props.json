@@ -4,7 +4,7 @@
       "label": "占位提示",
       "field": "placeholder",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -14,10 +14,23 @@
       }
     },
     {
+      "label": "默认值",
+      "field": "defaultValue",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 默认内容"
+        }
+      }
+    },
+    {
       "label": "最大长度",
       "field": "maxlength",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -27,10 +40,39 @@
       }
     },
     {
-      "label": "前缀",
+      "label": "前置标签",
+      "field": "addonBefore",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入前置标签"
+        }
+      }
+    },
+    {
+      "label": "后置标签",
+      "field": "addonAfter",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后置标签"
+        }
+      }
+    },
+    {
+      "label": "前缀图标",
       "field": "prefix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
+      "tooltip": {
+        "title": "设置 前缀图标 暂时只支持字符串"
+      },
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -40,36 +82,26 @@
       }
     },
     {
-      "label": "后缀",
+      "label": "后缀图标",
       "field": "suffix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
+      "tooltip": {
+        "title": "设置 后缀图标 暂时只支持字符串"
+      },
       "component": {
         "name": "AInput",
         "vModelField": "value",
         "props": {
           "placeholder": "请输入后缀"
-        }
-      }
-    },
-    {
-      "label": "ID",
-      "field": "id",
-      "visibilityToggler": false,
-      "show": true,
-      "component": {
-        "name": "AInput",
-        "vModelField": "value",
-        "props": {
-          "placeholder": "请输入 输入框的id"
         }
       }
     },
     {
       "label": "类型",
       "field": "type",
-      "visibilityToggler": false,
-      "show": true,
+      "visibilityToggler": true,
+      "visible": true,
       "tooltip": {
         "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
       },
@@ -78,6 +110,19 @@
         "vModelField": "value",
         "props": {
           "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
+      "label": "输入框的 id",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
         }
       }
     },
@@ -158,13 +203,41 @@
       }
     },
     {
+      "label": "校验状态",
+      "field": "status",
+      "tooltip": {
+        "title": "设置校验状态。注：一般情况无需设置,由验证规则自动生成。"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": null,
+              "label": "无"
+            },
+            {
+              "value": "error",
+              "label": "错误"
+            },
+            {
+              "value": "warning",
+              "label": "警告"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
       "tooltip": {
         "title": "组件的事件，渲染组件可以进行响应"
       },
       "visibilityToggler": true,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ImsDesignerCustomizationEvents",
         "vModelField": "value",
@@ -192,7 +265,7 @@
       "label": "占位提示",
       "field": "placeholder",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -202,10 +275,40 @@
       }
     },
     {
+      "label": "默认值",
+      "field": "defaultValue",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 默认内容"
+        }
+      }
+    },
+    {
+      "label": "自适应内容高度",
+      "field": "autosize",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "自适应内容高度，可设置为 true | false 或对象：{ minRows: 2, maxRows: 6 }"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 默认内容"
+        }
+      }
+    },
+
+    {
       "label": "最大长度",
       "field": "maxlength",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -214,58 +317,17 @@
         }
       }
     },
+
     {
-      "label": "前缀",
-      "field": "prefix",
-      "visibilityToggler": false,
-      "show": true,
-      "component": {
-        "name": "AInput",
-        "vModelField": "value",
-        "props": {
-          "placeholder": "请输入后缀"
-        }
-      }
-    },
-    {
-      "label": "后缀",
-      "field": "suffix",
-      "visibilityToggler": false,
-      "show": true,
-      "component": {
-        "name": "AInput",
-        "vModelField": "value",
-        "props": {
-          "placeholder": "请输入后缀"
-        }
-      }
-    },
-    {
-      "label": "ID",
+      "label": "输入框的 id",
       "field": "id",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
         "props": {
           "placeholder": "请输入 输入框的id"
-        }
-      }
-    },
-    {
-      "label": "类型",
-      "field": "type",
-      "visibilityToggler": false,
-      "show": true,
-      "tooltip": {
-        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
-      },
-      "component": {
-        "name": "AInput",
-        "vModelField": "value",
-        "props": {
-          "placeholder": "请输入 输入框的类型"
         }
       }
     },
@@ -317,7 +379,7 @@
       "label": "尺寸",
       "field": "size",
       "tooltip": {
-        "title": "vvvv"
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
       },
       "component": {
         "name": "ARadioGroup",
@@ -346,13 +408,41 @@
       }
     },
     {
+      "label": "校验状态",
+      "field": "status",
+      "tooltip": {
+        "title": "设置校验状态。注：一般情况无需设置,由验证规则自动生成。"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": null,
+              "label": "无"
+            },
+            {
+              "value": "error",
+              "label": "错误"
+            },
+            {
+              "value": "warning",
+              "label": "警告"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
       "tooltip": {
         "title": "组件的事件，渲染组件可以进行响应"
       },
       "visibilityToggler": true,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ImsDesignerCustomizationEvents",
         "vModelField": "value",
@@ -380,7 +470,7 @@
       "label": "占位提示",
       "field": "placeholder",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -393,7 +483,7 @@
       "label": "前缀",
       "field": "prefix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -406,7 +496,7 @@
       "label": "增减按钮",
       "field": "controls",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ASwitch",
         "vModelField": "checked",
@@ -417,19 +507,18 @@
       "label": "字符值模式",
       "field": "stringMode",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ASwitch",
         "vModelField": "checked",
         "props": {}
       }
     },
-
     {
       "label": "步进",
       "field": "step",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "tooltip": {
         "title": "每次改变步数，可以为小数"
       },
@@ -441,13 +530,11 @@
         }
       }
     },
-
     {
       "label": "数值精度",
       "field": "precision",
       "visibilityToggler": false,
-      "show": true,
-
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -457,13 +544,11 @@
         }
       }
     },
-
     {
       "label": "最小值",
       "field": "min",
       "visibilityToggler": false,
-      "show": true,
-
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -477,8 +562,7 @@
       "label": "最大值",
       "field": "max",
       "visibilityToggler": false,
-      "show": true,
-
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -488,7 +572,6 @@
         }
       }
     },
-
     {
       "label": "键盘快捷健",
       "field": "keyboard",
@@ -559,7 +642,7 @@
         "title": "组件的事件，渲染组件可以进行响应"
       },
       "visibilityToggler": true,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ImsDesignerCustomizationEvents",
         "vModelField": "value",
@@ -588,13 +671,12 @@
       }
     }
   ],
-
   "input-password": [
     {
       "label": "占位提示",
       "field": "placeholder",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -607,7 +689,7 @@
       "label": "最大长度",
       "field": "maxlength",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -620,7 +702,7 @@
       "label": "前缀",
       "field": "prefix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -633,7 +715,7 @@
       "label": "后缀",
       "field": "suffix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -646,7 +728,7 @@
       "label": "ID",
       "field": "id",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -659,7 +741,7 @@
       "label": "类型",
       "field": "type",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "tooltip": {
         "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
       },
@@ -765,7 +847,7 @@
         "title": "组件的事件，渲染组件可以进行响应"
       },
       "visibilityToggler": true,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ImsDesignerCustomizationEvents",
         "vModelField": "value",
@@ -793,7 +875,7 @@
       "label": "占位提示",
       "field": "placeholder",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -804,7 +886,7 @@
       "label": "最大长度",
       "field": "maxlength",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInputNumber",
         "vModelField": "value",
@@ -817,7 +899,7 @@
       "label": "前缀",
       "field": "prefix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -830,7 +912,7 @@
       "label": "后缀",
       "field": "suffix",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -843,7 +925,7 @@
       "label": "ID",
       "field": "id",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
@@ -856,7 +938,7 @@
       "label": "类型",
       "field": "type",
       "visibilityToggler": false,
-      "show": true,
+      "visible": true,
       "tooltip": {
         "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
       },
@@ -951,7 +1033,9 @@
         "title": "自定义节点 label、value、options 的字段"
       },
       "visibilityToggler": true,
-      "show": true,
+      "applyToggler": true,
+      "visible": true,
+      "apply": true,
       "component": {
         "name": "ImsDesignerCustomizationFieldNames",
         "vModelField": "value",
@@ -967,7 +1051,7 @@
         "title": "数据源配置"
       },
       "visibilityToggler": true,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ImsDesignerCustomizationOptions",
         "vModelField": "value",
@@ -999,7 +1083,7 @@
         "title": "组件的事件，渲染组件可以进行响应"
       },
       "visibilityToggler": true,
-      "show": true,
+      "visible": true,
       "component": {
         "name": "ImsDesignerCustomizationEvents",
         "vModelField": "value",
@@ -1078,1028 +1162,3170 @@
   ],
   "cascader": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "最大长度",
+      "field": "maxlength",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "前缀",
+      "field": "prefix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "后缀",
+      "field": "suffix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
+    },
+    {
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "选择时触发",
-      "field": "changeOnSelect",
-      "tooltip": {
-        "title": "（单选时生效）当此项为 true 时，点选每级菜单选项值都会发生变化"
-      },
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "多选节点",
-      "field": "multiple",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "次级菜单的展开方式",
-      "field": "expandTrigger",
-      "props": {
-        "options": [
-          {
-            "value": "click",
-            "label": "点击"
-          },
-          {
-            "value": "hover",
-            "label": "滑入"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "数据源的字段映射",
-      "field": "fieldNames",
-      "tooltip": {
-        "title": "当您传入的数据源的字段不是组件期望的字段时，可以使用该属性进行自定义映射。默认值：{ label: \"label\", value: \"value\", children: \"children\" }"
-      },
-      "props": {
-        "placeholder": "请输入最大长度"
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ImsCustomizationOptions",
-      "vModelField": "value",
-      "label": "数据源",
-      "field": "options",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
     },
     {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选择完成后的回调",
-            "callback": "(value, selectedOptions) => void",
-            "arguments": ["value", "selectedOptions"]
-          },
-          {
-            "id": "dropdownVisibleChange",
-            "value": "dropdownVisibleChange",
-            "label": "显示/隐藏浮层的回调",
-            "callback": "(value) => void",
-            "arguments": []
-          },
-          {
-            "id": "search",
-            "value": "search",
-            "label": "监听搜索，返回输入的值",
-            "callback": "(value) => void",
-            "arguments": ["value"]
-          }
-        ]
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
       }
     }
   ],
   "radio-group": [
     {
-      "component": "ImsCustomizationOptions",
-      "vModelField": "value",
-      "label": "数据源",
-      "field": "options",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "label": "占位提示",
+      "field": "placeholder",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
+      "label": "最大长度",
+      "field": "maxlength",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
+      }
     },
     {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
+      "label": "前缀",
+      "field": "prefix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "后缀",
+      "field": "suffix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
+    },
+    {
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
+      "label": "是否有边框",
+      "field": "bordered",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "是否禁用",
+      "field": "disabled",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选项变化时的回调函数",
-            "callback": "function(e:Event)",
-            "arguments": ["e"]
-          }
-        ]
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
       }
     }
   ],
   "checkbox-group": [
     {
-      "component": "ImsCustomizationOptions",
-      "vModelField": "value",
-      "label": "数据源",
-      "field": "options",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "label": "占位提示",
+      "field": "placeholder",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
+      "label": "最大长度",
+      "field": "maxlength",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
+      }
     },
     {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
+      "label": "前缀",
+      "field": "prefix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "后缀",
+      "field": "suffix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
+    },
+    {
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
+      "label": "是否有边框",
+      "field": "bordered",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "是否禁用",
+      "field": "disabled",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化时回调函数",
-            "callback": "function(checkedValue)",
-            "arguments": ["checkedValue"]
-          }
-        ]
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
       }
     }
   ],
   "date-picker": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
     },
     {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "是否禁用",
+      "field": "disabled",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "openChange",
-            "value": "openChange",
-            "label": "弹出日历和关闭日历的回调",
-            "callback": "function(status)",
-            "arguments": ["status"]
-          },
-          {
-            "id": "panelChange",
-            "value": "panelChange",
-            "label": "日期面板变化时的回调",
-            "callback": "function(value, mode)",
-            "arguments": ["value", "mode"]
-          }
-        ]
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
       }
     }
   ],
   "time-picker": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "slider": [
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大值",
-      "field": "max",
-      "props": {
-        "placeholder": "请输入最大长度",
-        "defaultValue": 100
+      "label": "占位提示",
+      "field": "placeholder",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最小值",
-      "field": "min",
-      "props": {
-        "placeholder": "请输入最大长度",
-        "defaultValue": 0
+      "label": "最大长度",
+      "field": "maxlength",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "步长",
-      "field": "step",
-      "props": {
-        "defaultValue": 1
+      "label": "前缀",
+      "field": "prefix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "双滑块模式",
-      "field": "range",
-      "props": {}
+      "label": "后缀",
+      "field": "suffix",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
+    },
+    {
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "switch": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "color-picker": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "ims-upload": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "ims-button": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "card-layout": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {}
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "前缀",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "后缀",
       "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
+      "label": "ID",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
       "label": "是否有边框",
       "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
       "label": "是否禁用",
       "field": "disabled",
-      "props": {}
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "自定义字段",
+      "field": "fieldNames",
+      "tooltip": {
+        "title": "自定义节点 label、value、options 的字段"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationFieldNames",
+        "vModelField": "value",
+        "props": {
+          "type": "select"
+        }
+      }
+    },
+    {
+      "label": "数据源",
+      "field": "options",
+      "tooltip": {
+        "title": "数据源配置"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationOptions",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "id": "1",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "2",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "3",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "事件",
+      "field": "events",
+      "tooltip": {
+        "title": "组件的事件，渲染组件可以进行响应"
+      },
+      "visibilityToggler": true,
+      "visible": true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "blur",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "change",
+              "description": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
+              "callback": "function(value, option:Option/Array<Option>)",
+              "arguments": ["value", "option"]
+            },
+            {
+              "name": "deselect",
+              "description": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
+              "callback": "function(value，option:Option)",
+              "arguments": ["value", "value，option"]
+            },
+            {
+              "name": "dropdownVisibleChange",
+              "description": "展开下拉菜单的回调",
+              "callback": "function(open)",
+              "arguments": ["open"]
+            },
+            {
+              "name": "focus",
+              "description": "获得焦点时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "inputKeyDown",
+              "description": "键盘按下时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseenter",
+              "description": "鼠标移入时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "mouseleave",
+              "description": "鼠标移出时回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "popupScroll",
+              "description": "下拉列表滚动时的回调",
+              "callback": "function",
+              "arguments": []
+            },
+            {
+              "name": "search",
+              "description": "文本框值变化时回调",
+              "callback": "function(value: string)",
+              "arguments": ["value"]
+            },
+            {
+              "name": "select",
+              "description": "被选中时调用，参数为选中项的 value (或 key) 值",
+              "callback": "function(value, option:Option)",
+              "arguments": ["value", "option"]
+            }
+          ]
+        }
+      }
     }
   ],
   "grid-layout": [],

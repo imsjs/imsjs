@@ -3,7 +3,7 @@
     "label": "触发类型",
     "field": "trigger",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ACheckboxGroup",
       "vModelField": "value",
@@ -25,7 +25,7 @@
     "label": "数据类型",
     "field": "type",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "component": {
       "name": "ASelect",
       "vModelField": "value",
@@ -97,7 +97,7 @@
     "label": "错误消息",
     "field": "message",
     "visibilityToggler": false,
-    "show": true,
+    "visible": true,
     "tooltip": {
       "title": "表单验证时的错误提示消息"
     },
@@ -113,10 +113,7 @@
     "label": "最小长度",
     "field": "min",
     "visibilityToggler": false,
-    "show": true,
-    "tooltip": {
-      "title": "表单验证时的错误提示消息"
-    },
+    "visible": true,
     "component": {
       "name": "AInputNumber",
       "vModelField": "value",
@@ -130,10 +127,7 @@
     "label": "最大长度",
     "field": "max",
     "visibilityToggler": false,
-    "show": true,
-    "tooltip": {
-      "title": "表单验证时的错误提示消息"
-    },
+    "visible": true,
     "component": {
       "name": "AInputNumber",
       "vModelField": "value",
@@ -147,10 +141,7 @@
     "label": "不允许空白",
     "field": "whitespace",
     "visibilityToggler": false,
-    "show": true,
-    "tooltip": {
-      "title": "表单验证时的错误提示消息"
-    },
+    "visible": true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",
@@ -161,10 +152,7 @@
     "label": "是否必填",
     "field": "required",
     "visibilityToggler": false,
-    "show": true,
-    "tooltip": {
-      "title": "表单验证时的错误提示消息"
-    },
+    "visible": true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",

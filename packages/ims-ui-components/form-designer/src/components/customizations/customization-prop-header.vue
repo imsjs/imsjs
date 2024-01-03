@@ -1,17 +1,17 @@
 <template>
   <div :class="prefixCls">
     <a-space :size="3">
-      <div v-if="modelToggler === true">
+      <div v-if="modelVisibleToggler === true">
         <icon
           @click="toggleShowContent"
-          :icon="`ant-design:${showContent ? 'down' : 'up'}-outlined`"
+          :icon="`ant-design:${modelVisible ? 'down' : 'up'}-outlined`"
           color="#0000004f"
         ></icon>
       </div>
-      <div v-if="modelToggler === true">
+      <div v-if="modelApplyToggler === true">
         <a-checkbox
-          v-model:checked="configing"
-          @change="onConfigingChange"
+          v-model:checked="modelApply"
+          @change="onApplyTogglerChange"
         ></a-checkbox>
       </div>
       <div
@@ -65,9 +65,6 @@ defineOptions({
   name: COMPONENT_NAME,
 });
 
-// /** 切换器 */
-//   toggler?: boolean;
-
 interface ImsDesignerCustomizationPropHeaderProps {
   /** 文本 */
   label?: string;
@@ -84,31 +81,39 @@ const {
   tooltip,
 } = defineProps<ImsDesignerCustomizationPropHeaderProps>();
 
+const emits = defineEmits<{
+  applyChange: [apply: boolean];
+}>();
+
 const { prefixCls } = useStyle("designer-customization-prop-header");
 
-const configing = ref(false);
+const modelApply = defineModel<boolean>("apply", {
+  default: false,
+});
 
 const toggleShowContent = () => {
-  modelToggler.value && (showContent.value = !showContent.value);
+  modelVisibleToggler.value && (modelVisible.value = !modelVisible.value);
 };
 
-const modelToggler = defineModel<boolean | undefined>("toggler", {
+const modelVisibleToggler = defineModel<boolean | undefined>("visibleToggler", {
   default: false,
 });
 
-const showContent = defineModel<boolean | undefined>("show", {
+const modelApplyToggler = defineModel<boolean | undefined>("applyToggler", {
   default: false,
 });
 
-const onConfigingChange = (e: Event) => {
-  console.info("e =>", e, configing.value);
-  if (modelToggler.value === true) {
-    if (configing.value === true) {
-      showContent.value = true;
+const modelVisible = defineModel<boolean | undefined>("visible", {
+  default: true,
+});
+
+const onApplyTogglerChange = () => {
+  if (modelVisibleToggler.value === true) {
+    if (modelApply.value === true) {
+      modelVisible.value = true;
     }
-  } else {
-    return;
   }
+  emits("applyChange", modelApply.value);
 };
 </script>
 
