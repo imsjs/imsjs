@@ -7,6 +7,8 @@ export interface ImsFormDesignerProps {
 
 /** 配置组件 */
 export interface ImsFormDesignerConfigurationComponent {
+  /** ID 标识 */
+  id?: string;
   /** 标签 */
   label: string;
   /** 字段 */
