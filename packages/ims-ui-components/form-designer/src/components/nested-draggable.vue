@@ -71,6 +71,7 @@
       <a-form-item
         v-else
         v-bind="Object.assign({ label: element.title }, element.item)"
+        :class="element.class"
       >
         <component
           :is="element.component.componentName || 'AInput'"

@@ -392,6 +392,7 @@
             <div v-show="formComponentProp === 'component-props'" class="px-2">
               <template v-for="(item, index) in activeComponent.componentProps">
                 <ImsDesignerCustomizationProp
+                  v-if="item.show !== false"
                   v-bind="item"
                   v-model:value="activeComponent.component.props[item.field]"
                   v-model:apply="item.apply"
@@ -408,7 +409,13 @@
 <script lang="ts" setup>
 import { useStyle } from "@imsjs/ims-ui-hooks";
 
-import type { ImsFormDesignerProps } from "@imsjs/ims-ui-types";
+import type {
+  ImsFormDesignerProps,
+  ImsFormDesignerConfigurationComponent,
+  ImsFormSchema,
+  ImsFormSchemaItem,
+  operationalAction,
+} from "@imsjs/ims-ui-types";
 
 import ImsFormRenderer from "../../form-renderer";
 
@@ -429,11 +436,16 @@ import NestedDraggable from "./components/nested-draggable.vue";
 import ImsDesignerCustomizationProp from "./components/customizations/customization-prop.vue";
 
 import componentListsJson from "./data/component-lists.json";
-import componentsProps from "./data/component-props.json";
-import componentEventsJson from "./data/component-events.json";
+import componentsPropsJson from "./data/component-props.json";
 
 import formItemPropsJson from "./data/form-item-props.json";
 import formPropsJson from "./data/form-props.json";
+
+const componentsProps: Record<string, ImsFormDesignerConfigurationComponent[]> =
+  componentsPropsJson;
+
+const formItemProps: ImsFormDesignerConfigurationComponent[] =
+  formItemPropsJson;
 
 const componentLists = ref(componentListsJson);
 
@@ -470,15 +482,8 @@ const elementTool = ref<string>("");
 // 目标设备
 const targetDevice = ref<string>("pc");
 
-interface toolAction {
-  id: string;
-  icon: string;
-  value: string;
-  label: string;
-}
-
 // 文件处理
-const fileActions = [
+const fileActions: operationalAction[] = [
   {
     id: "download",
     icon: "ant-design:cloud-download-outlined",
@@ -507,7 +512,7 @@ const fileActions = [
 
 const fileAction = ref<string>("");
 
-const onFileActionChange = (item: toolAction) => {
+const onFileActionChange = (item: operationalAction) => {
   if (item.value === "download") {
     let fileName = "ims-designer-data.json";
     let content = "data:text/json;charset=utf-8,";
@@ -560,7 +565,7 @@ const onFileActionChange = (item: toolAction) => {
 
 // 操作视图
 
-const operationalViewActions = [
+const operationalViewActions: operationalAction[] = [
   {
     id: "design",
     icon: "ic:outline-color-lens",
@@ -593,7 +598,7 @@ const componentsListsRef = ref();
 
 const formComponentProp = ref("form-props");
 
-const list = defineModel("value", {
+const list = defineModel<ImsFormSchema>("value", {
   default: {
     model: {},
     rules: {},
@@ -636,70 +641,50 @@ useDraggable(componentsListsRef, componentLists, {
   animation: 150,
   ghostClass: "ghost",
   group: { name: "components", pull: "clone", put: false },
-  clone(item) {
-    let addedComponent = cloneDeep(item);
-
-    addedComponent.class = "tree-item";
-
-    let itemId = nanoid();
-    addedComponent.id = itemId;
-
-    let itemName = nanoid();
-    addedComponent.item.name = itemName;
-
-    addedComponent.componentProps = componentsProps[addedComponent.type]; // 增加 componentProps
-    addedComponent.formItemProps = formItemPropsJson; // 增加 formItemProps
-
-    addedComponent.componentEvents = componentEventsJson[addedComponent.type]; // 增加 componentEvents
-
-    if (addedComponent.type === "grid-layout") {
-      addedComponent.componentProps = [];
-      addedComponent.componentEvents = [];
-      addedComponent.formItemProps = {};
-      addedComponent.children.forEach((child) => {
-        child.id = nanoid();
-      });
-    } else {
-      list.value.model[itemName] = "";
-      // 增加一个空白的校验规则
-      list.value.rules[itemName] = [];
-    }
-
-    return addedComponent;
+  clone(item: any) {
+    let buildedItem = buildFormItem(item, "clone");
+    return buildedItem;
   },
   sort: false,
 });
 
 const quickAddComponent = (item: any) => {
+  let buildedItem = buildFormItem(item, "click");
+  list.value.items[0].children.push(buildedItem);
+};
+
+/** 构建生成表单项 */
+const buildFormItem = (
+  item: any,
+  /** 方式 */
+  way: string
+): ImsFormSchemaItem => {
+  console.info("item =>", item);
   let addedComponent = cloneDeep(item);
   addedComponent.id = nanoid();
 
-  addedComponent.class = "tree-item";
+  addedComponent.class = `${way}-way-${addedComponent.type}`;
 
   let itemName = nanoid();
   addedComponent.item.name = itemName;
 
-  console.info(addedComponent.type, componentsProps[addedComponent.type]);
-
   addedComponent.componentProps = componentsProps[addedComponent.type]; // 增加 componentProps
-  addedComponent.formItemProps = formItemPropsJson; // 增加 formIte
-  addedComponent.componentEvents = componentEventsJson[addedComponent.type]; // 增加 componentEvents
+  addedComponent.formItemProps = formItemProps; // 增加 formItemProps
 
   if (addedComponent.type === "grid-layout") {
     addedComponent.componentProps = [];
-    addedComponent.componentEvents = [];
-    addedComponent.formItemProps = {};
-    addedComponent.children.forEach((child) => {
+
+    addedComponent.formItemProps = [];
+    addedComponent.children?.forEach((child: any) => {
       child.id = nanoid();
     });
-  }
-
-  list.value.items[0].children.push(addedComponent);
-
-  if (addedComponent.type !== "grid-layout") {
+  } else {
+    // 非布局组件 增加 model 和 rules
     list.value.model[itemName] = "";
     list.value.rules[itemName] = [];
   }
+
+  return addedComponent;
 };
 
 // 删除 tree-data 中的指定节点

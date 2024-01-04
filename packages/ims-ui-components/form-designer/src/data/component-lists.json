@@ -5,9 +5,6 @@
     "icon": "iconoir:input-field",
     "type": "input",
     "vModelField": "value",
-    "col": {
-      "span": 12
-    },
     "item": {
       "label": "输入框",
       "name": "",
@@ -30,7 +27,6 @@
       }
     },
     "componentProps": [],
-    "componentEvents": [],
     "formItemProps": []
   },
   {
@@ -67,9 +63,7 @@
     "icon": "fluent-emoji-high-contrast:input-numbers",
     "type": "input-number",
     "vModelField": "value",
-    "col": {
-      "span": 8
-    },
+
     "item": {
       "label": "数字输入框",
       "name": "",
@@ -84,7 +78,8 @@
       "componentName": "AInputNumber",
       "props": {
         "placeholder": "请输入",
-        "keyboard": true
+        "keyboard": true,
+        "controls": true
       }
     }
   },

@@ -303,7 +303,6 @@
         }
       }
     },
-
     {
       "label": "最大长度",
       "field": "maxlength",
@@ -317,7 +316,6 @@
         }
       }
     },
-
     {
       "label": "输入框的 id",
       "field": "id",
@@ -467,34 +465,97 @@
   ],
   "input-number": [
     {
-      "label": "占位提示",
-      "field": "placeholder",
+      "label": "格式化",
+      "field": "formatter",
       "visibilityToggler": false,
       "visible": true,
+      "show": false,
+      "tooltip": {
+        "title": "指定输入框展示值的格式 function(value: number | string, info: { userTyping: boolean, input: string })"
+      },
       "component": {
         "name": "AInput",
         "vModelField": "value",
         "props": {
-          "placeholder": "请输入占位提示"
+          "disabled": true,
+          "placeholder": "请输入 格式化 配置"
         }
       }
     },
     {
-      "label": "前缀",
+      "label": "解析器",
+      "field": "parser",
+      "visibilityToggler": false,
+      "visible": true,
+      "show": true,
+      "tooltip": {
+        "title": "指定从 formatter 里转换回数字的方式，和 formatter 搭配使用"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "disabled": true,
+          "placeholder": "请输入 解析器 配置"
+        }
+      }
+    },
+    {
+      "label": "前缀图标",
       "field": "prefix",
+      "visibilityToggler": false,
+      "visible": true,
+      "tooltip": {
+        "title": "设置 前缀图标 暂时只支持字符串"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
+    },
+    {
+      "label": "前置标签",
+      "field": "addonBefore",
       "visibilityToggler": false,
       "visible": true,
       "component": {
         "name": "AInput",
         "vModelField": "value",
         "props": {
-          "placeholder": "请输入前缀"
+          "placeholder": "请输入前置标签"
+        }
+      }
+    },
+    {
+      "label": "后置标签",
+      "field": "addonAfter",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后置标签"
         }
       }
     },
     {
       "label": "增减按钮",
       "field": "controls",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {}
+      }
+    },
+    {
+      "label": "自动获取焦点",
+      "field": "autofocus",
       "visibilityToggler": false,
       "visible": true,
       "component": {
@@ -512,6 +573,19 @@
         "name": "ASwitch",
         "vModelField": "checked",
         "props": {}
+      }
+    },
+    {
+      "label": "小数点",
+      "field": "decimalSeparator",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 小数点"
+        }
       }
     },
     {
@@ -579,6 +653,60 @@
         "name": "ASwitch",
         "vModelField": "checked",
         "props": {}
+      }
+    },
+    {
+      "label": "校验状态",
+      "field": "status",
+      "tooltip": {
+        "title": "设置校验状态。注：一般情况无需设置,由验证规则自动生成。"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": null,
+              "label": "无"
+            },
+            {
+              "value": "error",
+              "label": "错误"
+            },
+            {
+              "value": "warning",
+              "label": "警告"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "占位提示",
+      "field": "placeholder",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "默认值",
+      "field": "defaultValue",
+      "visibilityToggler": false,
+      "visible": true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 默认内容"
+        }
       }
     },
     {
