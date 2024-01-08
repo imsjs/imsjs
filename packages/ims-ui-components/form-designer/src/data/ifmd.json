@@ -1,0 +1,531 @@
+{
+  "components": [
+    {
+      "id": 1,
+      "title": "输入框",
+      "icon": "iconoir:input-field",
+      "type": "input",
+      "vModelField": "value",
+      "item": {
+        "label": "输入框",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "AInput",
+        "events": {},
+        "props": {
+          "placeholder": "请输入",
+          "bordered": true,
+          "showCount": false,
+          "size": "",
+          "events": {}
+        }
+      },
+      "componentProps": [],
+      "formItemProps": []
+    },
+    {
+      "id": 2,
+      "title": "文本域",
+      "icon": "bi:textarea-resize",
+      "type": "textarea",
+      "vModelField": "value",
+      "col": {
+        "span": 12
+      },
+      "item": {
+        "label": "文本域",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ATextarea",
+        "events": {},
+        "props": {
+          "placeholder": "请输入",
+          "bordered": true
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "数字输入框",
+      "icon": "fluent-emoji-high-contrast:input-numbers",
+      "type": "input-number",
+      "vModelField": "value",
+
+      "item": {
+        "label": "数字输入框",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "AInputNumber",
+        "props": {
+          "placeholder": "请输入",
+          "keyboard": true,
+          "controls": true
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "密码输入框",
+      "icon": "ph:password-light",
+      "type": "input-password",
+      "vModelField": "value",
+      "col": {
+        "span": 8
+      },
+      "item": {
+        "label": "密码输入框",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "AInputPassword",
+        "props": {
+          "placeholder": "请输入",
+          "visibilityToggle": true,
+          "showCount": false
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "选择框",
+      "icon": "tabler:select",
+      "type": "select",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "选择框",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ASelect",
+        "props": {
+          "bordered": true,
+          "allowClear": true,
+          "placeholder": "请选择",
+          "fieldNames": {
+            "label": "label",
+            "value": "value",
+            "options": "options"
+          },
+          "options": [
+            {
+              "id": "1",
+              "label": "选项一",
+              "value": "选项一"
+            },
+            {
+              "id": "2",
+              "label": "选项二",
+              "value": "选项二"
+            },
+            {
+              "id": "3",
+              "label": "选项三",
+              "value": "选项三"
+            }
+          ],
+          "events": {}
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "级联选择器",
+      "icon": "uiw:component",
+      "type": "cascader",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "级联选择器",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ACascader",
+        "props": {
+          "fieldNames": {
+            "label": "label",
+            "value": "value",
+            "children": "children"
+          },
+          "changeOnSelect": false,
+          "options": [
+            {
+              "value": "zhejiang",
+              "label": "Zhejiang",
+              "children": [
+                {
+                  "value": "hangzhou",
+                  "label": "Hangzhou",
+                  "children": [
+                    {
+                      "value": "xihu",
+                      "label": "West Lake"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "jiangsu",
+              "label": "Jiangsu",
+              "children": [
+                {
+                  "value": "nanjing",
+                  "label": "Nanjing",
+                  "children": [
+                    {
+                      "value": "zhonghuamen",
+                      "label": "Zhong Hua Men"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "bordered": true,
+          "allowClear": true,
+          "expandTrigger": "click"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "单选框",
+      "icon": "akar-icons:radio-fill",
+      "type": "radio-group",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "单选框",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ARadioGroup",
+        "props": {
+          "placeholder": "请输入",
+          "options": [
+            {
+              "id": "option-0BMV2r47Uz07S3kFA-flow",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "option-1BMV2r47Uz07S3kFA-flow",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "option-2BMV2r47Uz07S3kFA-flow",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 8,
+      "title": "多选框",
+      "icon": "mingcute:checkbox-line",
+      "type": "checkbox-group",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "多选框",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ACheckboxGroup",
+        "props": {
+          "placeholder": "请输入",
+          "options": [
+            {
+              "id": "option-0BMV2r47Uz07S3kFA-flow",
+              "value": "选项一",
+              "label": "选项一"
+            },
+            {
+              "id": "option-1BMV2r47Uz07S3kFA-flow",
+              "value": "选项二",
+              "label": "选项二"
+            },
+            {
+              "id": "option-2BMV2r47Uz07S3kFA-flow",
+              "value": "选项三",
+              "label": "选项三"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 9,
+      "title": "日期选择器",
+      "icon": "ant-design:calendar-twotone",
+      "type": "date-picker",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "日期选择器",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ADatePicker",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "title": "时间选择器",
+      "icon": "ant-design:field-time-outlined",
+      "type": "time-picker",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "时间选择器",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ATimePicker",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "title": "滑块",
+      "icon": "vaadin:slider",
+      "type": "slider",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "滑块",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ASlider",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "title": "开关",
+      "icon": "line-md:switch-off",
+      "type": "switch",
+      "vModelField": "checked",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "开关",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ASwitch",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "title": "颜色选择器",
+      "icon": "mdi:color",
+      "type": "color-picker",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "颜色选择器",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "AInputNumber",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "title": "上传",
+      "icon": "ant-design:cloud-upload-outlined",
+      "type": "ims-upload",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "上传",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "displayState": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ImsUpload",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 15,
+      "title": "卡片布局",
+      "icon": "ant-design:credit-card-outlined",
+      "type": "card-layout",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {
+        "label": "卡片布局",
+        "name": "",
+        "tooltip": "",
+        "extra": "",
+        "required": false,
+        "colon": true,
+        "rules": []
+      },
+      "component": {
+        "componentName": "ImsCardLayout",
+        "props": {
+          "placeholder": "请输入"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "title": "栅格布局",
+      "icon": "radix-icons:layout",
+      "type": "grid-layout",
+      "vModelField": "value",
+      "col": {
+        "span": 24
+      },
+      "item": {},
+      "children": [
+        {
+          "title": "栅格布局-列",
+          "icon": "radix-icons:layout",
+          "type": "grid-layout-col",
+          "vModelField": "value",
+          "item": {},
+          "children": []
+        },
+        {
+          "title": "栅格布局-列",
+          "icon": "radix-icons:layout",
+          "type": "grid-layout-col",
+          "vModelField": "value",
+          "item": {},
+          "children": []
+        }
+      ]
+    }
+  ]
+}

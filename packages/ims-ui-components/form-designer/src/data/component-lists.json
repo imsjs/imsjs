@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "输入框",
     "icon": "iconoir:input-field",
     "type": "input",
@@ -30,7 +30,7 @@
     "formItemProps": []
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "文本域",
     "icon": "bi:textarea-resize",
     "type": "textarea",

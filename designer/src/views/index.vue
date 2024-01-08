@@ -17,6 +17,11 @@ const list = ref({
   rules: {},
   items: [
     {
+      id: "tHGUhT0q4Ddzuf86gjg21",
+      title: "表单",
+      icon: "iconoir:input-field",
+      type: "form",
+      vModelField: "value",
       item: {
         name: "f_9GqdghhCcT4Dr6VZp-i",
         colon: true,
@@ -29,16 +34,16 @@ const list = ref({
         },
       },
       children: [],
-      formItemProps: formPropsJson,
+
       component: {
         componentName: "AInputPassword",
         props: {
           placeholder: "请输入",
         },
       },
-      id: "tHGUhT0q4Ddzuf86gjg21",
-      title: "表单",
-      type: "form",
+      componentProps: [],
+      formItemProps: formPropsJson,
+      class: "",
     },
   ],
 });

@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <div :class="`${prefixCls}-header`" v-if="showHeader === true">
+    <div :class="`${prefixCls}-header`" v-if="showHeader">
       <div :class="`${prefixCls}-header-logo`">LOGO</div>
       <div :class="`${prefixCls}-header-center`">Ims Designer</div>
       <div :class="`${prefixCls}-header-right`">right</div>
@@ -59,6 +59,7 @@
                         v-for="item in componentLists"
                         :span="12"
                         class="p-1"
+                        :key="item.id"
                       >
                         <div
                           @click="quickAddComponent(item)"
@@ -412,6 +413,7 @@ import { useStyle } from "@imsjs/ims-ui-hooks";
 import type {
   ImsFormDesignerProps,
   ImsFormDesignerConfigurationComponent,
+  ImsFormDesignerConfigurationComponentObject,
   ImsFormSchema,
   ImsFormSchemaItem,
   operationalAction,
@@ -441,19 +443,78 @@ import componentsPropsJson from "./data/component-props.json";
 import formItemPropsJson from "./data/form-item-props.json";
 import formPropsJson from "./data/form-props.json";
 
-const componentsProps: Record<string, ImsFormDesignerConfigurationComponent[]> =
-  componentsPropsJson;
+const componentsProps =
+  componentsPropsJson as ImsFormDesignerConfigurationComponentObject;
 
 const formItemProps: ImsFormDesignerConfigurationComponent[] =
   formItemPropsJson;
 
-const componentLists = ref(componentListsJson);
+// const componentLists = ref<ImsFormSchemaItem[]>([]);
+
+const componentLists = reactive<ImsFormSchemaItem[]>([
+  {
+    id: "1",
+    title: "输入框",
+    icon: "iconoir:input-field",
+    type: "input",
+    vModelField: "value",
+    item: {
+      label: "输入框",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+      colon: true,
+      displayState: true,
+      rules: [],
+    },
+    component: {
+      componentName: "AInput",
+      events: {},
+      props: {
+        placeholder: "请输入",
+        bordered: true,
+        showCount: false,
+        size: "",
+        events: {},
+      },
+    },
+    componentProps: [],
+    formItemProps: [],
+  },
+  {
+    id: "2",
+    title: "文本域",
+    icon: "bi:textarea-resize",
+    type: "textarea",
+    vModelField: "value",
+
+    item: {
+      label: "文本域",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+      colon: true,
+      displayState: true,
+      rules: [],
+    },
+    component: {
+      componentName: "ATextarea",
+      events: {},
+      props: {
+        placeholder: "请输入",
+        bordered: true,
+      },
+    },
+    componentProps: [],
+    formItemProps: [],
+  },
+]);
 
 const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
   serializer: StorageSerializers.object,
 });
-
-const activeComponentIndex = ref(-1);
 
 const modelKeysIndex = ref(-1);
 
@@ -478,7 +539,7 @@ const componentKeywords = ref<string>("");
 // 撤销 重做 Undo Redo
 const unReDo = ref<string>("");
 // 元素工具
-const elementTool = ref<string>("");
+const elementTool = ref("");
 // 目标设备
 const targetDevice = ref<string>("pc");
 
@@ -512,14 +573,16 @@ const fileActions: operationalAction[] = [
 
 const fileAction = ref<string>("");
 
-const onFileActionChange = (item: operationalAction) => {
-  if (item.value === "download") {
+const onFileActionChange = (fileAction: operationalAction) => {
+  if (fileAction.value === "download") {
     let fileName = "ims-designer-data.json";
     let content = "data:text/json;charset=utf-8,";
 
     let tmpData = cloneDeep(list.value);
     let formItems = toArray(tmpData.items[0].children).filter(
-      (item) => item.type !== "grid-layout-col" && item.type !== "grid-layout"
+      (item: ImsFormSchemaItem) => {
+        return item.type !== "grid-layout-col" && item.type !== "grid-layout";
+      }
     );
     // 校验规则设置
     formItems.forEach((item) => {
@@ -527,18 +590,18 @@ const onFileActionChange = (item: operationalAction) => {
     });
 
     content += JSON.stringify(tmpData, null, 2);
-    var encodedUri = encodeURI(content);
-    var actions = document.createElement("a");
+    const encodedUri = encodeURI(content);
+    const actions = document.createElement("a");
     actions.setAttribute("href", encodedUri);
     actions.setAttribute("download", fileName);
     actions.click();
   }
 
-  if (item.value === "upload") {
-    console.info("onFileActionClick 上传 =>", item.value);
+  if (fileAction.value === "upload") {
+    console.info("onFileActionClick 上传 =>", fileAction.value);
   }
 
-  if (item.value === "clear") {
+  if (fileAction.value === "clear") {
     // 直接清空所有的配置,可以考虑 增加确认提示之后再进行清空
     list.value.items[0].children = [];
     list.value.model = {};
@@ -549,11 +612,13 @@ const onFileActionChange = (item: operationalAction) => {
     activeStorageItem.value = breadcrumbs.value[0];
   }
 
-  if (item.value === "save") {
+  if (fileAction.value === "save") {
     // 保存
 
     let formItems = toArray(list.value.items[0].children).filter(
-      (item) => item.type !== "grid-layout-col" && item.type !== "grid-layout"
+      (item: ImsFormSchemaItem) => {
+        return item.type !== "grid-layout-col" && item.type !== "grid-layout";
+      }
     );
     // 校验规则设置
     formItems.forEach((item) => {
@@ -592,11 +657,18 @@ const operationalViewActions: operationalAction[] = [
   },
 ];
 
-const operationalView = ref<string>("design");
+const operationalView = ref("design");
 
 const componentsListsRef = ref();
 
-const formComponentProp = ref("form-props");
+// component-props
+// enum FcProp {
+//   /** 组件 */
+//   COMPONENT_PROPS,
+//   /** 表单项目 */
+//   FORM_PROPS,
+// }
+const formComponentProp = ref<string>("form_props");
 
 const list = defineModel<ImsFormSchema>("value", {
   default: {
@@ -631,13 +703,27 @@ const list = defineModel<ImsFormSchema>("value", {
   },
 });
 
-const activeComponent = ref({ id: "0", item: {}, component: { props: {} } });
+const activeComponent = ref<ImsFormSchemaItem>({
+  id: "0",
+  title: "",
+  icon: "",
+  type: "",
+  vModelField: "",
+  item: {
+    label: "",
+    displayState: true,
+    name: "",
+  },
+  component: { props: {}, componentName: "" },
+  componentProps: [],
+  formItemProps: [],
+});
 
 activeComponent.value = list.value.items[0];
 
 const breadcrumbs = ref([list.value.items[0]]);
 
-useDraggable(componentsListsRef, componentLists, {
+useDraggable(componentsListsRef.value, componentLists, {
   animation: 150,
   ghostClass: "ghost",
   group: { name: "components", pull: "clone", put: false },
@@ -659,7 +745,6 @@ const buildFormItem = (
   /** 方式 */
   way: string
 ): ImsFormSchemaItem => {
-  console.info("item =>", item);
   let addedComponent = cloneDeep(item);
   addedComponent.id = nanoid();
 
@@ -832,19 +917,6 @@ const onFormItemNameChange = (item, index, e) => {
       console.info("activeComponent.value =>", activeComponent.value);
       let changedName = activeComponent.value.item.name;
       console.info("changedName", changedName);
-      // modelKeys[activeComponentIndex.value] = changedName;
-      // let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
-
-      // 更新表单model
-      // list.value.model = newModel;
-
-      // 更新表单的验证规则
-      /**
-       * 1.同步重置了验证规则，可想办法保留验证规则
-       */
-      // let newRules = Object.fromEntries(modelKeys.map((item) => [item, []]));
-      // list.value.rules = newRules;
-      // useFormRs.value = useForm(list.value.model, list.value.rules);
     }
   }
 };
@@ -854,7 +926,7 @@ const activeComponentChange = (data: any, updateActiveItem: boolean = true) => {
   findParent(list.value.items, data, result);
   activeComponent.value = result[result.length - 1];
   breadcrumbs.value = result;
-  if (updateActiveItem === true) {
+  if (updateActiveItem) {
     activeStorageItem.value = data;
   }
 };

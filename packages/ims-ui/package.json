@@ -32,8 +32,8 @@
     "@imsjs/ims-ui-utils": "workspace:*"
   },
   "peerDependencies": {
-    "ant-design-vue": "^4.0.7",
-    "vue": "^3.3.11"
+    "ant-design-vue": "^4.1.0",
+    "vue": "^3.4.5"
   },
   "publishConfig": {
     "access": "public"
