@@ -1,1725 +1,291 @@
 {
   "input": [
     {
-      "component": "AInput",
-      "vModelField": "value",
       "label": "占位提示",
       "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
       }
     },
     {
-      "component": "AInputNumber",
-      "vModelField": "value",
+      "label": "默认值",
+      "field": "defaultValue",
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 默认内容"
+        }
+      }
+    },
+    {
       "label": "最大长度",
       "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "AInputNumber",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入最大长度"
+        }
       }
     },
     {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
+      "label": "前置标签",
+      "field": "addonBefore",
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入前置标签"
+        }
+      }
+    },
+    {
+      "label": "后置标签",
+      "field": "addonAfter",
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后置标签"
+        }
+      }
+    },
+    {
+      "label": "前缀图标",
       "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
       "tooltip": {
-        "title": "控件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+        "title": "设置 前缀图标 暂时只支持字符串"
       },
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
       }
     },
     {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
+      "label": "后缀图标",
+      "field": "suffix",
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "tooltip": {
+        "title": "设置 后缀图标 暂时只支持字符串"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入后缀"
+        }
+      }
     },
     {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
+      "label": "类型",
+      "field": "type",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "tooltip": {
+        "title": "声明 input 类型，同原生 input 标签的 type 属性，见：MDN(请直接使用 <a-textarea /> 代替 type=\"textarea\")。"
+      },
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的类型"
+        }
+      }
+    },
+    {
+      "label": "输入框的 id",
+      "field": "id",
+      "visibilityToggler": false,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "AInput",
+        "vModelField": "value",
+        "props": {
+          "placeholder": "请输入 输入框的id"
+        }
+      }
+    },
+    {
+      "label": "是否有边框",
+      "field": "bordered",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "允许清除内容",
+      "field": "allowClear",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "字数提示",
+      "field": "showCount",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "是否禁用",
+      "field": "disabled",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "ASwitch",
+        "vModelField": "checked",
+        "props": {
+          "placeholder": "请输入占位提示"
+        }
+      }
+    },
+    {
+      "label": "尺寸",
+      "field": "size",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "tooltip": {
+        "title": "组件大小。注：标准表单内的输入框大小限制为 middle。可选 large middle small"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": "",
+              "label": "默认"
+            },
+            {
+              "value": "large",
+              "label": "大"
+            },
+            {
+              "value": "middle",
+              "label": "中"
+            },
+            {
+              "value": "small",
+              "label": "小"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
+      "label": "校验状态",
+      "field": "status",
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "tooltip": {
+        "title": "设置校验状态。注：一般情况无需设置,由验证规则自动生成。"
+      },
+      "component": {
+        "name": "ARadioGroup",
+        "vModelField": "value",
+        "props": {
+          "options": [
+            {
+              "value": null,
+              "label": "无"
+            },
+            {
+              "value": "error",
+              "label": "错误"
+            },
+            {
+              "value": "warning",
+              "label": "警告"
+            }
+          ],
+          "optionType": "button"
+        }
+      }
+    },
+    {
       "label": "事件",
       "field": "events",
       "tooltip": {
-        "title": "表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的。修改时会同步重置验证规则为[]"
+        "title": "组件的事件，渲染组件可以进行响应"
       },
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "输入框内容变化时的回调",
-            "callback": "function(e:InputEvent)",
-            "arguments": ["e"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          }
-        ]
+      "visibilityToggler": true,
+      "visible": true,
+      "apply":true,
+      "component": {
+        "name": "ImsDesignerCustomizationEvents",
+        "vModelField": "value",
+        "props": {
+          "events": [
+            {
+              "name": "change",
+              "description": "输入框内容变化时的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            },
+            {
+              "name": "pressEnter",
+              "description": "按下回车的回调",
+              "callback": "function(e)",
+              "arguments": ["e"]
+            }
+          ]
+        }
       }
-    }
-  ],
-  "textarea": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "输入框内容变化时的回调",
-            "callback": "function(e:InputEvent)",
-            "arguments": ["e"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          }
-        ]
-      }
-    }
-  ],
-  "input-number": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化回调",
-            "callback": "function(value: number | string)",
-            "arguments": ["value"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          },
-          {
-            "id": "step",
-            "value": "step",
-            "label": "点击上下箭头的回调",
-            "callback": "(value: number, info: { offset: number, type: 'up' | 'down' }) => void",
-            "arguments": ["value", "info"]
-          }
-        ]
-      }
-    }
-  ],
-  "input-password": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化回调",
-            "callback": "function(value: number | string)",
-            "arguments": ["value"]
-          },
-          {
-            "id": "pressEnter",
-            "value": "pressEnter",
-            "label": "按下回车的回调",
-            "callback": "function(e:KeyboardEvent)",
-            "arguments": ["e"]
-          }
-        ]
-      }
-    }
-  ],
-  "select": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示",
-        "defaultValue": "请选择"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationOptions",
-      "vModelField": "value",
-      "label": "数据源",
-      "field": "options",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "blur",
-            "value": "blur",
-            "label": "失去焦点的时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数",
-            "callback": "function(value, option:Option/Array<Option>)",
-            "arguments": ["value", "option"]
-          },
-          {
-            "id": "deselect",
-            "value": "deselect",
-            "label": "取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效",
-            "callback": "function(value，option:Option)",
-            "arguments": ["value", "value，option"]
-          },
-          {
-            "id": "dropdownVisibleChange",
-            "value": "dropdownVisibleChange",
-            "label": "展开下拉菜单的回调",
-            "callback": "function(open)",
-            "arguments": ["open"]
-          },
-          {
-            "id": "focus",
-            "value": "focus",
-            "label": "获得焦点时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "inputKeyDown",
-            "value": "inputKeyDown",
-            "label": "键盘按下时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "mouseenter",
-            "value": "mouseenter",
-            "label": "鼠标移入时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "mouseleave",
-            "value": "mouseleave",
-            "label": "鼠标移出时回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "popupScroll",
-            "value": "popupScroll",
-            "label": "下拉列表滚动时的回调",
-            "callback": "function",
-            "arguments": []
-          },
-          {
-            "id": "search",
-            "value": "search",
-            "label": "文本框值变化时回调",
-            "callback": "function(value: string)",
-            "arguments": ["value"]
-          },
-          {
-            "id": "select",
-            "value": "select",
-            "label": "被选中时调用，参数为选中项的 value (或 key) 值",
-            "callback": "function(value, option:Option)",
-            "arguments": ["value", "option"]
-          }
-        ]
-      }
-    }
-  ],
-  "cascader": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选择完成后的回调",
-            "callback": "(value, selectedOptions) => void",
-            "arguments": ["value", "selectedOptions"]
-          },
-          {
-            "id": "dropdownVisibleChange",
-            "value": "dropdownVisibleChange",
-            "label": "显示/隐藏浮层的回调",
-            "callback": "(value) => void",
-            "arguments": []
-          },
-          {
-            "id": "search",
-            "value": "search",
-            "label": "监听搜索，返回输入的值",
-            "callback": "(value) => void",
-            "arguments": ["value"]
-          }
-        ]
-      }
-    }
-  ],
-  "radio-group": [
-    {
-      "component": "ImsCustomizationOptions",
-      "vModelField": "value",
-      "label": "数据源",
-      "field": "options",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "选项变化时的回调函数",
-            "callback": "function(e:Event)",
-            "arguments": ["e"]
-          }
-        ]
-      }
-    }
-  ],
-  "checkbox-group": [
-    {
-      "component": "ImsCustomizationOptions",
-      "vModelField": "value",
-      "label": "数据源",
-      "field": "options",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "change",
-            "value": "change",
-            "label": "变化时回调函数",
-            "callback": "function(checkedValue)",
-            "arguments": ["checkedValue"]
-          }
-        ]
-      }
-    }
-  ],
-  "date-picker": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    },
-    {
-      "component": "ImsCustomizationComponentEvents",
-      "vModelField": "value",
-      "label": "事件",
-      "field": "events",
-      "props": {
-        "events": [
-          {
-            "id": "openChange",
-            "value": "openChange",
-            "label": "弹出日历和关闭日历的回调",
-            "callback": "function(status)",
-            "arguments": ["status"]
-          },
-          {
-            "id": "panelChange",
-            "value": "panelChange",
-            "label": "日期面板变化时的回调",
-            "callback": "function(value, mode)",
-            "arguments": ["value", "mode"]
-          }
-        ]
-      }
-    }
-  ],
-  "time-picker": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "slider": [
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大值",
-      "field": "max",
-      "props": {
-        "placeholder": "请输入最大长度",
-        "defaultValue": 100
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最小值",
-      "field": "min",
-      "props": {
-        "placeholder": "请输入最大长度",
-        "defaultValue": 0
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "步长",
-      "field": "step",
-      "props": {
-        "defaultValue": 1
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "双滑块模式",
-      "field": "range",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "switch": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "color-picker": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "ims-upload": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "ims-button": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "card-layout": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
-    }
-  ],
-  "grid-layout": [
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "占位提示",
-      "field": "placeholder",
-      "props": {
-        "placeholder": "请输入占位提示"
-      }
-    },
-    {
-      "component": "AInputNumber",
-      "vModelField": "value",
-      "label": "最大长度",
-      "field": "maxlength",
-      "props": {
-        "placeholder": "请输入最大长度"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "前缀",
-      "field": "prefix",
-      "props": {
-        "placeholder": "prefix"
-      }
-    },
-    {
-      "component": "AInput",
-      "vModelField": "value",
-      "label": "后缀",
-      "field": "suffix",
-      "props": {
-        "placeholder": "suffix"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "允许清除内容",
-      "field": "allowClear",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否有边框",
-      "field": "bordered",
-      "props": {}
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否展示字数",
-      "field": "showCount",
-      "props": {}
-    },
-    {
-      "component": "ARadioGroup",
-      "vModelField": "value",
-      "label": "尺寸",
-      "field": "size",
-      "props": {
-        "options": [
-          {
-            "value": "",
-            "label": "默认"
-          },
-          {
-            "value": "large",
-            "label": "大"
-          },
-          {
-            "value": "middle",
-            "label": "中"
-          },
-          {
-            "value": "small",
-            "label": "小"
-          }
-        ],
-        "optionType": "button"
-      }
-    },
-    {
-      "component": "ASwitch",
-      "vModelField": "checked",
-      "label": "是否禁用",
-      "field": "disabled",
-      "props": {}
     }
   ]
 }

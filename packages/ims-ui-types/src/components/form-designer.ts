@@ -1,8 +1,10 @@
-import type { TooltipProps,  FormItemProps } from "ant-design-vue";
+import type { TooltipProps,  FormProps, FormItemProps } from "ant-design-vue";
 
 export interface ImsFormDesignerProps {
   /** 是否展头部 */
   showHeader?: boolean;
+    /** 组件配置对象 */
+  componentsProps:ImsFormDesignerConfigurationComponentsProps;
 }
 
 /** 配置组件 */
@@ -88,9 +90,7 @@ export interface ImsFormSchemaItem {
 /**
  * 组件属性配置 Prop Configuration
  */
-export interface ImsFormDesignerConfigurationComponentObject {
-  [key: string]: ImsFormDesignerConfigurationComponent[];
-}
+export type ImsFormDesignerConfigurationComponentsProps =  Record<string,ImsFormDesignerConfigurationComponent[]>
 
 //
 /** 表单JSON Schema */
@@ -103,7 +103,7 @@ export interface ImsFormSchema {
   items: [
     {
       /** ID 标识  */
-      id: string | number;
+      id: string;
       /** 组件标题 */
       title: string;
       /** 组件图标 */
@@ -113,9 +113,18 @@ export interface ImsFormSchema {
       /** 表单数据字符 model field */
       vModelField: string;
       /** 表单项（FormItem）配置项  */
-      item: FormItemProps & {
+      item: FormProps & {
         /** 展示状态 */
         displayState: true;
+        /** label 标签布局 */
+        labelCol: {
+          /** 标签样式 */
+          style:{
+            /** 标签宽度 */
+            width: string | number;
+          }
+
+        }
       };
       /**组件相关配置 */
       component: {

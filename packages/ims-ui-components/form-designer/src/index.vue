@@ -55,6 +55,7 @@
                   <Simplebar class="simple-bar-init">
                     <a-row
                       ref="componentsListsRef"
+                      id="components-lists-ref"
                       :class="`${prefixCls}-contents-left-nav-bar-tabs-components-components-lists`"
                     >
                       <a-col
@@ -416,44 +417,29 @@
 <script lang="ts" setup>
 import { useStyle } from "@imsjs/ims-ui-hooks";
 
-import type {
+import {
   ImsFormDesignerConfigurationComponent,
-  ImsFormDesignerConfigurationComponentObject,
   ImsFormDesignerProps,
   ImsFormSchema,
   ImsFormSchemaItem,
   operationalAction,
 } from "@imsjs/ims-ui-types";
-
 import Simplebar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
-
 import { type RefOrElement, useDraggable } from "vue-draggable-plus";
-
 import { cloneDeep } from "lodash-es";
-
 import { toArray } from "tree-lodash";
-
 import { nanoid } from "nanoid";
 import { StorageSerializers, useStorage } from "@vueuse/core";
-
 import NestedDraggable from "./components/nested-draggable.vue";
-
 import ImsDesignerCustomizationProp from "./components/customizations/customization-prop.vue";
 
-import componentListsJson from "./data/component-lists.json";
-import componentsPropsJson from "./data/component-props.json";
+// import type { UnwrapRefSimple } from "vue";
 
 import formItemPropsJson from "./data/form-item-props.json";
-import formPropsJson from "./data/form-props.json";
-
-const componentsProps =
-  componentsPropsJson as ImsFormDesignerConfigurationComponentObject;
 
 const formItemProps: ImsFormDesignerConfigurationComponent[] =
   formItemPropsJson;
-
-// const componentLists = ref<ImsFormSchemaItem[]>([]);
 
 const componentLists = reactive<ImsFormSchemaItem[]>([
   {
@@ -514,6 +500,90 @@ const componentLists = reactive<ImsFormSchemaItem[]>([
     componentProps: [],
     formItemProps: [],
   },
+  {
+    id: "16",
+    title: "栅格布局",
+    icon: "radix-icons:layout",
+    type: "grid-layout",
+    vModelField: "value",
+    item: {
+      label: "栅格布局",
+      name: "",
+      tooltip: "",
+      extra: "",
+      required: false,
+      colon: true,
+      displayState: true,
+      rules: [],
+    },
+    children: [
+      {
+        id: "16-01",
+        title: "栅格布局-列",
+        icon: "radix-icons:layout",
+        type: "grid-layout-col",
+        vModelField: "value",
+        item: {
+          label: "栅格布局-列",
+          name: "",
+          tooltip: "",
+          extra: "",
+          required: false,
+          colon: true,
+          displayState: true,
+          rules: [],
+        },
+        componentProps: [],
+        formItemProps: [],
+        component: {
+          componentName: "ATextarea",
+          events: {},
+          props: {
+            placeholder: "请输入",
+            bordered: true,
+          },
+        },
+      },
+      {
+        id: "16-02",
+        title: "栅格布局-列",
+        icon: "radix-icons:layout",
+        type: "grid-layout-col",
+        vModelField: "value",
+        item: {
+          label: "栅格布局-列",
+          name: "",
+          tooltip: "",
+          extra: "",
+          required: false,
+          colon: true,
+          displayState: true,
+          rules: [],
+        },
+
+        componentProps: [],
+        formItemProps: [],
+        component: {
+          componentName: "ATextarea",
+          events: {},
+          props: {
+            placeholder: "请输入",
+            bordered: true,
+          },
+        },
+      },
+    ],
+    component: {
+      componentName: "ATextarea",
+      events: {},
+      props: {
+        placeholder: "请输入",
+        bordered: true,
+      },
+    },
+    componentProps: [],
+    formItemProps: [],
+  },
 ]);
 
 const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
@@ -521,25 +591,17 @@ const activeStorageItem = useStorage("active-item", { id: "0" }, undefined, {
 });
 
 const modelKeysIndex = ref(-1);
-
-const props = withDefaults(defineProps<ImsFormDesignerProps>(), {
-  showHeader: false,
-});
-
+const { componentsProps, showHeader } = defineProps<ImsFormDesignerProps>();
 const emits = defineEmits<{
+  // 数据保存事件
   save: [data?: any];
 }>();
-
-console.info("props =>", props);
-
 const COMPONENT_NAME = "ImsFormDesigner";
 defineOptions({
   name: COMPONENT_NAME,
 });
 const { prefixCls } = useStyle("form-designer");
-
 const componentKeywords = ref<string>("");
-
 // 撤销 重做 Undo Redo
 const unReDo = ref<string>("");
 // 元素工具
@@ -583,13 +645,11 @@ const onFileActionChange = (fileAction: operationalAction) => {
     let content = "data:text/json;charset=utf-8,";
 
     let tmpData = cloneDeep(list.value);
-    let formItems = toArray(tmpData.items[0].children).filter(
-      (item: ImsFormSchemaItem) => {
-        return item.type !== "grid-layout-col" && item.type !== "grid-layout";
-      }
-    );
+    let formItems = toArray(tmpData.items[0].children).filter((item: any) => {
+      return item.type !== "grid-layout-col" && item.type !== "grid-layout";
+    });
     // 校验规则设置
-    formItems.forEach((item: ImsFormSchemaItem) => {
+    formItems.forEach((item: any) => {
       tmpData.rules[item.item.name] = item.item.rules;
     });
 
@@ -620,12 +680,13 @@ const onFileActionChange = (fileAction: operationalAction) => {
     // 保存
 
     let formItems = toArray(list.value.items[0].children).filter(
-      (item: ImsFormSchemaItem) => {
+      (item: any) => {
         return item.type !== "grid-layout-col" && item.type !== "grid-layout";
       }
     );
+
     // 校验规则设置
-    formItems.forEach((item) => {
+    formItems.forEach((item: any) => {
       list.value.rules[item.item.name] = item.item.rules;
     });
     emits("save", list.value);
@@ -666,36 +727,7 @@ const operationalView = ref("design");
 const formComponentProp = ref<string>("form-props");
 
 const list = defineModel<ImsFormSchema>("value", {
-  default: {
-    model: {},
-    rules: {},
-    items: [
-      {
-        item: {
-          name: "f_9GqdghhCcT4Dr6VZp-i",
-          colon: true,
-          layout: "horizontal",
-          labelAlign: "right",
-          labelCol: {
-            style: {
-              width: "80px",
-            },
-          },
-        },
-        children: [],
-        formItemProps: formPropsJson,
-        component: {
-          componentName: "AInputPassword",
-          props: {
-            placeholder: "请输入",
-          },
-        },
-        id: "tHGUhT0q4Ddzuf86gjg21",
-        title: "表单",
-        type: "form",
-      },
-    ],
-  },
+  required: true,
 });
 
 const activeComponent = ref<ImsFormSchemaItem>({
@@ -714,6 +746,7 @@ const activeComponent = ref<ImsFormSchemaItem>({
   formItemProps: [],
 });
 
+console.info("list.value.items[0] =>", list.value.items[0]);
 activeComponent.value = list.value.items[0];
 
 const breadcrumbs = ref([list.value.items[0]]);
@@ -729,7 +762,7 @@ useDraggable(componentsListsRef, componentLists, {
   sort: false,
 });
 
-const quickAddComponent = (item: ImsFormSchemaItem) => {
+const quickAddComponent = (item: UnwrapRefSimple<ImsFormSchemaItem>) => {
   let buildedItem = buildFormItem(item, "click");
   list.value.items[0].children.push(buildedItem);
 };
@@ -833,20 +866,18 @@ const copyItem = (data: any) => {
  * 增加 栅格布局 的 COL
  * @param data
  */
-const addGridCol = (data: any) => {
-  let itemId = data.id;
-  let findedIndex = list.value.items[0].children.findIndex(
-    (item) => item.id === itemId
+const addGridCol = (data: ImsFormSchemaItem) => {
+  let findedCompIndex = componentLists.findIndex(
+    (component) => component.type === "grid-layout"
   );
-  let findedCompIndex = componentListsJson.findIndex(
-    (comp) => comp.type === "grid-layout"
-  );
-  let originalColData = cloneDeep(
-    componentListsJson[findedCompIndex].children[0]
-  );
-  originalColData.id = nanoid();
-  console.info("findedIndex =>", findedIndex);
-  list.value.items[0].children[findedIndex].children.push(originalColData);
+  let findedComponent = componentLists[findedCompIndex];
+  if (typeof findedComponent.children != "undefined") {
+    let originalColData = cloneDeep(findedComponent.children[0]);
+    originalColData.id = nanoid();
+    if (typeof data.children != "undefined") {
+      data.children.push(originalColData);
+    }
+  }
 };
 
 const onFormItemFocus = (item: ImsFormDesignerConfigurationComponent) => {
@@ -872,7 +903,6 @@ const onFormItemFocus = (item: ImsFormDesignerConfigurationComponent) => {
 };
 
 const onFormItemBlur = (item: ImsFormDesignerConfigurationComponent) => {
-  console.log("onFormItemBlur => item", item);
   if (activeComponent.value.type !== "form") {
     if (item.field === "name") {
       let currentChangedValue = activeComponent.value.item.name;
@@ -894,12 +924,8 @@ const onFormItemBlur = (item: ImsFormDesignerConfigurationComponent) => {
 };
 
 const onFormItemNameChange = (item: ImsFormDesignerConfigurationComponent) => {
-  console.log("onFormItemNameChange => item", item);
-  console.info("activeComponent.value.type =>", activeComponent.value.type);
   if (activeComponent.value.type === "form") {
     if (item.field === "labelCol.style.width") {
-      console.info("ok.....", list.value.items[0].item[item.field]);
-
       list.value.items[0].item.labelCol.style.width =
         list.value.items[0].item[item.field];
     }
@@ -927,7 +953,7 @@ const activeComponentChange = (data: any, updateActiveItem: boolean = true) => {
   }
 };
 
-const breadcrumbClick = (breadcrumb) => {
+const breadcrumbClick = (breadcrumb: ImsFormSchemaItem) => {
   if (breadcrumb.id === breadcrumbs.value[breadcrumbs.value.length - 1].id) {
     return false;
   }
@@ -941,11 +967,14 @@ const fieldNames = {
   key: "id",
 };
 
-const onOutlineSelect = (selectedKeys, { selectedNodes }) => {
+const onOutlineSelect = (
+  selectedKeys: string[],
+  { selectedNodes }: { selectedNodes: ImsFormSchemaItem[] }
+) => {
   activeComponentChange(selectedNodes[0]);
 };
 
-watch(activeStorageItem, (newActiveStorageItem: any) => {
+watch(activeStorageItem, (newActiveStorageItem: ImsFormSchemaItem) => {
   activeComponentChange(newActiveStorageItem, false);
 });
 </script>
