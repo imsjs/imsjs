@@ -1,4 +1,4 @@
-import type { TooltipProps, FormProps, FormItemProps } from "ant-design-vue";
+import type { TooltipProps,  FormItemProps } from "ant-design-vue";
 
 export interface ImsFormDesignerProps {
   /** 是否展头部 */
@@ -17,6 +17,8 @@ export interface ImsFormDesignerConfigurationComponent {
   visibilityToggler: boolean;
   /** 显示 */
   visible: boolean;
+  /** 应用 */
+  apply:boolean;
   /** 是否展示配置 */
   show?: boolean;
   /** 提示信息 */
@@ -46,7 +48,7 @@ export interface operationalAction {
  */
 export interface ImsFormSchemaItem {
   /** ID 标识  */
-  id: string | number;
+  id: string;
   /** 组件标题 */
   title: string;
   /** 组件图标 */

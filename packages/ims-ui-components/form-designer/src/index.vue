@@ -17,7 +17,9 @@
             <a-tab-pane key="1">
               <template #tab>
                 <div class="flex flex-col justify-center items-center">
-                  <div><icon icon="uiw:component"></icon></div>
+                  <div>
+                    <icon icon="uiw:component"></icon>
+                  </div>
                   <div>组件</div>
                 </div>
               </template>
@@ -121,7 +123,9 @@
             <a-tab-pane key="2">
               <template #tab>
                 <div class="flex flex-col justify-center items-center">
-                  <div><icon icon="mdi:file-tree-outline"></icon></div>
+                  <div>
+                    <icon icon="mdi:file-tree-outline"></icon>
+                  </div>
                   <div>大纲</div>
                 </div>
               </template>
@@ -183,7 +187,9 @@
             <a-tab-pane key="4">
               <template #tab>
                 <div class="flex flex-col justify-center items-center">
-                  <div><icon icon="uiw:component"></icon></div>
+                  <div>
+                    <icon icon="uiw:component"></icon>
+                  </div>
                   <div>记录</div>
                 </div>
               </template>
@@ -198,12 +204,12 @@
           <div :class="`${prefixCls}-contents-canvas-tools-left`">
             <a-space>
               <a-radio-group v-model:value="unReDo" class="rgi" size="small">
-                <a-radio-button value="undo"
-                  ><icon icon="ion:arrow-undo-outline"></icon
-                ></a-radio-button>
-                <a-radio-button value="redo"
-                  ><icon icon="ion:arrow-redo-outline"></icon
-                ></a-radio-button>
+                <a-radio-button value="undo">
+                  <icon icon="ion:arrow-undo-outline"></icon>
+                </a-radio-button>
+                <a-radio-button value="redo">
+                  <icon icon="ion:arrow-redo-outline"></icon>
+                </a-radio-button>
               </a-radio-group>
 
               <a-radio-group
@@ -213,11 +219,11 @@
                 v-if="operationalView === 'design'"
               >
                 <a-radio-button value="move">
-                  <icon icon="system-uicons:move"></icon
-                ></a-radio-button>
-                <a-radio-button value="selection"
-                  ><icon icon="ph:selection-plus-light"></icon
-                ></a-radio-button>
+                  <icon icon="system-uicons:move"></icon>
+                </a-radio-button>
+                <a-radio-button value="selection">
+                  <icon icon="ph:selection-plus-light"></icon>
+                </a-radio-button>
               </a-radio-group>
 
               <a-radio-group
@@ -225,12 +231,12 @@
                 class="rgi"
                 size="small"
               >
-                <a-radio-button value="pc"
-                  ><icon icon="iconoir:pc-check"></icon
-                ></a-radio-button>
-                <a-radio-button value="mobile"
-                  ><icon icon="clarity:mobile-line"></icon
-                ></a-radio-button>
+                <a-radio-button value="pc">
+                  <icon icon="iconoir:pc-check"></icon>
+                </a-radio-button>
+                <a-radio-button value="mobile">
+                  <icon icon="clarity:mobile-line"></icon>
+                </a-radio-button>
               </a-radio-group>
             </a-space>
           </div>
@@ -343,8 +349,8 @@
                 v-for="breadcrumb in breadcrumbs"
                 class="cursor-pointer"
                 @click="breadcrumbClick(breadcrumb)"
-                >{{ breadcrumb.title }}</a-breadcrumb-item
-              >
+                >{{ breadcrumb.title }}
+              </a-breadcrumb-item>
             </a-breadcrumb>
           </div>
           <div :class="`${prefixCls}-contents-right-header-tabs-wrapper`">
@@ -382,16 +388,16 @@
                 <ImsDesignerCustomizationProp
                   v-bind="item"
                   v-model:value="activeComponent.item[item.field]"
-                  @focus="(e) => onFormItemFocus(item, index, e)"
-                  @blur="(e) => onFormItemBlur(item, index, e)"
-                  @change="(e) => onFormItemNameChange(item, index, e)"
+                  @focus="() => onFormItemFocus(item)"
+                  @blur="() => onFormItemBlur(item)"
+                  @change="() => onFormItemNameChange(item)"
                 ></ImsDesignerCustomizationProp>
               </template>
             </div>
 
             <!-- 组件属性 -->
             <div v-show="formComponentProp === 'component-props'" class="px-2">
-              <template v-for="(item, index) in activeComponent.componentProps">
+              <template v-for="item in activeComponent.componentProps">
                 <ImsDesignerCustomizationProp
                   v-if="item.show !== false"
                   v-bind="item"
@@ -411,20 +417,18 @@
 import { useStyle } from "@imsjs/ims-ui-hooks";
 
 import type {
-  ImsFormDesignerProps,
   ImsFormDesignerConfigurationComponent,
   ImsFormDesignerConfigurationComponentObject,
+  ImsFormDesignerProps,
   ImsFormSchema,
   ImsFormSchemaItem,
   operationalAction,
 } from "@imsjs/ims-ui-types";
 
-import ImsFormRenderer from "../../form-renderer";
-
 import Simplebar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
 
-import { useDraggable } from "vue-draggable-plus";
+import { type RefOrElement, useDraggable } from "vue-draggable-plus";
 
 import { cloneDeep } from "lodash-es";
 
@@ -585,7 +589,7 @@ const onFileActionChange = (fileAction: operationalAction) => {
       }
     );
     // 校验规则设置
-    formItems.forEach((item) => {
+    formItems.forEach((item: ImsFormSchemaItem) => {
       tmpData.rules[item.item.name] = item.item.rules;
     });
 
@@ -659,16 +663,7 @@ const operationalViewActions: operationalAction[] = [
 
 const operationalView = ref("design");
 
-const componentsListsRef = ref();
-
-// component-props
-// enum FcProp {
-//   /** 组件 */
-//   COMPONENT_PROPS,
-//   /** 表单项目 */
-//   FORM_PROPS,
-// }
-const formComponentProp = ref<string>("form_props");
+const formComponentProp = ref<string>("form-props");
 
 const list = defineModel<ImsFormSchema>("value", {
   default: {
@@ -723,26 +718,25 @@ activeComponent.value = list.value.items[0];
 
 const breadcrumbs = ref([list.value.items[0]]);
 
-useDraggable(componentsListsRef.value, componentLists, {
+const componentsListsRef = ref<RefOrElement>();
+useDraggable(componentsListsRef, componentLists, {
   animation: 150,
   ghostClass: "ghost",
   group: { name: "components", pull: "clone", put: false },
   clone(item: any) {
-    let buildedItem = buildFormItem(item, "clone");
-    return buildedItem;
+    return buildFormItem(item, "clone");
   },
   sort: false,
 });
 
-const quickAddComponent = (item: any) => {
+const quickAddComponent = (item: ImsFormSchemaItem) => {
   let buildedItem = buildFormItem(item, "click");
   list.value.items[0].children.push(buildedItem);
 };
 
 /** 构建生成表单项 */
 const buildFormItem = (
-  item: any,
-  /** 方式 */
+  item: ImsFormSchemaItem,
   way: string
 ): ImsFormSchemaItem => {
   let addedComponent = cloneDeep(item);
@@ -810,7 +804,7 @@ const findParent = (data: any, target: any, result: any) => {
 };
 
 // 删除表单节点
-const deleteItem = (data: any) => {
+const deleteItem = (data: ImsFormSchemaItem) => {
   removeNodeInTree(list.value.items[0].children, data.id);
   // 同时删除 model 和 rules
   delete list.value.model[data.item.name];
@@ -855,11 +849,8 @@ const addGridCol = (data: any) => {
   list.value.items[0].children[findedIndex].children.push(originalColData);
 };
 
-const onFormItemFocus = (item, index, e) => {
-  console.info("onFormItemFocus.item", item);
-  console.info("onFormItemFocus.index, e =>", index);
-  console.info("onFormItemFocus.e =>", e);
-
+const onFormItemFocus = (item: ImsFormDesignerConfigurationComponent) => {
+  console.log("onFormItemFocus => item", item);
   if (activeComponent.value.type !== "form") {
     if (item.field === "name") {
       console.info(
@@ -880,26 +871,30 @@ const onFormItemFocus = (item, index, e) => {
   }
 };
 
-const onFormItemBlur = (item, index, e) => {
+const onFormItemBlur = (item: ImsFormDesignerConfigurationComponent) => {
+  console.log("onFormItemBlur => item", item);
   if (activeComponent.value.type !== "form") {
     if (item.field === "name") {
       let currentChangedValue = activeComponent.value.item.name;
       // models
       let modelKeys = Object.keys(list.value.model);
       modelKeys[modelKeysIndex.value] = currentChangedValue;
-      let newModel = Object.fromEntries(modelKeys.map((item) => [item, ""]));
-      list.value.model = newModel;
+      list.value.model = Object.fromEntries(
+        modelKeys.map((item) => [item, ""])
+      );
 
       // rules
       let rulesKeys = Object.keys(list.value.rules);
       rulesKeys[modelKeysIndex.value] = currentChangedValue;
-      let newRules = Object.fromEntries(rulesKeys.map((item) => [item, []]));
-      list.value.rules = newRules;
+      list.value.rules = Object.fromEntries(
+        rulesKeys.map((item) => [item, []])
+      );
     }
   }
 };
 
-const onFormItemNameChange = (item, index, e) => {
+const onFormItemNameChange = (item: ImsFormDesignerConfigurationComponent) => {
+  console.log("onFormItemNameChange => item", item);
   console.info("activeComponent.value.type =>", activeComponent.value.type);
   if (activeComponent.value.type === "form") {
     if (item.field === "labelCol.style.width") {
@@ -922,10 +917,11 @@ const onFormItemNameChange = (item, index, e) => {
 };
 
 const activeComponentChange = (data: any, updateActiveItem: boolean = true) => {
-  let result = [];
+  let result: any[] = [];
   findParent(list.value.items, data, result);
   activeComponent.value = result[result.length - 1];
   breadcrumbs.value = result;
+
   if (updateActiveItem) {
     activeStorageItem.value = data;
   }
@@ -982,6 +978,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
       --at-apply: font-bold px-2;
     }
   }
+
   // 内容区域
   &-contents {
     --at-apply: flex-1 flex h-full;
@@ -991,25 +988,31 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
     // height: calc(100% -48px);
     &-left {
       --at-apply: flex flex-row h-full;
+
       &-nav-bar {
         --at-apply: w-356px;
 
         &-tabs {
           // border: 1px solid red;
           /* tabs 样式调整 开始 */
+
           :deep(.ant-tabs-tab) {
             padding: 8px 12px;
           }
+
           :deep(.ant-tabs-content-holder) {
             .ant-tabs-content {
               height: 100%;
+
               .ant-tabs-tabpane {
                 padding-left: 0;
                 height: 100%;
               }
             }
           }
+
           /* tabs 样式调整  结束 */
+
           .tab-wrapper {
             --at-apply: h-full p-2;
           }
@@ -1018,6 +1021,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
             --at-apply: h-full flex flex-col box-border;
 
             overflow: hidden;
+
             &-components {
               --at-apply: flex-1 pb-12;
               overflow: hidden;
@@ -1029,10 +1033,12 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
               &-lists {
                 --at-apply: px-1;
+
                 &-item {
                   border: 1px solid #eaeaea;
                   --at-apply: p-2 cursor-pointer rd flex items-center
                     justify-start;
+
                   .icon {
                     font-size: 14px;
                     --at-apply: mr-1;
@@ -1047,6 +1053,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
                   &:hover {
                     border-color: #3e8bf2;
                     background-color: #3e8bf20f;
+
                     .icon {
                       color: #3e8bf2;
                     }
@@ -1065,6 +1072,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
             }
           }
         }
+
         // border-right: 1px solid #eaeaea;
       }
     }
@@ -1073,6 +1081,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
       --at-apply: "bg-#eeeeee flex-1 px-2 flex flex-col  h-full box-border";
 
       overflow: hidden;
+
       &-tools {
         --at-apply: py-2 px-1 flex justify-between items-center;
 
@@ -1101,23 +1110,25 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
       &-workspace {
         --at-apply: "flex-1 bg-#fff h-full box-border";
         overflow: hidden;
+
         &-view {
           --at-apply: h-full box-border;
           overflow: hidden;
           // border: 1px solid #eaeaea;
 
           &-json {
-            // border: 2px solid red;
+            border: none;
           }
 
           &-code {
-            border: 2px solid black;
+            border: none;
           }
 
           &-play {
             --at-apply: box-border;
             overflow: hidden;
           }
+
           //
         }
 
@@ -1131,6 +1142,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
             div:first-child.no-item {
               // border: 2px solid red;
               height: calc(100% - 65px);
+
               &::before {
                 content: "拖拽组件到这里";
                 display: flex;
@@ -1150,6 +1162,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
       &-header {
         --at-apply: h-86px min-h-86px;
+
         &-breadcrumb {
           --at-apply: h-40px min-h-40px flex items-center px-2;
           border-bottom: 1px solid #eaeaea;
@@ -1157,6 +1170,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 
         &-tabs-wrapper {
           --at-apply: h-46px min-h-46px;
+
           :deep(.ant-tabs-nav) {
             margin-bottom: 0;
           }
@@ -1175,7 +1189,7 @@ watch(activeStorageItem, (newActiveStorageItem: any) => {
 <style lang="less">
 .ims-form-designer-components-outline-tree {
   .ant-tree-switcher,
-  ant-tree-switcher_close {
+  .ant-tree-switcher_close {
     --at-apply: f-c-c;
   }
 }

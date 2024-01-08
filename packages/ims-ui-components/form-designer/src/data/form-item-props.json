@@ -4,6 +4,7 @@
     "field": "label",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -17,6 +18,7 @@
     "field": "name",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -34,6 +36,7 @@
     "field": "tooltip",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -48,6 +51,7 @@
     "field": "extra",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "component": {
       "name": "AInput",
       "vModelField": "value",
@@ -61,6 +65,7 @@
     "field": "colon",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",
@@ -72,6 +77,7 @@
     "field": "displayState",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "tooltip": {
       "title": "控制组件的展示状态，关闭不会展示，但会保留字段"
     },
@@ -86,6 +92,7 @@
     "field": "rules",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "tooltip": {
       "title": "Form 组件提供了表单验证的功能，只需要通过 rules 属性传入约定的验证规则，并将 FormItem 的 name 属性设置为需校验的字段名即可。校验规则参见 async-validator"
     },
@@ -100,6 +107,7 @@
     "field": "required",
     "visibilityToggler": false,
     "visible": true,
+    "apply":true,
     "component": {
       "name": "ASwitch",
       "vModelField": "checked",
